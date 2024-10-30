@@ -1,0 +1,179 @@
+\documentclass[10pt]{article}
+\include{../../../preamble.tex}
+
+\title{IO1 Pset 1}
+
+\author{Dylan Baker}
+\date{October 2024}
+
+\begin{document}
+\maketitle
+
+\section{Problem 1}
+
+Suppose value added is a general function of TFP, labor, and capital,i.e., 
+$Y=f(A, L, K)$. Assuming perfect competition and constant returns to scale, 
+derive the following expression for logged TFP: $a=y-\alpha l-(1-\alpha) k$, 
+where lower-case letters denote logs of their level counterparts and $\alpha$ the 
+wage bill as a share of total revenues.
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+\begin{align}
+    Y &= f(A, L, K) \\
+    \Rightarrow d Y &= \frac{\partial f}{\partial A} d A + \frac{\partial f}{\partial L} d L + \frac{\partial f}{\partial K} d K && \text{Total differential} \\
+    \Rightarrow \frac{d Y}{Y} &= \frac{\partial f}{\partial A} \frac{d A}{Y} + \frac{\partial f}{\partial L} \frac{d L}{Y} + \frac{\partial f}{\partial K} \frac{d K}{Y} && \text{Divide by $Y$} \\
+    &= \frac{A}{Y} \frac{\partial f}{\partial A} \frac{d A}{A} + \frac{L}{Y} \frac{\partial f}{\partial L} \frac{d L}{L} + \frac{K}{Y} \frac{\partial f}{\partial K} \frac{d K}{K} \label{eq:io1_pset1_q1_dyy}
+\end{align}
+
+Note that a cost maximizing firm will set the 
+marginal product equal to the ratio of the real input prices.
+That is,
+
+\begin{align}
+    \frac{\partial F}{\partial L}=\frac{w}{P} \\
+    \frac{\partial F}{\partial K}=\frac{r}{P}
+\end{align}
+
+Additionally, 
+
+\begin{align}
+    d \ln Y = \frac{d Y}{Y}
+\end{align}
+
+and the analogous equalities hold for $A$, $L$, and $K$.
+
+Thus, we can return to \eqref{eq:io1_pset1_q1_dyy} to get:
+
+\begin{align}
+    \frac{d Y}{Y} = &\frac{A}{Y} \frac{\partial f}{\partial A} \frac{d A}{A} + \frac{L}{Y} \frac{\partial f}{\partial L} \frac{d L}{L} + \frac{K}{Y} \frac{\partial f}{\partial K} \frac{d K}{K} \\
+    = &\frac{A}{Y} \frac{\partial f}{\partial A} \frac{d A}{A} + \frac{L}{Y} \frac{w}{P} \frac{d L}{L} + \frac{K}{Y} \frac{r}{P} \frac{d K}{K} \\
+    \Rightarrow d \ln Y = &\frac{A}{Y} \frac{\partial f}{\partial A} d \ln A + \frac{L}{Y} \frac{w}{P} d \ln L + \frac{K}{Y} \frac{r}{P} d \ln K \\
+    = & d \ln A + \frac{L}{Y} \frac{w}{P} d \ln L + \frac{K}{Y} \frac{r}{P} d \ln K && \text{since $\frac{\partial f}{\partial A} = \frac{Y}{A}$} \\
+    \Rightarrow d y = & d a + \alpha d l + (1-\alpha) d k \\
+    \Rightarrow d a = & d y - \alpha d l - (1-\alpha) d k && \text{rearrange} \\ 
+    \Rightarrow a = & y - \alpha l - (1-\alpha) k
+\end{align}
+
+
+\section{Problem 2}
+
+Do the following Monte Carlo exercise to convince yourself of the possible 
+endogeneity problems in production function estimation. (Matlab, Stata's matrix 
+programming language Mata, or even Excel can be used for this, though eventually 
+you're going to have to move the data into a program that runs regressions.)
+
+Construct a balanced panel dataset of 100 firms, each operating in 50 periods 
+(for a total of 5000 observations). You will have to create data for firms' value 
+added (output), TFP, labor and capital inputs, and real wage rates.
+
+The firm's production function is, $y_{i t}=a_{i t}+0.7 l_{i t}+0.3 k_{i t}$, 
+where all variables are expressed in logs.
+
+Logged TFP is described by the following statistical process: 
+$a_{i t}=\gamma_i+\omega_{i t}$. Here $\gamma_i$ is a firm fixed effect and 
+$\omega_{i t}$ follows an $\operatorname{AR}(1)$ process: 
+$\omega_{i t}=\rho \omega_{i t-1}+\varepsilon_{i t}$. Assume 
+$\gamma_i \sim$ $\mathrm{N}(0,0.25)$-that is, has a standard deviation of 0.5 -across 
+firms, $\rho=0.8$, and $\varepsilon_{i t}$ is i.i.d. $\mathrm{N}(0,0.01)$ across 
+firms and time. The firm observes $\gamma_i$ and $\omega_{i t-1}$ at the beginning 
+of period t and then chooses its inputs. After that, $\varepsilon_{i t}$ is revealed.
+
+Assume capital is exogenous to the firm and randomly determined (obviously 
+nonsensical, but it makes things easy). Specifically, $\mathrm{k}_{i t}$ is 
+i.i.d. $\mathrm{N}(0,0.01)$ across firms and time. Likewise, the log real wage 
+rate facing the firm is also i.i.d., with $\mathrm{w}_{i t} \sim \mathrm{~N}(0,0.25)$.
+
+\begin{enumerate}[label=\alph*.]
+    \item After constructing these exogenous variables, figure out what the firm's labor inputs are. To do so, assume the firm is a price taker in its output and labor markets. Use the expression for the profit-maximizing labor level to derive the labor demand equation, and construct the firms' labor input values according to this equation.
+    \item Construct the firms' output levels from their TFP, capital, and labor values.
+    \item Estimate the production function by regressing $y$ on $k$ and $l$ using OLS. Are the coefficients biased? In which direction, if so? Explain why.
+    \item Now estimate the production function using firm fixed effects. Is there a bias, and how does this compare to (c)? Explain. (Just for fun, try this using random effects too.)
+    \item Is there anything in the data you created that would be a suitable instrument? Explain why, if so, and then estimate the production function using IV. How do the results change?
+\end{enumerate}
+
+\subsection{Part A}
+
+After constructing these exogenous variables, figure out what the firm's labor inputs are. To do so, assume the firm is a price taker in its output and labor markets. Use the expression for the profit-maximizing labor level to derive the labor demand equation, and construct the firms' labor input values according to this equation.
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+A given firm, in a given period, is solving:
+
+\begin{align}
+    \underset{L_{i,t}}{\text{max }} P \mathbb{E}[A_{i,t} \mid \omega_{i, t-1}] L_{i,t}^\alpha K_{i,t}^{1-\alpha}-W L_{i,t}
+\end{align}
+
+which gives us:
+
+\begin{align}
+    \frac{\partial \pi}{\partial L} &= P \mathbb{E}[A_{i,t} \mid \omega_{i, t-1}] \alpha L_{i,t}^{\alpha-1} K_{i,t}^{1-\alpha} - W = 0 \\
+    \Rightarrow L_{i,t}^* &= \left(\frac{\alpha \mathbb{E}[A_{i,t} \mid \omega_{i, t-1}]}{W / P}\right)^{\frac{1}{1-\alpha}} K_{i,t} \\
+    &= \left(\frac{\alpha \Gamma_i \Omega_{it}}{W / P}\right)^{\frac{1}{1-\alpha}} K_{i,t}
+\end{align}
+
+Switching to logs and plugging in $\alpha = 0.7$ we get:
+
+\begin{align}
+    l_{i t}^*=k_{i t}+\frac{10}{3}\left(\ln (0.7)+\gamma_i+\rho \omega_{i t-1}-w_{i t}\right)
+\end{align}
+
+
+\subsection{Part B}
+
+Construct the firms' output levels from their TFP, capital, and labor values.
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+\subsection{Part C}
+
+Estimate the production function by regressing $y$ on $k$ and $l$ using OLS. Are the coefficients biased? In which direction, if so? Explain why.
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+\subsection{Part D}
+
+Now estimate the production function using firm fixed effects. Is there a bias, and how does this compare to (c)? Explain. (Just for fun, try this using random effects too.)
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+\subsection{Part E}
+
+Is there anything in the data you created that would be a suitable instrument? Explain why, if so, and then estimate the production function using IV. How do the results change?
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Problem 3}
+
+A simple model of equilibrium industry productivity and output heterogeneity.
+
+Suppose that firms in an industry have a variable profit function $\pi\left(\phi_i, \mu, \sigma\right)$, where $\phi_i$ is the firm's productivity level, and $\sigma$ is the elasticity of substitution between the output of industry firms. $\mu$ is a value that indexes the intensity of industry competition (like $s$ in the Ericson-Pakes model); assume that it is an increasing function of both the average productivity level and mass of industry producers. Assume that $\pi_\phi(\cdot)>0$ and $\pi_\mu(\cdot)<0$; i.e., being more productive increases profits, and stiffer competition decreases profits. There is also a fixed cost of production, $f$, so total operating profits are $\Pi\left(\phi_i, \mu, \sigma, f\right)=\pi\left(\phi_i, \mu, \sigma\right)-f$.
+
+Entry is a simple two stage game. In the first stage, a very large number of ex-ante identical potential entrants decide whether to enter into the industry. If they choose to do so, they pay a sunk entry cost, $s$, and learn their own productivity draw (taken from a common distribution $G(\phi)$ over $\left.\left[\phi, \phi^{\prime}\right]\right)$ as well as those of all other firms who paid the entry cost. Upon learning these productivity draws, they simultaneously decide whether or not to produce in the second stage, and earn operating profits as specified above.
+
+Two conditions hold in equilibrium. No firm produces at a loss (they can always choose not to produce and earn zero profits). Second, there is free entry: in equilibrium, the expected value of entry is equal to $s$.
+
+\begin{enumerate}[label=\alph*.]
+    \item Use the first equilibrium condition and the firm's operating profit function to argue that there is a unique cutoff productivity level, $\phi^*$, where firms with productivity draws $\phi_i<\phi^*$ do not produce. Assume that $G(\phi)$ has a large enough domain so that $\pi\left(\varphi^l, \mu, \sigma\right)<f$ and $\pi\left(\varphi^u, \mu, \sigma\right)>f$ for all $\mu$ and $\sigma$. Use the unique cutoff result to write a zero-marginal-profit equation that embodies the first equilibrium condition.
+    \item Derive, using this equilibrium equation, the condition under which $d \phi^* / d f>0$; that is, higher fixed production costs raise the efficiency bar for profitable operation. Give the intuition behind the condition and this result. (Note that the average productivity level in the industry is a function of $\phi^*$.)
+    \item Write down an equation that embodies the second (free-entry) 
+        equilibrium condition. (Remember that the expected value of entry is equal 
+        to the probability of successful entry multiplied by average profits 
+        conditional upon successful entry.) Use it to show that $d \phi^* / d s<0$; 
+        i.e., high entry costs imply it is easier for inefficient firms to operate 
+        profitably. (Hint: use the zero-cutoff-profit equation to substitute in for 
+        the fixed cost in the free-entry equation before doing the comparative statics.) Why does an increase in the lump-sum sunk cost have an effect opposite that of an increase in the lump-sum fixed production cost?
+    \item Show the condition on the profit function required so that $d \phi^* / d \sigma>0$, i.e., an increase in substitutability makes it more difficult for inefficient producers to survive. Give the intuition for the derived condition. Do you find it intuitively plausible?
+    \item How would you empirically test these implications?
+\end{enumerate}
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+
+
+\end{document}
