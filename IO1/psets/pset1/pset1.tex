@@ -193,7 +193,157 @@ Two conditions hold in equilibrium. No firm produces at a loss (they can always 
     \item How would you empirically test these implications?
 \end{enumerate}
 
+\subsection{Part A}
+
+Use the first equilibrium condition and the firm's operating profit function to argue that there is a unique cutoff productivity level, $\phi^*$, where firms with productivity draws $\phi_i<\phi^*$ do not produce. Assume that $G(\phi)$ has a large enough domain so that $\pi\left(\varphi^l, \mu, \sigma\right)<f$ and $\pi\left(\varphi^u, \mu, \sigma\right)>f$ for all $\mu$ and $\sigma$. Use the unique cutoff result to write a zero-marginal-profit equation that embodies the first equilibrium condition.
+
 \hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+A firm will produce if
+
+\begin{align}
+    \pi\left(\phi_i, \mu, \sigma\right) > f
+\end{align}
+
+Given that for any fixed $\mu$ and $\sigma$, there is some 
+$\underline{\phi}$ such that $\pi\left(\underline{\phi}, \mu, \sigma\right) < f$ and
+some $\overline{\phi}$ such that $\pi\left(\overline{\phi}, \mu, \sigma\right) > f$.
+With this established, the desired result follows 
+from the fact that $\pi_{\phi}(\cdot)>0$.\footnote{I'm 
+taking $\pi$ to be continuous in $\phi$.}
+
+\subsection{Part B}
+
+Derive, using this equilibrium equation, the condition under which $d \phi^* / d f>0$; that is, higher fixed production costs raise the efficiency bar for profitable operation. Give the intuition behind the condition and this result. (Note that the average productivity level in the industry is a function of $\phi^*$.)
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+Use total differentiation:
+
+\begin{align}
+    &\left(\frac{d \pi\left(\phi^*, \mu\left(\phi^*\right)\right)}{d \phi^*}+\frac{d \pi\left(\phi^*, \mu\left(\phi^*\right)\right)}{d \mu\left(\phi^*\right)} \frac{d \mu\left(\phi^*\right)}{d \phi^*}\right) d \phi^*-d f=0 \\
+    \Leftrightarrow &\frac{d \phi^*}{d f}=\frac{1}{\frac{d \pi\left(\phi^*, \mu\left(\phi^*\right)\right)}{d \phi^*}+\frac{d \pi\left(\phi^*, \mu\left(\phi^*\right)\right)}{d \mu\left(\phi^*\right)} \frac{d \mu\left(\phi^*\right)}{d \phi^*}}
+\end{align}
+
+Given 
+
+\begin{align}
+    \frac{d \pi\left(\phi^*, \mu\left(\phi^*\right)\right)}{d \mu\left(\phi^*\right)}<0 \\
+    \frac{d \pi\left(\phi^*, \mu\left(\phi^*\right)\right)}{d \phi^*}>0
+\end{align}
+
+we know that
+
+\begin{align}
+    \frac{d \phi^*}{d f}>0 \Rightarrow \frac{d \mu\left(\phi^*\right)}{d \phi^*}>0
+\end{align}
+
+and 
+
+\begin{align}
+    \frac{d \pi\left(\phi^*, \mu\left(\phi^*\right)\right)}{d \phi^*} \frac{d \mu\left(\phi^*\right)}{d \phi^*}>-\frac{d \pi\left(\phi^*, \mu\left(\phi^*\right)\right)}{d \mu\left(\phi^*\right)}
+\end{align}
+
+
+The intuition behind this condition is that we are 
+looking at the difference in the rising profit 
+of a productive firm against the falling profit
+of a firm in a more competitive industry. 
+
+
+\subsection{Part C}
+
+Write down an equation that embodies the second (free-entry) 
+equilibrium condition. (Remember that the expected value of entry is equal 
+to the probability of successful entry multiplied by average profits 
+conditional upon successful entry.) Use it to show that $d \phi^* / d s<0$; 
+i.e., high entry costs imply it is easier for inefficient firms to operate 
+profitably. (Hint: use the zero-cutoff-profit equation to substitute in for 
+the fixed cost in the free-entry equation before doing the comparative statics.) Why does an increase in the lump-sum sunk cost have an effect opposite that of an increase in the lump-sum fixed production cost?
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+Using $g$ to be the density of $G$,
+the free entry condition is given by:
+
+\begin{align}
+    \int_{\phi^*}^{\phi^u}(\pi(\phi, \mu, \sigma)-f) g(\phi) d \phi-s=0
+\end{align}
+
+Then we can write:
+
+\begin{align}
+    &\left[-\left[\pi\left(\phi^*, \mu, \sigma\right)-f\right] g\left(\phi^*\right)+\int_{\phi^*}^{\phi^*} \pi_\mu(\phi) \frac{\partial \mu}{\partial \phi^*} g(\phi) d \phi\right] d \phi^*-d s=0 && \parbox[t]{4cm}{\raggedright total differentiation} \\
+    \Rightarrow & \left\{\int_{\phi^*}^{\phi^u} \pi_\mu(\phi) \frac{\partial \mu}{\partial \phi^*} g(\phi) d \phi\right\} d \phi^*=d s && \parbox[t]{4cm}{\raggedright since $\pi\left(\phi^*, \mu, \sigma\right)-f=0$} \\
+    \Rightarrow &\frac{d \phi^*}{d s}=\frac{1}{\left\{\int_{\phi^*}^{\phi^u} \pi_\mu(\phi) \frac{\partial \mu}{\partial \phi^*} g(\phi) d \phi\right\}}
+\end{align}
+
+Noting $\pi_\mu(\cdot)<0$ and $\frac{\partial \mu}{\partial \phi^*}>0, \frac{d \phi^*}{d s}<0$.
+
+
+An increase in $f$ corresponds to a relative increase in the 
+difficulty of production for less productive firms. If $s$ 
+is increase, meanwhile, it is relatively easier for 
+less productive firms to produce, since the fixed cost
+of discovering productivity is raised. 
+
+\subsection{Part D}
+
+Show the condition on the profit function required so that $d \phi^* / d \sigma>0$, i.e., an increase in substitutability makes it more difficult for inefficient producers to survive. Give the intuition for the derived condition. Do you find it intuitively plausible?
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+We have
+
+\begin{align}
+    \int_{\phi^*}^{\phi^u}\left(\pi(\phi, \mu, \sigma)-\pi\left(\phi^*, \mu, \sigma\right)\right) g(\phi) d \phi-s=0
+\end{align}
+
+from 
+
+\begin{align}
+    \pi\left(\phi^*, \mu, \sigma\right)=f
+\end{align}
+
+Using total differentiation and the zero-marginal-profit equation, we get:
+
+\begin{align}
+    \left\{\int_{\phi^*}^{\phi^\mu}\left[\pi_\mu(\phi) \frac{\partial \mu}{\partial \phi^*}-\pi_\phi\left(\phi^*\right)-\pi_\mu\left(\phi^*\right) \frac{\partial \mu}{\partial \phi^*}\right] g(\phi) d \phi\right\} d \phi^*+\left\{\int_{\phi^*}^{\phi^u}\left[\pi_\sigma(\phi)-\pi_\sigma\left(\phi^*\right)\right] g(\phi) d \phi\right\} d \sigma=0
+\end{align}
+
+Thus, 
+
+\begin{align}
+    \frac{d \phi^*}{d \sigma}=-\frac{\int_{\phi^*}^{\phi^u}\left[\pi_\sigma(\phi)-\pi_\sigma\left(\phi^*\right)\right] g(\phi) d \phi}{\int_{\phi^*}^{\phi^\mu}\left[\pi_\mu(\phi) \frac{\partial \mu}{\partial \phi^*}-\pi_\phi\left(\phi^*\right)-\pi_\mu\left(\phi^*\right) \frac{\partial \mu}{\partial \phi^*}\right] g(\phi) d \phi}
+\end{align}
+
+The denominator is positive by earlier parts 
+and $\frac{d \phi^*}{d \sigma}>0$. Thus, 
+
+\begin{align}
+    \int_{\phi^*}^{\phi^u}\left[\pi_\sigma(\phi)-\pi_\sigma\left(\phi^*\right)\right] g(\phi) d \phi< 0
+\end{align}
+
+If $\sigma$ changes and elicits a positive effect on $\phi$ such that $\phi > \phi^*$, then 
+it becomes increasingly challenging for 
+less productive firms to survive, moving the cutoff. 
+
+
+
+\subsection{Part E}
+
+How would you empirically test these implications?
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+We are looking for exogenous variation in 
+$f, s$, and $\sigma$. These are challenging given the clear 
+endogeneity issues accompanying them. In principle, 
+we'd be interested in something like valid instruments or 
+natural experiments lending themselves 
+to design-based identification strategies. 
+However, this is challenging in its own right.
+
 
 
 
