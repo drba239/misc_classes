@@ -108,8 +108,7 @@ which gives us:
 
 \begin{align}
     \frac{\partial \pi}{\partial L} &= P \mathbb{E}[A_{i,t} \mid \omega_{i, t-1}] \alpha L_{i,t}^{\alpha-1} K_{i,t}^{1-\alpha} - W = 0 \\
-    \Rightarrow L_{i,t}^* &= \left(\frac{\alpha \mathbb{E}[A_{i,t} \mid \omega_{i, t-1}]}{W / P}\right)^{\frac{1}{1-\alpha}} K_{i,t} \\
-    &= \left(\frac{\alpha \Gamma_i \Omega_{it}}{W / P}\right)^{\frac{1}{1-\alpha}} K_{i,t}
+    \Rightarrow L_{i,t}^* &= \left(\frac{\alpha \mathbb{E}[A_{i,t} \mid \omega_{i, t-1}]}{W / P}\right)^{\frac{1}{1-\alpha}} K_{i,t}
 \end{align}
 
 Switching to logs and plugging in $\alpha = 0.7$ we get:
@@ -125,23 +124,45 @@ Construct the firms' output levels from their TFP, capital, and labor values.
 
 \hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
 
-\subsection{Part C}
+See code.
 
-Estimate the production function by regressing $y$ on $k$ and $l$ using OLS. Are the coefficients biased? In which direction, if so? Explain why.
+\subsection{Part C \& D}
 
-\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+Part C: Estimate the production function by regressing $y$ on $k$ and $l$ using OLS. Are the coefficients biased? In which direction, if so? Explain why.
 
-\subsection{Part D}
-
-Now estimate the production function using firm fixed effects. Is there a bias, and how does this compare to (c)? Explain. (Just for fun, try this using random effects too.)
+Part D: Now estimate the production function using firm fixed effects. Is there a bias, and how does this compare to (c)? Explain. (Just for fun, try this using random effects too.)
 
 \hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+\FloatBarrier
+
+\input{output/baseline_vs_fe_ols.tex}
+
+The estimate for l is biased up in each case, though most so for 
+the baseline OLS estimate. The estimate for k is biased down in each case,
+though, again, most so for the baseline OLS estimate. The random effects 
+version is between the two regressions presented in the table here.
+
+Here, we are suffering from omitted variable bias, since $l_{it}$
+is correlated with the error term, since it's a function of $\omega_{it-1}$
+and $\gamma_i$. By including fixed effects, we are able to partially address this
+by accounting for the permanent piece of firm productivity.
+
+
+\FloatBarrier
 
 \subsection{Part E}
 
 Is there anything in the data you created that would be a suitable instrument? Explain why, if so, and then estimate the production function using IV. How do the results change?
 
 \hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+We can use log real wage as an instrument. If we do so, 
+we get the below results:
+
+\input{output/iv_reg.tex}
+
+The estimates are still slightly off, but they are quite close.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

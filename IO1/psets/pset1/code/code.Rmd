@@ -16,7 +16,9 @@ knitr::opts_chunk$set(
 
 ```{r}
 library(tidyverse)
-library(mvtnorm)
+library(fixest)
+library(modelsummary)
+#setwd("/Users/dylanbaker/Documents/GitHub/misc_classes/IO1/psets/pset1/code")
 ```
 
 ```{r}
@@ -79,16 +81,33 @@ panel_data$y <- panel_data$a + 0.7 * panel_data$l + 0.3 * panel_data$k
 ```
 
 ```{r}
+# Fit the two models
+model_1 <- feols(y ~ l + k, data = panel_data)
+model_2 <- feols(y ~ l + k | firm_id, data = panel_data)
 
+# Generate the table using etable
+etable_output <- etable(list("Pooled OLS" = model_1, "Fixed Effects" = model_2), 
+                        tex = TRUE)
+
+# Save the output to a .tex file
+writeLines(etable_output, "../output/baseline_vs_fe_ols.tex")
 ```
 
 ```{r}
-# Production function: y_it = a_it + 0.7 l_it + 0.3 k_it (in logs)
-panel_data$y <- panel_data$a + 0.7 * panel_data$l + 0.3 * panel_data$k
-```
+# Fit the two models with w as an instrument for l
+# Model 1: Pooled OLS with IV
+model_1_iv <- feols(y ~ 1 + k | 0 | l ~ w, data = panel_data)
+model_1_iv
 
-```{r}
+# Model 2: Fixed Effects with IV
+# model_2_iv <- feols(y ~ k | firm_id | l ~ w, data = panel_data)
+# model_2_iv
 
+# Generate the table using etable
+etable_output2 <- etable(list("Pooled OLS (IV)" = model_1_iv), tex = TRUE)
+
+# Save the output to a .tex file
+writeLines(etable_output2, "../output/iv_reg.tex")
 ```
 
 ```{r}
