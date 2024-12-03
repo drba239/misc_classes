@@ -1,0 +1,151 @@
+% -------------------------------------
+% Setup 
+% -------------------------------------
+\documentclass[12pt, aspectratio=169]{beamer}
+\input{beamer_theme.tex}
+\usepackage{soul}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+
+% SET VARIABLES 
+\newcommand\nn{622} 
+\newcommand\paneltot{7,344}
+\newcommand\panelind{604}
+\newcommand\boots{200}
+
+% OUTCOMES
+\newcommand\yrform{71}
+\newcommand\yrinf{93}
+\newcommand\yrmin{5}
+\newcommand\yrmax{18}
+\newcommand\suppref{28.6}
+\newcommand\formpref{37.4}
+
+
+% -------------------------------------
+% Begin Document 
+% -------------------------------------
+\begin{document}
+\title{Some Stuff}
+\author{Dylan Baker}
+\date{November 22, 2024}
+
+\begin{frame}[plain, noframenumbering] 
+
+\maketitle
+
+\end{frame}
+
+\begin{frame}{The Effects of Media Coverage of Immigration}
+
+    \begin{itemize}
+        \item Basically, I'm about to talk about the effect of media coverage of immigration on 
+            views about immigration/immigrants and support for anti-immigration parties/policies.
+        \item My concern is that when we have ``the effects of immigration''
+            studies, we're essentially looking at environments where everyone is
+            being ``treated'' by a key mechanism (media coverage) and there's some variation around a high-mean dosage.
+        \item Example: Why are people in Wyoming mad about immigration while also not experiencing inflows of immigrants?
+    \end{itemize}
+    
+    
+\end{frame}
+
+
+\begin{frame}{Studies on the Effects of Immigration}
+
+\begin{itemize}
+\item There are a number of studies that look at the effects of immigration on 
+    political behavior, e.g.,:
+    \begin{itemize}
+        \item Halla, M., Wagner, A. F., \& Zweimüller, J. (2017). Immigration and Voting for the Far Right. \emph{Journal of the European Economic Association, 15}(6), 1341–1385. \href{https://doi.org/10.1093/jeea/jvx003}{https://doi.org/10.1093/jeea/jvx003}
+        \item Mayda, A. M., Peri, G., \& Steingress, W. (2022). The Political Impact of Immigration: Evidence from the United States. \emph{American Economic Journal: Applied Economics, 14}(1), 358-389. \href{https://doi.org/10.1257/app.20190081}{https://doi.org/10.1257/app.20190081}
+    \end{itemize}    
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Studies on Immigration Coverage}
+
+    \begin{itemize}
+        \item There have been fewer, but still some, papers on immigration media coverage, e.g.,:
+            \begin{itemize}
+                \item Benesch, C., Loretz, S., Stadelmann, D., \& Thomas, T. (2019). Media coverage and immigration worries: Econometric evidence. \emph{Journal of Economic Behavior \& Organization, 160}, 52–67. \href{https://doi.org/10.1016/j.jebo.2019.02.011}{https://doi.org/10.1016/j.jebo.2019.02.011}
+                \item Keita, S., Renault, T., \& Valette, J. (2024). The Usual Suspects: Offender Origin, Media Reporting and Natives’ Attitudes Towards Immigration. \emph{The Economic Journal, 134}(657), 322–362. \href{https://doi.org/10.109}{https://doi.org/10.109}
+                \item Djourelova, M. (2023). Persuasion through Slanted Language: Evidence from the Media Coverage of Immigration. \emph{American Economic Review, 113}(3), 800–835. \href{https://doi.org/10.1257/aer.20211537}{https://doi.org/10.1257/aer.20211537}
+            \end{itemize}
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{Main Results and a Concern}
+    \begin{itemize}
+        \item In general, studies are showing that there's immigration into an area 
+            increases anti-immigrant sentiment and support for anti-immigration parties. (I am skipping nuance here.)
+        \item Moreover, in general, immigration media coverage is shown to 
+            increase concern about migration.
+        \item I'm concerned that a lot of the effect that we're interested in is 
+        hiding in the intercept or time fixed effects of these models.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Examples}
+
+    \begin{itemize}
+        \item Motivating Example: 
+        \begin{itemize}
+            \item The Austrian Anti-Immigrant Far Right Party went from 
+                15.29\% to 30.36\% in its vote share from 2014 to 2015. Steinmayr (2021)
+                finds that exposure to passing migrants increases support for the 
+                Far Right party by 1.5-2.3 percentage points.
+            \item Benesch et al. (2019) look at plausibly exogenous changes in 
+                media coverage of immigration in Germany via the timing 
+                of Swiss immigration-related referenda. They find that an 
+                additional news item is associated with a 0.008 point increase 
+                in immigration concerns (on a 3 point scale) and
+                a 10 percentage point increase in the percent of news items 
+                that are immigration related is associated with a 0.1314 point increase.
+        \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{The Concern Revisited}
+    \begin{itemize}
+        \item We may be looking at environments where everyone is 
+            being ``treated'' by high levels of immigration coverage, so we're getting 
+            the effect of marginal changes in coverage or inflows (which may 
+            adjust coverage) around a high baseline, while 
+            being unable to think about the effects of moving from low 
+            to high coverage because we lack a good control group.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Thoughts on Addressing This}
+    
+    \begin{itemize}
+        \item I need to identify settings where there is greater variation in 
+            the broader
+            media environment.
+        \item Possible Avenues: Looking at earlier American history
+            \begin{itemize}
+                \item Something formulation of the rise of telegraph lines, 
+                    since that gave smaller towns access to Associated Press news wires,
+                    which would cover immigration news that the local newspaper 
+                    may not have otherwise covered.
+                    \begin{itemize}
+                        \item Big endogeneity issues + how to isolate immigration coverage
+                    \end{itemize}
+                \item Inflows of immigrants into the headquarters of firms that own 
+                    newspaper groups in many areas.
+            \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+
+
+
+
+\end{document}

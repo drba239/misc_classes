@@ -1,0 +1,200 @@
+% -------------------------------------
+% Setup 
+% -------------------------------------
+\documentclass[12pt, aspectratio=169]{beamer}
+\input{beamer_theme}
+\usepackage{soul}
+\usepackage{tikz}
+\usetikzlibrary{tikzmark}
+
+% SET VARIABLES 
+\newcommand\nn{622} 
+\newcommand\paneltot{7,344}
+\newcommand\panelind{604}
+\newcommand\boots{200}
+
+% OUTCOMES
+\newcommand\yrform{71}
+\newcommand\yrinf{93}
+\newcommand\yrmin{5}
+\newcommand\yrmax{18}
+\newcommand\suppref{28.6}
+\newcommand\formpref{37.4}
+
+
+% -------------------------------------
+% Begin Document 
+% -------------------------------------
+\begin{document}
+\title{Some Stuff}
+\author{Dylan Baker}
+\date{November 22, 2024}
+
+\begin{frame}[plain, noframenumbering] 
+\maketitle
+\end{frame}
+
+% Outline frame
+\begin{frame}[noframenumbering, plain]{Outline}
+    \begin{enumerate}
+        \item Context
+        \item Inefficiencies
+        \item Potential Research Questions
+        \item Aggregate Data 
+        \item Solutions?
+        \item Literature
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Context}
+\begin{itemize}
+\item In Patna (Bihar), people don’t want to buy packaged milk because they believe it’s contaminated and full of preservatives/chemicals.  
+
+\item They also don’t want to buy milk from local dairy shops for similar reasons.
+
+\item To overcome this trust issue, several milkmen take their cows door to door and milk the cow in front of their consumers to establish trust that their milk is pure and fresh. 
+
+\item There is close to no difference in prices between different forms of milk so prices don't drive these decisions. 
+
+\item Based on observation, $\sim$ 25\% of residents get their milk directly from a cow. \small (Patna's population is 2.58 mil, so $\sim$ 645,000 people get milk from a cow directly)
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[noframenumbering] {}\label{offerresults}
+\begin{columns}
+ \begin{column}{0.5\textwidth}
+  \begin{figure}
+        \includegraphics[width=.8\textwidth]{69774ca0-ebb8-4101-a2e5-2443fd0344bd.JPG} 
+    \end{figure}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+  \begin{figure}
+        \includegraphics[width=1\textwidth]{befcfb44-3258-478a-a422-13c660a5e6ec.jpg} \medbreak 
+        \includegraphics[width=1\textwidth]{d74cea83-da76-41c4-9c24-ab7cb57a5984.jpg}  
+\end{figure}
+\end{column}
+\end{columns}  
+\end{frame}
+
+\begin{frame}{Inefficiencies}
+\begin{itemize}
+\item Several issues with this system: 
+\begin{itemize}
+    \item [$\rightarrow$] Anecdotal stories about milkmen injecting the cows with steroids at a street corner before entering someone's house to make this process viable.
+    \item [$\rightarrow$] Ethical concerns about the use of these injections; Animal welfare concerns 
+    \item [$\rightarrow$] Incidents of kids getting injured by cows on the street. Local municipalities often intervene. 
+    \item [$\rightarrow$] Productivity inefficiencies from the milkmen's perspective.
+\end{itemize}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Potential Research Question}
+\small
+\textcolor{orange}{What is the most interesting question here?}
+\begin{enumerate}
+\small
+    \item How social/economic trust is built? Identify reasons why lack of trust is bad (externalities, spillovers). 
+    \item Quantifying productivity inefficiencies or welfare losses? Quantifying the costs of `mistrust' in an economy?
+    \item How to resolve these market failures (asymmetric information/information frictions)?
+    \begin{itemize}
+    \item [$\rightarrow$] What is the most efficient way to establish a reputation for quality? 
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[noframenumbering] {Potential Research Question}
+\small
+\textcolor{orange}{What is the most interesting question here?}
+\begin{enumerate}
+\setcounter{enumi}{3}
+    \item (NEW!) How does `lack of trust' lead to misallocation of labor and resources and how is that impeding structural transformation necessary for growth?
+    \begin{itemize}
+    \item [$\rightarrow$] The goal is to argue that this is a specific example of a broader phenomenon where society substitutes for a lack of institutions/state and the potential losses from that. E.g., - Mob/Vigilante justice as a substitute for police.  
+    \end{itemize}
+    \item Some question related to technology adoption.
+    \begin{itemize}
+    \item [$\rightarrow$] Eg, technology to signal quality like laser cut labels, or some chemistry quick test to judge quality, etc.
+    \end{itemize}
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Aggregate Data}
+\begin{enumerate}
+    \item Livestock Census data: can see which regions are most cattle-dense, differences in livestock-related infrastructure across areas, trends in growth or decline in population for various livestock, etc. 
+    \item  Household consumption surveys: can see what fraction of the consumption basket is milk.
+    \item National Dairy Development Board (NDDB), Department of Animal Husbandry and Dairying, Food and Agriculture Organization (FAO): can see aggregate data on milk production and dairy consumption. 
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Solutions?}
+
+\begin{itemize}
+\item Some theoretical model on misallocation or an asymmetric info model like the lemons market with certification. 
+\item Several interventions that could improve this market inefficiency caused by a lack of institutions that could help establish trust in this industry. For example,
+\begin{itemize}
+    \item [$\rightarrow$] random weekly health inspections
+    \item [$\rightarrow$] certifications/quality labels
+    \item [$\rightarrow$] consumer tests for quality (some new tech)
+\end{itemize}
+It would have to be an RCT since there is absolutely no data available to document this phenomenon or to understand what would work.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[noframenumbering] {Solutions?}
+
+\begin{itemize}
+\setcounter{enumi}{2} 
+\item OR could conduct a survey simply comparing 2 cities and quantifying the productivity inefficiencies or total welfare loss. 
+\item OR could survey to quantify the misallocation (hours spent, sales, etc. relative to other ways of distribution). 
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{}
+\textcolor{orange}{Is this worth pursuing?}
+\begin{itemize}
+    \item [$\rightarrow$] No idea how pervasive this system is. Would there be any external validity? Is this useful for the rest of the world?
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Literature}
+\begin{itemize}
+    \item There are basically no papers providing empirical evidence for the consequences of lack of trust. There are also no papers identifying lack of trust as a mechanism impeding structural transformation/growth. 
+    \item The closest I can get to `trust' literature is stuff done on covid vaccines/medicines.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[noframenumbering] {Literature}
+\small
+Found one paper that is very similar to this idea: \textit{\href{https://drive.google.com/file/d/0B52sohAPtnAWYVhBYm11cDBrSmM/view?resourcekey=0-R4YuMEKjedEfvJNhMFWLKg}{Bai, Jie. `Melons as Lemons: Asymmetric Information, Consumer Learning and Seller Reputation'. ReStud (forthcoming).}} 
+\begin{itemize}
+ \item \ul{Setting:} China’s watermelon markets, where asymmetric information on quality and lack of seller reputation impact consumer trust and quality provision.
+
+ \item \ul{Data:} Experiment with 60 local markets, she introduces two quality signals (laser-cut and sticker labels) and gathers data on quality, pricing, sales, and consumer experiences.
+
+
+\end{itemize}
+\end{frame}
+
+\begin{frame} [noframenumbering] {Literature}
+\small
+\begin{itemize}
+\item \ul{Methods:} Theoretical model and empirical analysis through the RCT to understand how consumer beliefs and signaling costs affect sellers' reputation incentives.
+\item \ul{Findings:} Only the costly laser label effectively boosts quality provision, enhances consumer learning, and increases sales, showing that higher-cost signals can improve seller reputation and market outcomes in settings with pessimistic beliefs.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}{}
+\textcolor{orange}{Is this idea still worth pursuing?}
+\begin{itemize}
+    \item [$\rightarrow$] If so, next steps?
+\end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,89 @@
+% -------------------------------------
+% Setup 
+% -------------------------------------
+\documentclass[11pt, aspectratio=169]{beamer}
+\input{beamer_theme}
+
+% -------------------------------------
+% Begin Document 
+% -------------------------------------
+\begin{document}
+\title{From Immigrants to Americans: Race and Assimilation during the Great Migration}
+\subtitle{By Vasiliki Fouka, Soumyajit Mazumder, \& Marco Tabellini}
+\author{Dylan Baker}
+
+\begin{frame}[plain, noframenumbering] 
+\maketitle
+\end{frame}
+
+
+\begin{frame}{Context}
+
+    \begin{itemize}
+        \item Historical Context
+            \begin{itemize}
+                \item In the early 20th century, many European 
+                    immigrants were culturally distant from native born 
+                    Americans and faced discrimination.
+                \item The Great Migration was a period of mass 
+                    migration of African Americans from the rural South 
+                    to the urban North in the US from 1910-1970.
+            \end{itemize}
+        \item Academic Context
+            \begin{itemize}
+                \item 
+            \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}{Data}
+
+\end{frame}
+
+\begin{frame}{Analytical Technique}
+
+\begin{itemize}
+    \item DiD: Compares change in Black population across MSAs within region
+        \vspace{-0.2cm} % Adjust this value as needed
+        \begin{align}
+            Y_{i n r t}=\underbrace{\alpha_n}_{\parbox[t]{1.2cm}{\raggedright \footnotesize \centering MSA FE}}
+            +\underbrace{(\delta_r \times \gamma_t)_{r t}}_{\parbox[t]{2cm}{\raggedright \footnotesize \centering Time $\times$ Region FE}}
+            +\beta_1 \underbrace{B_{n t}}_{\parbox[t]{1.4cm}{\raggedright \footnotesize \centering Black Pop in $n$ at $t$}}
+            +\beta_2 \underbrace{\operatorname{Pop}_{n t}}_{\parbox[t]{1.5cm}{\raggedright \footnotesize \centering Total Pop in $n$ at $t$}}
+            +\underbrace{\mathbf{X}_{i n t}^{\prime}}_{\parbox[t]{1.5cm}{\raggedright \footnotesize \centering Individual controls}} \Gamma
+            +u_{i n r t}
+        \end{align}
+        \vspace{-1cm} % Adjust this value as needed
+    \item Shift-Share Instrument for Black Population
+        \begin{align}
+            Z_{n t}=\sum_{s=1910}^t \sum_{j \in \text { South }} \underbrace{\alpha_{j n}^{1900}}_{\parbox[t]{3.3cm}{\raggedright \footnotesize \centering Share of Black migrants from state $j$ living in MSA $n$ in 1900}} \underbrace{O_{j s}}_{\parbox[t]{3cm}{\raggedright \footnotesize \centering \# of Black migrants who left state $j$ between $s-1$ and $s$}}
+        \end{align}
+        \vspace{-0.6cm} % Adjust this value as needed
+        \begin{itemize}
+            \item Migrants tended to move to the destination MSAs of past migrants from their region 
+        \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Results}
+
+An increase in the Black population led to:
+
+    \begin{itemize}
+        \item Heightened Assimilation Efforts
+            \begin{itemize}
+                \item Increased Naturalization Rates: Rose 1.5 p.p. per 1 S.D. ($\sim$45,000 people) increase
+                \item Less Ethnically Distinct Names: A 100,000 increase led to a name distinctiveness decline among Italians equivalent to changing Luciano to Mike
+            \end{itemize}
+        \item Heightened Acceptance from Native Born White People
+            \begin{itemize}
+                \item Increased Intermarriage Rates: Rose 0.54 p.p. (7.5\%) per 1 S.D. increase
+                \item Decreased Anti-immigrant News Coverage: 
+            \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+\end{document}
