@@ -1,6 +1,7 @@
 
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage[backend=biber,style=authoryear]{biblatex}
 \usepackage{booktabs}
 \usepackage{epsfig}
 \usepackage{fontawesome}
@@ -10,7 +11,20 @@
 \usepackage{mathtools}
 \usepackage{pgfplots}
 \usepackage{tikz}
+
+\usepackage{tcolorbox}
+
+
 \mathtoolsset{showonlyrefs=true}
+
+\DeclareCiteCommand{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printnames{labelname}%
+   \space(\printfield{year})}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
 
 
 
@@ -20,6 +34,9 @@
 \usepackage{setspace}
 \setlength{\itemsep}{10em}
 \usepackage{adjustbox}
+
+
+
 
 
 
@@ -38,7 +55,7 @@
 \usepackage{threeparttable}
 \usepackage{pdflscape}
 \usepackage{float}
-\usepackage{natbib}
+%\usepackage{natbib}
 \usepackage{multirow}
 
 
@@ -119,33 +136,71 @@
   \setbeamercolor{section title}{fg=white, bg=maroon}
 }
 
-\setbeamertemplate{section page}{
-  \vfill
-  \centering
-  \begin{beamercolorbox}[sep=8pt,center,shadow=false,rounded=false]{section title}
-    \usebeamerfont{title}\usebeamercolor{title}\insertsectionhead\par%
-  \end{beamercolorbox}
-  \vfill
-}
+% \setbeamertemplate{section page}{
+%   \vfill
+%   \centering
+%   \begin{beamercolorbox}[sep=8pt,center,shadow=false,rounded=false]{section title}
+%     \usebeamerfont{title}\usebeamercolor{title}\insertsectionhead\par%
+%   \end{beamercolorbox}
+%   \vfill
+% }
 
 % bibliography stuff
-\setbeamertemplate{frametitle continuation}{}
-\setbeamertemplate{bibliography entry title}{}
-\setbeamertemplate{bibliography entry location}{}
-\setbeamertemplate{bibliography entry note}{}
-\renewcommand{\bibsection}{}
+% \setbeamertemplate{frametitle continuation}{}
+% \setbeamertemplate{bibliography entry title}{}
+% \setbeamertemplate{bibliography entry location}{}
+% \setbeamertemplate{bibliography entry note}{}
+% \renewcommand{\bibsection}{} %natbib
 
-\newenvironment{transitionframe}{
-  \setbeamercolor{background canvas}{bg=maroon,fg=white}
-  \color{white}
-  \centering
-  \LARGE
-  \begin{center}
-  \begin{frame}[plain, noframenumbering]}{
-  \end{frame}
-  \end{center}
-}
+% \newenvironment{transitionframe}{
+%   \setbeamercolor{background canvas}{bg=maroon,fg=white}
+%   \color{white}
+%   \centering
+%   \LARGE
+%   \begin{center}
+%   \begin{frame}[plain, noframenumbering]}{
+%   \end{frame}
+%   \end{center}
+% }
 
 \setbeamertemplate{note page}[plain]
 \usepackage{appendixnumberbeamer}
 
+
+
+% Counter for notes
+\newcounter{notescounter}
+
+% Define the notes environment
+\newenvironment{notes}[1][]{
+  \refstepcounter{notescounter}%
+  \if\relax\detokenize{#1}\relax
+    % If #1 is empty, set the title to "Notes"
+    \begin{tcolorbox}[
+      colback=blue!10,
+      colframe=blue!50,
+      fonttitle=\bfseries,
+      title={Notes},
+      arc=5mm,
+      boxrule=0.5mm,
+      width=\textwidth,
+      before skip=9pt,
+      after skip=9pt
+    ]
+  \else
+    % If #1 is not empty, use it as the title
+    \begin{tcolorbox}[
+      colback=blue!10,
+      colframe=blue!50,
+      fonttitle=\bfseries,
+      title={#1},
+      arc=5mm,
+      boxrule=0.5mm,
+      width=\textwidth,
+      before skip=9pt,
+      after skip=9pt
+    ]
+  \fi
+}{
+  \end{tcolorbox}
+}

@@ -3,6 +3,7 @@
 % -------------------------------------
 \documentclass[11pt, aspectratio=169]{beamer}
 \input{beamer_theme}
+%\addbibresource{references.bib}
 
 % -------------------------------------
 % Begin Document 
@@ -10,12 +11,15 @@
 \begin{document}
 \title{From Immigrants to Americans: Race and Assimilation during the Great Migration}
 \subtitle{By Vasiliki Fouka, Soumyajit Mazumder, \& Marco Tabellini}
-\author{Dylan Baker}
+\author{By Dylan Baker}
+\date{ }
 
 \begin{frame}[plain, noframenumbering] 
 \maketitle
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Context}
 
@@ -23,23 +27,73 @@
         \item Historical Context
             \begin{itemize}
                 \item In the early 20th century, many European 
-                    immigrants were culturally distant from native born 
+                    immigrants were viewed as culturally distant from native born 
                     Americans and faced discrimination.
                 \item The Great Migration was a period of mass 
                     migration of African Americans from the rural South 
                     to the urban North in the US from 1910-1970.
+                \item Historians have argued that the Great Migration 
+                    fueled the change from structuring race 
+                    around ethnicity to structuring it around skin color.
             \end{itemize}
         \item Academic Context
             \begin{itemize}
-                \item 
+                \item This paper builds on a large psychology literature 
+                    on self-categorization (Turner et al. (1987)) and 
+                    outgroup bias (Tajfel et al. (1971)).
+                \item In economics and political science, Bordalo et al. (2016) argues 
+                    for the context dependence 
+                    of group stereotypes and Shayo (2009) develops 
+                    a model of social identity oriented around perceived distance 
+                    between groups.
             \end{itemize}
     \end{itemize}
 
 \end{frame}
 
-\begin{frame}{Data}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Question \& Data}
+
+\centering
+\textbf{Question}
+
+\vspace{-0.4cm}
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+\begin{itemize}
+    \item How does the introduction of a social group (Black migrants) 
+    perceived to be more culturally distant to the majority (native-born 
+    white Americans) affect the assimilation of a traditionally marginalized 
+    group (European immigrants)?
+\end{itemize}
+
+\textbf{Data}
+
+\vspace{-0.4cm}
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+\begin{itemize}
+    \item Census Data: Decennial US Census Data from 1900-1930 from 
+        the 108 non-Southern MSAs with 
+        positive inflow of Southern Black migrants.
+        \begin{itemize}
+            \item Key variables: Naturalization status, 
+                marriage status (dummy for marriage with native-born American), 
+                and ethnic distinctiveness of children's names.
+        \end{itemize}
+    \item Newspaper Data: Articles compiled from Newspapers.com from 71 MSAs.
+        \begin{itemize}
+            \item Key variables: Usage of immigrant-oriented and anti-Black 
+                language
+        \end{itemize}
+\end{itemize}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Analytical Technique}
 
@@ -51,39 +105,53 @@
             +\underbrace{(\delta_r \times \gamma_t)_{r t}}_{\parbox[t]{2cm}{\raggedright \footnotesize \centering Time $\times$ Region FE}}
             +\beta_1 \underbrace{B_{n t}}_{\parbox[t]{1.4cm}{\raggedright \footnotesize \centering Black Pop in $n$ at $t$}}
             +\beta_2 \underbrace{\operatorname{Pop}_{n t}}_{\parbox[t]{1.5cm}{\raggedright \footnotesize \centering Total Pop in $n$ at $t$}}
-            +\underbrace{\mathbf{X}_{i n t}^{\prime}}_{\parbox[t]{1.5cm}{\raggedright \footnotesize \centering Individual controls}} \Gamma
+            +\underbrace{\mathbf{X}_{i n r t}^{\prime}}_{\parbox[t]{1.5cm}{\raggedright \footnotesize \centering Individual controls}} \Gamma
             +u_{i n r t}
         \end{align}
         \vspace{-1cm} % Adjust this value as needed
     \item Shift-Share Instrument for Black Population
+        \vspace{-0.2cm} % Adjust this value as needed
         \begin{align}
             Z_{n t}=\sum_{s=1910}^t \sum_{j \in \text { South }} \underbrace{\alpha_{j n}^{1900}}_{\parbox[t]{3.3cm}{\raggedright \footnotesize \centering Share of Black migrants from state $j$ living in MSA $n$ in 1900}} \underbrace{O_{j s}}_{\parbox[t]{3cm}{\raggedright \footnotesize \centering \# of Black migrants who left state $j$ between $s-1$ and $s$}}
         \end{align}
         \vspace{-0.6cm} % Adjust this value as needed
         \begin{itemize}
-            \item Migrants tended to move to the destination MSAs of past migrants from their region 
+            \item Migrants tended to move to the destination MSAs of past migrants from their region.
+            \item Uses cross-sectional variation over $n$ in 1900 Black migrant state-of-origin mix \& time-series variation in out-migration from each Southern state post-1900.
         \end{itemize}
 \end{itemize}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Results}
 
 An increase in the Black population led to:
 
     \begin{itemize}
-        \item Heightened Assimilation Efforts
+        \item Heightened Assimilation Efforts by European Immigrants
             \begin{itemize}
                 \item Increased Naturalization Rates: Rose 1.5 p.p. per 1 S.D. ($\sim$45,000 people) increase
                 \item Less Ethnically Distinct Names: A 100,000 increase led to a name distinctiveness decline among Italians equivalent to changing Luciano to Mike
             \end{itemize}
-        \item Heightened Acceptance from Native Born White People
+        \item Greater Acceptance of European Immigrants Among Native Born White People
             \begin{itemize}
                 \item Increased Intermarriage Rates: Rose 0.54 p.p. (7.5\%) per 1 S.D. increase
-                \item Decreased Anti-immigrant News Coverage: 
+                \item Decreased Anti-immigrant News Coverage
+            \end{itemize}
+        \item Elevated Anti-Black Sentiment
+            \begin{itemize}
+                \item Increased the Frequency of Anti-Black Stereotypes in the Press
             \end{itemize}
     \end{itemize}
 
 \end{frame}
+
+% \begin{frame}[plain, noframenumbering]{References}
+%     \printbibliography
+% \end{frame}
+
 
 \end{document}
