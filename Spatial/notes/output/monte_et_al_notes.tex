@@ -1,13 +1,15 @@
 \documentclass[10pt]{article}
 \include{../../../preamble.tex}
 
-\title{Ch. 5 Optimal Experiment Design Notes}
+\title{Monte Paper Notes}
 
 \author{Dylan Baker}
 \date{October 2024}
 
 \begin{document}
 \maketitle
+
+\tableofcontents
 
 \section{Terms}
 
@@ -120,6 +122,8 @@ rent as a function of the supply of land.
 
 \section{Production}
 
+\subsection{Labor Requirement for Production}
+
 Firms produce tradable varieties under 
 monopolistic competition
 and increasing returns to scale
@@ -129,21 +133,122 @@ To produce a variety, firms incur
 a fixed cost, $F$, as well as a 
 variable cost
 that is determined by the inverse 
-of local productivity, $A_i(j)$: $x_i(j)/A_i(j)$.
+of local productivity, $A_i$: $x_i(j)/A_i$.
 
 Thus, the total amount of labor, $l_i(j)$, required to produce
 $x_i(j)$ units of variety $j$ in location $i$ is
 given by:
 
 \begin{align}
-    l_i(j)=F+ \frac{x_i(j)}{A_i(j)}
+    l_i(j)=F+ \frac{x_i(j)}{A_i} \label{eq:labor_requirement}
 \end{align}
 
+\subsection{Price: Constant Markup over Marginal Cost}
+
+Profit maximization  
+gives us that 
+the equilibrium prices are a 
+constant markup over marginal cost:
+
+\begin{align}
+    p_{n i}(j)=\left(\frac{\sigma}{\sigma-1}\right) \frac{d_{n i} w_i}{A_i} \label{eq:price_ni_1}
+\end{align}
+
+The derivation is given in \autoref{sec:price_ni_1}.
+
+Notice also that $p_{n i}(j)$ is the 
+same for all varieties produced in location $i$, i.e.,
+there is no $j$ on the RHS. 
+
+\subsection{Equilibrium Output of $j$ in $i$}
+
+If we then additionally note zero profits, we get
+an expression for equilibrium output of each variety
+in each location:
+
+\begin{align}
+    x_i(j)=A_i F(\sigma-1) \label{eq:eq_output_xij}
+\end{align}
+
+The derivation is given in \autoref{sec:eq_output_xij}.
+
+\subsection{Measure of Produced Varieties}
+
+\eqref{eq:eq_output_xij} combined with labor market 
+clearing gives us that 
+the total measure of produced varieties in region $i$, $M_i$,
+is proportional to the 
+measure of employed workers, $L_i$:
+
+\begin{align}
+    M_i = \frac{L_i}{\sigma F} \label{eq:m_i_1}
+\end{align}
+
+The derivation is given in \autoref{sec:m_i_1}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Goods Trade}
+
+\subsection{Share of $n$'s Expenditure on $i$'s Goods}
+
+``The model implies a gravity equation 
+for bilateral trade between locations.''
+
+``Using the CES expenditure function, the 
+equilibrium pricing rule, and the measure 
+of firms, the 
+share of location $n$'s expenditure on 
+good's produced in location $i$ is:''
+
+\begin{align}
+    \pi_{n i}=\frac{M_i p_{n i}^{1-\sigma}}{\sum_{k \in N} M_k p_{n k}^{1-\sigma}}=\frac{L_i\left(d_{n i} w_i / A_i\right)^{1-\sigma}}{\sum_{k \in N} L_k\left(d_{n k} w_k / A_k\right)^{1-\sigma}} \label{eq:share_ni_1}
+\end{align}
+
+The derivation is given in \autoref{sec:share_ni_1}.
+
+Notice that trade between locations $n$ and $i$
+depends on both their own trade costs, $d_{n i}$,
+as well as the trade costs between $n$ and all other locations.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Workplace Income}
+
+``Equating revenue and
+expenditure, and using zero profits, workplace income in 
+each location equals total expenditure 
+on goods produced in that location, namely,''
+
+\begin{align}
+    w_i L_i=\sum_{n \in N} \pi_{n i} \bar{v}_n R_n \label{eq:workplace_income}
+\end{align}
+
+The derivation is given in \autoref{sec:workplace_income}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Price Index Re-Expression}
+
+Then, using the equilibrium pricing rule
+and labor market clearing, we can 
+re-express the price index dual to the consumption index as:
+
+\begin{align}
+    P_n & =\frac{\sigma}{\sigma-1}\left(\frac{1}{\sigma F}\right)^{\frac{1}{1-\sigma}}\left[\sum_{i \in N} L_i\left(d_{n i} w_i / A_i\right)^{1-\sigma}\right]^{\frac{1}{1-\sigma}} \\
+    & =\frac{\sigma}{\sigma-1}\left(\frac{L_n}{\sigma F \pi_{n n}}\right)^{\frac{1}{1-\sigma}} \frac{d_{n n} w_n}{A_n} \label{eq:price_index_p_n_2}
+\end{align}
+
+The derivation is given in \autoref{sec:price_ni_2}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Derivations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Derivation of $c_{n i}(j)$ Expression} 
 \label{sec:good_nij_consumption}
@@ -194,7 +299,7 @@ which gives the relevant FOC:
 From there, we can define the dual price index 
 
 \begin{align}
-    P_n \equiv \left(\sum_{i \in N} \int_0^{M_i} p_{n i}(j)^{1-\sigma} d_j \right)^{\frac{1}{1-\sigma}}
+    P_n \equiv \left(\sum_{i \in N} \int_0^{M_i} p_{n i}(j)^{1-\sigma} d_j \right)^{\frac{1}{1-\sigma}} \label{eq:price_index_p_n}
 \end{align}
 
 and revisit to our budget constraint:
@@ -218,5 +323,286 @@ Then, returning to \eqref{eq:inter_good_nij_cons}, we can plug in our expression
 \end{align}
 
 which is what we wanted.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Derivation of $p_{n i}(j)$ Expression}
+\label{sec:price_ni_1}
+This is the derivation of \eqref{eq:price_ni_1}.
+
+\subsubsection{Marginal Cost}
+
+We will get the expression 
+for $p_{n i}(j)$ by equating 
+marginal cost and marginal revenue.
+
+First, notice that since 
+
+\begin{align}
+    l_i(j)=F+\frac{x_i(j)}{A_i}
+\end{align}
+
+cost is given by:
+
+\begin{align}
+    \underbrace{\operatorname{Cost}\left(x_i(j)\right)}_{\text {total monetary cost }}=\underbrace{w_i}_{\text {wage }}\left[F+\frac{x_i(j)}{A_i}\right] \label{eq:cost_xij}
+\end{align}
+
+However, to account for trade costs,
+we must consider the variable cost of 
+delivering $q_{ni}(j)$ units of variety $j$
+to location $n$ from location $i$:
+
+\begin{align}
+    \underbrace{\text{Var Cost}\left(q_{ni}(j)\right)}_{\text {variable monetary cost }}=\underbrace{w_i}_{\text {wage }} \underbrace{d_{ni}}_{\text{trade costs}} \left[\frac{q_{ni}(j)}{A_i}\right] \label{eq:var_cost_qnij}
+\end{align}
+
+This is fine for marginal cost, since the fixed cost 
+will disappear when we take the derivative.
+
+Also, notice that we've defined $q_{ni}(j)$ such that:
+
+\begin{align}
+    x_i(j) = \sum_{n \in N} d_{ni} q_{ni}(j) \label{eq:xij_qnij}
+\end{align}
+
+where $d_{ni}$ is the multiplier reflecting 
+how many more units of variety $j$ must be made 
+to deliver $q_{ni}(j)$ units of variety $j$ to location $n$
+from location $i$.
+
+Then, marginal cost is given by:
+
+\begin{align}
+    \text{MC} = \frac{d}{d q_{ni}(j)} \text{Var Cost}\left(q_{ni}(j)\right)= \frac{w_i d_{ni}}{A_i}
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Marginal Revenue}
+
+Under isoelastic (CES) demand, 
+we can write the quantity demanded as
+
+\begin{align}
+    q_{ni}(j)=A_i p_{n i}(j)^{-\sigma} 
+\end{align}
+
+Then, revenue is given by:
+
+\begin{align}
+    \text{Rev}(p_{n i}(j)) = p_{n i}(j) q_{ni}(j) = A_i p_{n i}(j)^{1-\sigma}
+\end{align}
+
+Then marginal revenue is given by:
+
+\begin{align}
+    \text{MR}_{n i}(j) = &\frac{d \text{Rev}(p_{n i}(j))}{dp_{n i}(j)} \frac{d p_{n i}(j)}{d q_{ni}(j)} \label{eq:mr_ni_1}
+\end{align}
+
+by the chain rule.
+
+Then notice that
+
+\begin{align}
+    \frac{d \text{Rev}(p_{n i}(j))}{dp_{n i}(j)} = A_i (1-\sigma) p_{n i}(j)^{-\sigma} \label{eq:drev_dp}
+\end{align}
+
+and 
+
+\begin{align}
+    \frac{d q_{ni}(j)}{d p_{n i}(j)} = -\sigma A_i p_{n i}(j)^{-\sigma-1}
+\end{align}
+
+Since $q$ and $p$ are inversely related,
+we can write:
+
+\begin{align}
+    \frac{d p_{n i}(j)}{d q_{ni}(j)} = \left(\frac{d q_{ni}(j)}{d p_{n i}(j)}\right)^{-1} = -\frac{1}{\sigma A_i p_{n i}(j)^{\sigma+1}} \label{eq:dp_dq}
+\end{align}
+
+Then, plugging 
+\eqref{eq:drev_dp} and \eqref{eq:dp_dq} into \eqref{eq:mr_ni_1}, we get:
+
+\begin{align}
+    \text{MR}_{n i}(j) = &\frac{d \text{Rev}(p_{n i}(j))}{dp_{n i}(j)} \frac{d p_{n i}(j)}{d q_{ni}(j)}  \\
+    = & A_i (1-\sigma) p_{n i}(j)^{-\sigma} \left(-\frac{1}{\sigma A_i p_{n i}(j)^{\sigma+1}}\right) \\
+    = & \left(\frac{\sigma - 1}{\sigma}\right) p_{n i}(j)
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Equating MR and MC}
+
+Then, equating marginal revenue and marginal cost, we get
+the desired expression:
+
+\begin{align}
+    \text{MR}_{n i}(j) = \text{MC} \\
+    \Rightarrow \left(\frac{\sigma - 1}{\sigma}\right) p_{n i}(j) = \frac{d_{ni} w_i}{A_i} \\
+    \Rightarrow p_{n i}(j) = \left(\frac{\sigma}{\sigma-1}\right) \frac{d_{ni} w_i}{A_i}
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Derivation of $x_i(j)$ Expression}
+\label{sec:eq_output_xij}
+
+This is the derivation of \eqref{eq:eq_output_xij}.
+
+Zero profit implies that 
+revenue minus variable cost equals fixed cost,
+which leads to the desired equation:
+
+\begin{align}
+    &\text{Revenue} - \text{Variable Cost} = \text{Fixed Cost} \\
+    \Rightarrow & \sum_n \left[p_{ni}(j) q_{ni}(j) - w_i d_{ni} \left(\frac{q_{ni}(j)}{A_i}\right)\right] = w_i F && \parbox[t]{4cm}{\raggedright By \eqref{eq:cost_xij} and \eqref{eq:var_cost_qnij}} \\
+    \Rightarrow & \sum_n \left[\frac{\sigma}{\sigma-1} \frac{d_{ni} w_i}{A_i} q_{ni}(j) - w_i d_{ni} \left(\frac{q_{ni}(j)}{A_i}\right)\right] = w_i F && \parbox[t]{4cm}{\raggedright By \eqref{eq:price_ni_1}} \\
+    \Rightarrow & \sum_n \left[\frac{1}{\sigma-1} \frac{d_{ni}}{A_i} q_{ni}(j)\right] = F \\ 
+    \Rightarrow & \sum_n d_{ni} q_{ni}(j) = A_i F (\sigma-1) \\
+    \Rightarrow & x_i(j) = A_i F (\sigma-1) && \parbox[t]{4cm}{\raggedright By \eqref{eq:xij_qnij}}
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Derivation of $M_i$ Expression}
+\label{sec:m_i_1}
+
+This is a derivation of \eqref{eq:m_i_1}.
+
+\begin{align}
+    L_i = &\int_{0}^{M_i} l_i(j) dj && \parbox[t]{4cm}{\raggedright Labor market clearing}\\
+    = & \int_{0}^{M_i} \left[F + \frac{x_i(j)}{A_i}\right] dj && \text{By \eqref{eq:labor_requirement}} \\
+    = &\int_{0}^{M_i} F + \frac{A_i F (\sigma -1)}{A_i} dj && \text{By \eqref{eq:eq_output_xij}} \\
+    = &\int_{0}^{M_i} \sigma F dj \\
+    = & \sigma F M_i
+\end{align}
+
+By re-arranging, we get the desired expression:
+
+\begin{align}
+    M_i = \frac{L_i}{\sigma F}
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Derivation of $\pi_{n i}$ Expression}
+\label{sec:share_ni_1}
+
+This is a derivation of \eqref{eq:share_ni_1}.
+
+First, because it will be useful momentarily, note:
+
+\begin{align}
+    &P_n=\left[\sum_{k \in N} \int_0^{M_k} p_{n k}(j)^{1-\sigma} d j\right]^{\frac{1}{1-\sigma}} \\
+    \Rightarrow &P_n^{1-\sigma} = \sum_{k \in N} \int_0^{M_k} p_{n k}(j)^{1-\sigma} d j \\
+    \Rightarrow &P_n^{1-\sigma} = \sum_{k \in N} \int_0^{M_k} p_{nk}^{1-\sigma} d j && \parbox[t]{4cm}{\raggedright By \eqref{eq:price_ni_1}} \\
+    \Rightarrow &P_n^{1-\sigma} = \sum_{k \in N} M_k p_{nk}^{1-\sigma} \label{eq:price_ind_interm_share_ni_1}
+\end{align}
+
+Now, begin with the baseline expression
+for share of expenditure:
+
+\begin{align}
+    \pi_{n i}=&\frac{\int_0^{M_i} p_{n i}(j) c_{n i}(j) d j}{\sum_{k \in N} \int_0^{M_k} p_{n k}(j) c_{n k}(j) d j} \\
+    = &\frac{\int_0^{M_i} p_{n i}(j) \alpha X_n P_n^{\sigma-1} p_{n i}(j)^{-\sigma} d j}{\sum_{k \in N} \int_0^{M_k} p_{n k}(j) \alpha X_n P_n^{\sigma-1} p_{n k}(j)^{-\sigma} d j} && \parbox[t]{4cm}{\raggedright By \eqref{eq:good_nij_consumption}} \\
+    = &\frac{\int_0^{M_i} p_{ni}(j)^{1-\sigma} d j}{\sum_{k \in N} \int_0^{M_k} p_{nk}(j)^{1-\sigma} d j} && \parbox[t]{4cm}{\raggedright Cancel terms} \\
+    = &\frac{\int_0^{M_i} p_{ni}(j)^{1-\sigma} d j}{P_n^{1-\sigma}} && \parbox[t]{4cm}{\raggedright By \eqref{eq:price_index_p_n}} \\
+    = &\frac{\int_0^{M_i} p_{ni}^{1-\sigma} d j}{\sum_{k \in N} M_k p_{nk}^{1-\sigma}} && \parbox[t]{4cm}{\raggedright By \eqref{eq:price_ni_1} \& \eqref{eq:price_ind_interm_share_ni_1}} \\
+    = &\frac{M_i p_{ni}^{1-\sigma}}{\sum_{k \in N} M_k p_{nk}^{1-\sigma}}
+\end{align}
+
+Thus, we now have the first desired equality:
+
+\begin{align}
+    \pi_{n i}=\frac{M_i p_{n i}^{1-\sigma}}{\sum_{k \in N} M_k p_{n k}^{1-\sigma}} \label{eq:share_ni_inter1}
+\end{align}
+
+Now, notice that:
+
+\begin{align}
+    M_i p_{ni}^{1-\sigma} = &\left(\frac{L_i}{\sigma F}\right) \left(\frac{\sigma}{\sigma-1}\right)^{1-\sigma} \frac{d_{ni} w_i}{A_i}^{1-\sigma} && \parbox[t]{4cm}{\raggedright By \eqref{eq:price_ni_1} and \eqref{eq:m_i_1}}
+\end{align}
+
+Thus, we can re-write \eqref{eq:share_ni_inter1} to be: 
+
+\begin{align}
+    \pi_{n i}=&\frac{M_i p_{n i}^{1-\sigma}}{\sum_{k \in N} M_k p_{n k}^{1-\sigma}} \\
+    = &\frac{\left(\frac{L_i}{\sigma F}\right) \left(\frac{\sigma}{\sigma-1}\right)^{1-\sigma} \frac{d_{ni} w_i}{A_i}^{1-\sigma}}{\sum_{k \in N} \left(\frac{L_k}{\sigma F}\right) \left(\frac{\sigma}{\sigma-1}\right)^{1-\sigma} \frac{d_{nk} w_k}{A_k}^{1-\sigma}} \\
+    = &\frac{L_i \left(\frac{d_{ni} w_i}{A_i}\right)^{1-\sigma}}{\sum_{k \in N} L_k \left(\frac{d_{nk} w_k}{A_k}\right)^{1-\sigma}}
+\end{align}
+
+which is what we wanted.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Derivation of $w_i L_i$ Expression}
+\label{sec:workplace_income}
+
+This is a derivation of \eqref{eq:workplace_income}.
+
+There's not really much of a derivation here. 
+
+First, note that total labor income is expressed as:
+
+\begin{align}
+    w_i L_i
+\end{align}
+
+Total revenue from goods produced in location $i$ is given by:
+
+\begin{align}
+    \sum_{n \in N} \pi_{n i} \bar{v}_n R_n
+\end{align}
+
+There are no net profits, so 
+total revenue minus total cost must be zero:
+
+\begin{align}
+    &\sum_{n \in N} \pi_{n i} \bar{v}_n R_n - w_i L_i = 0 \\
+    \Rightarrow &\sum_{n \in N} \pi_{n i} \bar{v}_n R_n = w_i L_i
+\end{align}
+
+Also, note, since I briefly forgot, that the fixed 
+costs of production and the costs associated with 
+trade are already accounted for in the $L_i$ term.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Derivation of $P_n$ Re-Expression}
+\label{sec:price_ni_2}
+
+This is a derivation of \eqref{eq:price_index_p_n_2}.
+
+\begin{align}
+    P_n = &\left[\sum_{i \in N} \int_0^{M_i} p_{n i}(j)^{1-\sigma} d j\right]^{\frac{1}{1-\sigma}} && \parbox[t]{4cm}{\raggedright By \eqref{eq:price_index_p_n}} \\
+    = &\left[\sum_{i \in N} \int_0^{M_i} p_{n i}^{1-\sigma} d j\right]^{\frac{1}{1-\sigma}} && \parbox[t]{4cm}{\raggedright By \eqref{eq:price_ni_1}} \\
+    = &\left[\sum_{i \in N} M_i p_{n i}^{1-\sigma}\right]^{\frac{1}{1-\sigma}} \\
+    = &\left[\sum_{i \in N} \frac{L_i}{\sigma F} \left(\frac{\sigma}{\sigma-1}\right)^{1-\sigma} \frac{d_{ni} w_i}{A_i}^{1-\sigma}\right]^{\frac{1}{1-\sigma}} && \parbox[t]{4cm}{\raggedright By \eqref{eq:m_i_1} and \eqref{eq:price_ni_1}} \\
+    = &\left(\frac{\sigma}{\sigma-1}\right) \left(\frac{1}{\sigma F}\right)^{\frac{1}{1-\sigma}} \left[\sum_{i \in N} L_i \left(\frac{d_{ni} w_i}{A_i}\right)^{1-\sigma}\right]^{\frac{1}{1-\sigma}} \\
+\end{align}
+
+which is the first desired equality. 
+
+From there, we can note
+
+\begin{align}
+    \pi_{nn} &= \frac{L_n \left(\frac{d_{nn} w_n}{A_n}\right)^{1-\sigma}}{\sum_{i \in N} L_i \left(\frac{d_{ni} w_i}{A_i}\right)^{1-\sigma}} && \parbox[t]{4cm}{\raggedright By \eqref{eq:share_ni_1}} \label{eq:pi_nn}
+\end{align}
+
+which let's us pick back up to write:
+
+\begin{align}
+    P_n = &\left(\frac{\sigma}{\sigma-1}\right) \left(\frac{1}{\sigma F}\right)^{\frac{1}{1-\sigma}} \left[\sum_{i \in N} L_i \left(\frac{d_{ni} w_i}{A_i}\right)^{1-\sigma}\right]^{\frac{1}{1-\sigma}} \\
+    = &\left(\frac{\sigma}{\sigma-1}\right) \left(\frac{1}{\sigma F}\right)^{\frac{1}{1-\sigma}} \left[\frac{L_n \left(\frac{d_{nn} w_n}{A_n}\right)^{1-\sigma}}{\pi_{nn}}\right]^{\frac{1}{1-\sigma}} && \text{By \eqref{eq:pi_nn}} \\
+    = &\left(\frac{\sigma}{\sigma-1}\right) \left(\frac{L_n}{\sigma F \pi_{nn}}\right)^{\frac{1}{1-\sigma}} \frac{d_{nn} w_n}{A_n}
+\end{align}
+
+which is the second desired expression.
 
 \end{document}
