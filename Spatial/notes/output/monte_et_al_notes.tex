@@ -1,0 +1,222 @@
+\documentclass[10pt]{article}
+\include{../../../preamble.tex}
+
+\title{Ch. 5 Optimal Experiment Design Notes}
+
+\author{Dylan Baker}
+\date{October 2024}
+
+\begin{document}
+\maketitle
+
+\section{Terms}
+
+\input{../input/monte_et_al_terms.tex}
+
+\section{The Model}
+
+\subsection{Preferences and Endowments}
+
+\subsubsection{Preferences}
+
+The preferences of a worker who lives in
+location $n$ and works in location $i$ 
+is given by the following utility function
+of the Cobb-Douglas form:
+
+\begin{align}
+    U_{n i \omega}=\frac{b_{n i \omega}}{\kappa_{n i}}\left(\frac{C_{n \omega}}{\alpha}\right)^\alpha\left(\frac{H_{n \omega}}{1-\alpha}\right)^{1-\alpha}
+\end{align}
+
+Idiosyncratic amenities 
+are drawn from 
+an independent Fréchet distribution:
+
+\begin{align}
+    G_{n i}(b)=e^{-B_{n i} b^{-\epsilon}}, \quad B_{n i}>0, \epsilon>1
+\end{align}
+
+\subsubsection{Good Consumption Index}
+
+The good consumption index is given the form:
+
+\begin{align}
+    C_n=\left[\sum_{i \in N} \int_0^{M_i} c_{n i}(j)^\rho d j\right]^{\frac{1}{\rho}}, \quad \sigma=\frac{1}{1-\rho}>1
+\end{align}
+
+``The goods consumption index in location $n$ is a constant elasticity of 
+substitution (CES) function of consumption of a continuum of tradable 
+varieties sourced from each location $i$.''
+
+Utility maximization 
+will give that ``the equilibrium consumption 
+in location $n$ of each variety sourced from 
+location $i$ 
+is given by'':
+
+\begin{align}
+    c_{n i}(j)=\alpha X_n P_n^{\sigma-1} p_{n i}(j)^{-\sigma} \label{eq:good_nij_consumption}
+\end{align}
+
+See \autoref{sec:good_nij_consumption} for derivation.
+
+\subsubsection{Land and Local Consumption}
+
+``We assume that this land is owned by immobile landlords,
+who receive worker expenditure on residential land as income, and consume only
+goods where they live.''
+
+From there, we get the expression
+
+\begin{align}
+    P_n C_n=\alpha \bar{v}_n R_n+(1-\alpha) \bar{v}_n R_n=\bar{v}_n R_n
+\end{align}
+
+which says that the 
+total expenditure on goods in location $n$, $P_n C_n$
+is equal to the total labor income of 
+residents in location $n$, $\bar{v}_n R_n$.
+
+\begin{questions}
+    Should I be saying ``total labor income'' or just ``total income''
+    for $\bar{v}_n R_n$?
+\end{questions}
+
+The middle term can be read as 
+residents total spending on goods in $n$,
+$\alpha \bar{v}_n R_n$, plus 
+residents total spending on land in $n$,
+$(1-\alpha) \bar{v}_n R_n$.
+
+We can also get the following expression:
+
+\begin{align}
+    Q_n=(1-\alpha) \frac{\bar{v}_n R_n}{H_n}
+\end{align}
+
+which says that 
+the land price in location $n$, $Q_n$,
+is equal to the total spending on land in $n$ 
+divided by the supply of land in $n$.
+
+This follows from the land market clearing condition:
+
+\begin{align}
+    \underbrace{Q_n \times H_n}_{\text {price } \times \text { quantity of land }}=\underbrace{(1-\alpha) \bar{v}_n R_n}_{\text {total rent paid by residents }}
+\end{align}
+
+and is useful, because it allows us to express 
+rent as a function of the supply of land.
+
+\begin{questions}
+    Why do we only say that it's a function of the supply of land?
+    It seems to be a function of several things, no?
+\end{questions}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Production}
+
+Firms produce tradable varieties under 
+monopolistic competition
+and increasing returns to scale
+using labor as the lone input. 
+
+To produce a variety, firms incur 
+a fixed cost, $F$, as well as a 
+variable cost
+that is determined by the inverse 
+of local productivity, $A_i(j)$: $x_i(j)/A_i(j)$.
+
+Thus, the total amount of labor, $l_i(j)$, required to produce
+$x_i(j)$ units of variety $j$ in location $i$ is
+given by:
+
+\begin{align}
+    l_i(j)=F+ \frac{x_i(j)}{A_i(j)}
+\end{align}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Derivations}
+
+\subsection{Derivation of $c_{n i}(j)$ Expression} 
+\label{sec:good_nij_consumption}
+
+\subsubsection{Write the Problem}
+This is the derivation of \eqref{eq:good_nij_consumption}.
+
+When making consumption decisions surrounding
+$c_{n i}(j)$, an individual is solving the following problem:
+
+\begin{align}
+    &\underset{\{c_{n i}(j)\}}{\max} C_n \\ 
+    \text{s.t. } &\sum_i \int_{0}^{M_i} p_{n i}(j) c_{n i}(j) d j=\alpha X_n
+\end{align}
+
+or expanded out:
+
+\begin{align}
+    &\underset{\{c_{n i}(j)\}}{\max} \left[\sum_{i \in N} \int_0^{M_i} c_{n i}(j)^\rho d j\right]^{\frac{1}{\rho}} \\
+    \text{s.t. } &\sum_i \int_{0}^{M_i} p_{n i}(j) c_{n i}(j) d j=\alpha X_n
+\end{align}
+
+where the $\alpha X_n$ term comes from the fact that 
+people spend $\alpha$ of their total expenditures, $X_n$,
+on goods.
+
+\subsubsection{Lagrangian and FOCs}
+
+The Langragian for this problem is then:
+
+\begin{align}
+    \mathcal{L} = \left[\sum_{i \in N} \int_0^{M_i} c_{n i}(j)^\rho d j\right]^{\frac{1}{\rho}} + \lambda \left(\alpha X_n - \sum_i \int_{0}^{M_i} p_{n i}(j) c_{n i}(j) d j\right)
+\end{align}
+
+which gives the relevant FOC:
+
+\begin{align}
+    \{c_{n i}(j)\} \quad \quad &\frac{\partial}{\partial c_{n i}(j)} \left[\left(\sum_{i \in N} \int_0^{M_i} c_{n i}(j)^\rho d j\right)^{\frac{1}{\rho}}\right] - \lambda p_{n i}(j) = 0 \\
+    \Leftrightarrow & \frac{1}{\rho} \left[\sum_{i \in N} \int_0^{M_i} \rho c_{n i}(j)^\rho d j\right]^{\frac{1}{\rho}-1} c_{n i}(j)^{\rho-1} - \lambda p_{n i}(j) = 0 \\
+    \Leftrightarrow & C_n^{1-\rho} c_{n i}(j)^{\rho-1} = \lambda p_{n i}(j) \\
+    \Leftrightarrow & c_{n i}(j) = \lambda^{\frac{1}{\rho -1}} p_{ni}(j)^{\frac{1}{\rho -1}} C_n \\ 
+    \Leftrightarrow & c_{n i}(j) = \lambda^{-\sigma} p_{ni}(j)^{-\sigma} C_n && \text{since $\sigma = \frac{1}{1-\rho}$} \label{eq:inter_good_nij_cons}
+\end{align}
+
+
+\subsubsection{Solve for $\lambda$}
+
+From there, we can define the dual price index 
+
+\begin{align}
+    P_n \equiv \left(\sum_{i \in N} \int_0^{M_i} p_{n i}(j)^{1-\sigma} d_j \right)^{\frac{1}{1-\sigma}}
+\end{align}
+
+and revisit to our budget constraint:
+
+\begin{alignat}{2}
+    &\alpha X_n && = \sum_i \int_{0}^{M_i} p_{n i}(j) c_{n i}(j) d j \\
+    &&&= \sum_i \int_{0}^{M_i} p_{n i}(j) \lambda^{-\sigma} p_{ni}(j)^{-\sigma} C_n d j \quad \text{by \eqref{eq:inter_good_nij_cons}} \\
+    &&&= \lambda^{-\sigma} C_n \sum_i \int_{0}^{M_i} p_{n i}(j)^{1-\sigma} d j \\
+    &&& = \lambda^{-\sigma} C_n P_n^{1-\sigma} \\
+    \Rightarrow &\lambda^{-\sigma} &&= \frac{\alpha X_n}{C_n} P_n^{\sigma-1} \\
+\end{alignat}
+
+\subsubsection{Plug in $\lambda$}
+
+Then, returning to \eqref{eq:inter_good_nij_cons}, we can plug in our expression for $\lambda^{-\sigma}$:
+
+\begin{align}
+    c_{n i}(j) &= \lambda^{-\sigma} p_{ni}(j)^{-\sigma} C_n \\
+    &= \left(\frac{\alpha X_n}{C_n} P_n^{\sigma-1}\right) p_{ni}(j)^{-\sigma} C_n \\
+    &= \alpha X_n P_n^{\sigma-1} p_{ni}(j)^{-\sigma}
+\end{align}
+
+which is what we wanted.
+
+\end{document}
