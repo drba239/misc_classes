@@ -8,6 +8,8 @@
 \begin{document}
 \maketitle
 
+\tableofcontents
+
 \section{Introduction}
 
 Mediation analysis 
@@ -350,8 +352,7 @@ $Y_i(t,1) = 0$. Thus, the issue comes from not appreciating
 that the impact of $D$ on $M$ is not applied uniformly across 
 the population, and it may be applied to a sub-population 
 for whom the effect of $M$ on $Y$ doesn't match the average effect 
-across the population. Such an issue would be ruled out by 
-the Sequential Ignorability assumption had it applied here.
+across the population. 
 
 
 \begin{figure}[!htb]
@@ -361,9 +362,217 @@ the Sequential Ignorability assumption had it applied here.
     \label{fig:med_two_exp_failure}
 \end{figure}
 
+Such an issue would be ruled out by 
+the Sequential Ignorability assumption had it applied here.
+In particular, in addition to treatment $D_i$ randomization, 
+the assumption would mean that 
+conditional on $D_i$, $M_i$ is independent of the potential outcomes 
+of $Y_i$, but this clearly doesn't hold in this example, since 
+conditional on $D_i$, 
+$M_i$ is related to the potential outcomes of $Y_i$.
+
+This means that randomizing $M_i$ in the second experiment 
+doesn't reflect what actually happens to $M_i$ when we introduce 
+$D_i$.
+
+\begin{questions}[To-Do]
+    Add a clearer explanation of showing how they're related.
+\end{questions}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Paired Design}
+
+An alternative to separate randomization is 
+the paired design. Under the paired design, 
+the researcher runs 2 experiments:
+
+\begin{itemize}
+    \item Experiment A: Randomize over $D$.
+        \begin{itemize}
+            \item Recovers the ATE, which is composed of direct and indirect effects.
+        \end{itemize}
+    \item Experiment B: Randomize over $D$ and $M$.
+        \begin{itemize}
+            \item Recovers the ACDEs.
+        \end{itemize}
+\end{itemize}
+
+Experiment B can give some indication of 
+whether there is a meaningful 
+interaction effect: $D \times M$.
+
+If there is not, this may be some 
+suggestive evidence that $D$ and $M$ 
+work in predominantly additively separable ways. 
+This implies that there is only one direct and one indirect effect.
+
+That is, 
+
+\begin{align}
+    \text{ADE(0)} = \text{ADE(1)} \equiv \text{ADE} \label{eq:uniform_ade} \\
+    \text{AIE(0)} = \text{AIE(1)} \equiv \text{AIE} \label{eq:uniform_aie}
+\end{align}
+
+Moreover, 
+
+\begin{align}
+    \text{ACDE}(0) = \text{ACDE}(1) \equiv \text{ACDE}
+\end{align}
+
+and 
+
+\begin{align}
+    \text{ACDE} = \text{ADE} \label{eq:ade_acde}
+\end{align}
+
+since the idea is that ACDE isn't varying with $M$
+and hence recovers the ADE.
+
+Moreover, the average indirect 
+effect can be recovered as the 
+difference-in-differences 
+across experiments. That is:
+
+\begin{align}
+    \text{AIE} = \underbrace{\mathbb{E}\left[Y_i\left(M_i(1), 1\right)-Y_i\left(M_i(0), 0\right)\right]}_{\text { ATE (Experiment A)}}-\underbrace{\mathbb{E}\left[Y_i(1,1)-Y_i(0,1)\right]}_{\text{ACDE (Experiment B)}}
+\end{align}
+
+since:
+
+\begin{align}
+    &\text{ATE} = \text{ADE} + \text{AIE} && \parbox[t]{4cm}{\raggedright by \eqref{eq:ATE_ex2}, \eqref{eq:uniform_ade}, and \eqref{eq:uniform_aie}} \\
+    \Rightarrow &\text{AIE} = \text{ATE} - \text{ADE} \\ 
+    \Rightarrow &\text{AIE} = \text{ATE} - \text{ACDE} && \parbox[t]{4cm}{\raggedright by \eqref{eq:ade_acde}}
+\end{align}
+
+Thus, in this case, 
+``all mechanism-specific components of the ATE are recovered.''
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cross-Over Design}
+
+\subsubsection{Setup}
+
+In the cross-over design, 
+the researcher considers a single experiment 
+over multiple time periods.
+
+In the initial round, denoted with the subscript $1$,
+the researcher randomizes $D_{i1}$
+and measures the (endogenous) mediator, $M_{i1}$,
+as well as the outcome, $Y_{i1}$.
+In the subsequent round, denoted by subscript 
+$2$, the researcher flips the treatment, so that 
+
+\begin{align}
+    D_{i2} = 1 - D_{i1} = \begin{cases}
+        1 & \text{if } D_{i1} = 0 \\
+        0 & \text{if } D_{i1} = 1
+    \end{cases}
+\end{align}
+
+but holds the mediator value 
+fixed at the value 
+it took in the first round, i.e., $M_{i2} = M_{i1}$.
+Then, the researcher measures the outcome, $Y_{i2}$.
+
+\subsubsection{Assumptions}
+
+\begin{itemize}
+    \item Causal Transience: Our usual causal transience assumption can be stated as:
+
+        \begin{align}
+            Y_{i t}\left(D_{i t}, \boldsymbol{D}_i, T\right)=Y_{i t}\left(D_{i t}, T\right)
+        \end{align}
+        
+        where 
+        
+        \begin{align}
+            \boldsymbol{D}_{i}=\left(D_{i 1}, \ldots, D_{i T}\right)
+        \end{align}
+        
+        and in this case, $T=2$.
+    \item Effect of Mediator Transience: We must now 
+        also assume that fixing the value of the mediator to 
+        the initial (endogenous) value in subsequent 
+        rounds yields the same outcome as it did when it was 
+        endogenously chosen in the first round. That is,
+        when $M_i(d)=m$:
+
+        \begin{align}
+            \mathbb{E}\left[Y_{i 1}\left(M_i(d), d\right)\right]=\mathbb{E}\left[Y_{i 2}(m, d)\right] \text { for all } d, m .
+        \end{align}
+    \item Other stuff from the within-participants design chapter 
+        presumably applies here as well.
+\end{itemize}
+
+\subsubsection{Results}
+
+If our assumptions are met, we get the nice
+reward of being able to separately identify 
+the AIE(d) and ADE(d) values.
+
+As one example of how we can do this, consider:
+
+\begin{align}
+    \text{AIE}(1) \equiv &\mathbb{E}\left[Y_{i 2}\left(M_i(1), 1\right)-Y_{i 2}\left(M_i(0), 1\right)\right] \\
+    = &\color{blue}{\mathbb{E}\left[Y_{i 2}\left(M_i(1), 1\right)\right]} - \color{red}{\mathbb{E}\left[Y_{i 2}\left(M_i(0), 1\right)\right]} \\
+    = &\color{blue}{\mathbb{E}\left[Y_{i 1}\left(M_i(1), 1\right)\right]} - \color{red}{\mathbb{E}\left[Y_{i 2}\left(M_i(0), 1\right)\right]} && \parbox[t]{5cm}{\raggedright by assumption} \\
+    = &\underbrace{\color{blue}{\mathbb{E}\left[Y_{i 1} \mid D_{i 1}=1\right]}}_{\text {Initial period mean of initially-treated }}-\underbrace{\color{red}{\mathbb{E}\left[Y_{i 2} \mid D_{i 1}=0\right]}}_{\text {Subsequent period mean of initially-untreated }}
+\end{align}
+
+Basically, we're leveraging: 
+\begin{itemize}
+    \item that in the initial period, 
+        we got the average value of the outcome under treatment, 
+        including permitting the mediator to endogenously adjust, 
+        giving us an estimate of $\mathbb{E}\left[Y_{i 1} \mid D_{i 1}=1\right]$
+    \item and that in the second period, we're able to hold fixed 
+        the endogenously selected value of the mediator among 
+        those untreated in period 1 and introduced treatment in period 2\footnote{
+            To be super explicit, I'm saying that we're not allowing endogenous 
+            adjustment of the mediator for this second-period treated group.
+        }
+\end{itemize}
+
+which, under our assumptions, gives us the 
+$\text{AIE}(1)$ by the above set of equalities.
+
+Similarly, 
+
+\begin{align}
+    \text{AIE}(0) \equiv &\mathbb{E}\left[Y_{i 2}\left(M_i(1), 0\right)-Y_{i 2}\left(M_i(0), 0\right)\right] \\
+    = &\color{blue}{\mathbb{E}\left[Y_{i 2}\left(M_i(1), 0\right)\right]} - \color{red}{\mathbb{E}\left[Y_{i 2}\left(M_i(0), 0\right)\right]} \\
+    = &\color{blue}{\mathbb{E}\left[Y_{i 2}\left(M_i(1), 0\right)\right]} - \color{red}{\mathbb{E}\left[Y_{i 1}\left(M_i(0), 0\right)\right]} && \parbox[t]{5cm}{\raggedright by assumption} \\
+    = &\underbrace{\color{blue}{\mathbb{E}\left[Y_{i 2} \mid D_{i 1}=1\right]}}_{\text {Subsequent period mean of initially-treated }}-\underbrace{\color{red}{\mathbb{E}\left[Y_{i 1} \mid D_{i 1}=0\right]}}_{\text {Initial period mean of initially-untreated }}
+\end{align}
+
+Similarly, 
+
+\begin{align}
+    \text{ADE}(1) \equiv &\mathbb{E}\left[Y_{i 2}\left(M_i(1), 1\right)-Y_{i 2}\left(M_i(1), 0\right)\right] \\
+    = &\color{blue}{\mathbb{E}\left[Y_{i 2}\left(M_i(1), 1\right)\right]} - \color{red}{\mathbb{E}\left[Y_{i 2}\left(M_i(1), 0\right)\right]} \\
+    = &\color{blue}{\mathbb{E}\left[Y_{i 1}\left(M_i(1), 1\right)\right]} - \color{red}{\mathbb{E}\left[Y_{i 2}\left(M_i(1), 0\right)\right]} && \parbox[t]{5cm}{\raggedright by assumption} \\
+    = &\underbrace{\color{blue}{\mathbb{E}\left[Y_{i 1} \mid D_{i 1}=1\right]}}_{\text {Initial period mean of initially-treated }}-\underbrace{\color{red}{\mathbb{E}\left[Y_{i 2} \mid D_{i 1}=1\right]}}_{\text {Subsequent period mean of initially-treated }}
+\end{align}
+
+and 
+
+\begin{align}
+    \text{ADE}(0) \equiv &\mathbb{E}\left[Y_{i 2}\left(M_i(0), 1\right)-Y_{i 2}\left(M_i(0), 0\right)\right] \\
+    = &\color{blue}{\mathbb{E}\left[Y_{i 2}\left(M_i(0), 1\right)\right]} - \color{red}{\mathbb{E}\left[Y_{i 2}\left(M_i(0), 0\right)\right]} \\
+    = &\color{blue}{\mathbb{E}\left[Y_{i 2}\left(M_i(0), 1\right)\right]} - \color{red}{\mathbb{E}\left[Y_{i 1}\left(M_i(0), 0\right)\right]} && \parbox[t]{5cm}{\raggedright by assumption} \\
+    = &\underbrace{\color{blue}{\mathbb{E}\left[Y_{i 2} \mid D_{i 1}=0\right]}}_{\text {Subsequent period mean of initially-untreated }}-\underbrace{\color{red}{\mathbb{E}\left[Y_{i 1} \mid D_{i 1}=0\right]}}_{\text {Initial period mean of initially-untreated }}
+\end{align}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Appendix}
 
 
 
