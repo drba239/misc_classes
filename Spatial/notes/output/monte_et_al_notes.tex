@@ -274,6 +274,7 @@ maximize their utility.
 
 The derivation is given in \autoref{sec:indirect_utility}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Indirect Utility and the Fréchet distribution}
 
 Notice that indirect utility expression follows a Fréchet distribution,
@@ -301,6 +302,25 @@ where
 \end{align}
 
 The derivation is given in \autoref{sec:frechet_indirect_utility}.
+
+``Each worker selects the
+bilateral commute that offers her the maximum utility, where the maximum of
+Fréchet distributed random variables is itself Fréchet distributed.''
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Probability of Living in $n$ and Working in $i$}
+
+Based on the above-established distribution of utility, 
+the probability of a worker choosing to live in $n$ 
+and work in $i$ is then given by:
+
+\begin{align}
+    \lambda_{n i}=\frac{B_{n i}\left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon}{\sum_{r \in N} \sum_{s \in N} B_{r s}\left(\kappa_{r s} P_r^\alpha Q_r^{1-\alpha}\right)^{-\epsilon} w_s^\epsilon} \equiv \frac{\Phi_{n i}}{\Phi} \label{eq:lambda_ni_1}
+\end{align}
+
+The derivation is given in \autoref{sec:lambda_ni_1}.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -712,8 +732,6 @@ This is a derivation of \eqref{eq:frechet_indirect_utility}.
 Consider the following property of 
 the Fréchet distribution:
 
-
-
 \begin{notes}[Fréchet Distribution Property]
     If $X \sim \text{Fréchet}(B, \epsilon)$, then $F_X(x)=\exp \left[-B x^{-\epsilon}\right]$ for $x>0$.
 
@@ -760,6 +778,60 @@ if we define
     \Psi_{ni} = B_{n i} \left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon
 \end{align}
 
+which is the desired expression.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Derivation of $\lambda_{n i}$ Expression}
+\label{sec:lambda_ni_1}
+
+This is a derivation of \eqref{eq:lambda_ni_1}.
+
+First, note that the pdf of $U_{n i \omega}$ is given by:
+
+\begin{align}
+    f_{n i}(u)=\frac{d}{d u} G_{n i}(u)= \frac{d}{d u}\left[\exp \left(-\Psi_{n i} u^{-\epsilon}\right)\right]
+    =\epsilon \Psi_{n i} u^{-\epsilon-1} \exp \left[-\Psi_{n i} u^{-\epsilon}\right] \label{eq:pdf_frechet}
+\end{align}
+
+\begin{align}
+    \lambda_{ni} = &\Pr\left( \underset{(mh)}{\text{argmax }} U_{m h \omega} = (ni) \right) \\
+    = &\Pr\left( U_{n i \omega} > U_{m h \omega} \text{ for all } (m h) \neq (n i) \right) \\
+    = & \int_0^{\infty} \underbrace{f_{n i}(u)}_{\text {pdf of } U_{n i \omega}} \operatorname{Pr}\left(U_{m h \omega}<u, \forall(m, h) \neq(n, i) \mid U_{n i \omega}=u\right) d u \\
+    = & \int_0^{\infty} f_{n i}(u) \operatorname{Pr}\left(U_{m h \omega}<u, \forall(m, h) \neq(n, i) \right) d u && \parbox[t]{4cm}{\raggedright by independence} \\
+    = & \int_0^{\infty} f_{n i}(u) \prod_{(m, h) \neq(n, i)} \operatorname{Pr}\left(U_{m h, \omega}<u\right) d u && \parbox[t]{4cm}{\raggedright by independence} \\
+    = & \int_0^{\infty} f_{n i}(u) \prod_{(m, h) \neq(n, i)} G_{m h}(u) d u && \parbox[t]{4cm}{\raggedright by definition of CDF} \\
+    = & \int_0^{\infty} \epsilon \Psi_{n i} u^{-\epsilon-1} \exp \left[-\Psi_{n i} u^{-\epsilon}\right] \prod_{(m, h) \neq(n, i)} G_{m h}(u) d u && \parbox[t]{4cm}{\raggedright by \eqref{eq:pdf_frechet}} \\
+    = & \int_0^{\infty} \epsilon \Psi_{n i} u^{-\epsilon-1} \exp \left[-\Psi_{n i} u^{-\epsilon}\right] \prod_{(m, h) \neq(n, i)} \exp \left[-\Psi_{m h} u^{-\epsilon}\right] d u && \parbox[t]{4cm}{\raggedright by \eqref{eq:frechet_indirect_utility}} \\
+    = &\int_0^{\infty} \epsilon \Psi_{n i} u^{-\epsilon-1} \exp [-\underbrace{\left(\Psi_{n i}+\sum_{(m, h) \neq(n, i)} \Psi_{m h}\right)}_{\sum_{r, s} \Psi_{r s}} u^{-\epsilon}] d u \\
+    = &\int_0^{\infty} \epsilon \Psi_{n i} u^{-\epsilon-1} \exp \left[-\left(\sum_{r, s} \Psi_{r s}\right) u^{-\epsilon}\right] d u \\
+    = &\Psi_{n i} \int_0^{\infty} \epsilon u^{-\epsilon-1} \exp \left[-\left(\sum_{r, s} \Psi_{r s}\right) u^{-\epsilon}\right] d u
+\end{align}
+
+Consider the following change of variables:
+
+\begin{align}
+    &t = u^{-\epsilon} \\
+    &dt = -\epsilon u^{-\epsilon-1} du \\
+    \Rightarrow &\epsilon u^{-\epsilon-1} d u=-d t
+\end{align}
+
+Notice that as $u$ goes from 0 to $\infty$, $t$ goes from $\infty$ to 0.
+
+Thus, we can re-write:
+
+\begin{align}
+    \lambda_{ni} = &\Psi_{n i} \int_0^{\infty} \epsilon u^{-\epsilon-1} \exp \left[-\left(\sum_{r, s} \Psi_{r s}\right) u^{-\epsilon}\right] d u \\
+    = &\Psi_{n i} \int_{t=\infty}^{t=0} \exp \left[- \left(\sum_{r, s} \Psi_{r s}\right) t\right](-d t)  \\
+    = & \Psi_{n i} \int_{0}^{\infty} \exp \left[- \left(\sum_{r, s} \Psi_{r s}\right) t\right] d t && \parbox[t]{4cm}{\raggedright integral property} \\
+    = & \frac{\Psi_{n i}}{(-\sum_{r, s} \Psi_{r s})} \int_{0}^\infty \left(-\sum_{r, s} \Psi_{r s}\right) \left[-\left(\sum_{r, s} \Psi_{r s}\right) t\right] d t && \parbox[t]{4cm}{\raggedright to make the inside of the integral equal $\frac{d}{dx}[e^{cx}]$} \\
+    = & \frac{\Psi_{n i}}{\sum_{r, s} \Psi_{r s}} \left[ \lim_{t \to \infty} \exp\left(-\left(\sum_{r, s} \Psi_{r s}\right) t\right) - \exp(0)\right] && \parbox[t]{4cm}{\raggedright by the fundamental theorem of calculus} \\
+    = & \frac{\Psi_{n i}}{-(\sum_{r, s} \Psi_{r s})} \left[0 - 1\right] \\
+    = & \frac{\Psi_{n i}}{\sum_{r, s} \Psi_{r s}}
+\end{align}
+
+which is what we wanted.
 
 
 \end{document}
