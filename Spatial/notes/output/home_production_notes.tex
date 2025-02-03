@@ -28,7 +28,7 @@
 The preferences of a worker who lives in location $n$ and works in location $i$ is given by the following utility function of the Cobb-Douglas form:
 
 \begin{align}
-    U_{n i \omega}=\frac{b_{n i \omega}}{\kappa_{n i}}\left(\frac{C_{n \omega}}{\alpha}\right)^\alpha\left(\frac{H_{n \omega}}{1-\alpha}\right)^{1-\alpha} s_\omega^\gamma
+    U_{n i \omega}=\frac{b_{n i \omega}}{\kappa_{n i}}\left(\frac{C_{n \omega}}{\alpha}\right)^\alpha\left(\frac{H_{n \omega}}{1-\alpha}\right)^{1-\alpha} s_\omega^\gamma \label{eq:utility_1}
 \end{align}
 
 Idiosyncratic amenities 
@@ -260,7 +260,60 @@ The derivation is given in \autoref{sec:price_ni_2}.
 
 \subsubsection{Indirect Utility}
 
+Workers are geographically mobile and select 
+both the location of their residence and the location of 
+their workplace (possibly different) to maximize their 
+utility. 
 
+Building from our baseline utility function,
+ we can 
+then get the indirect utility expression:
+
+\begin{align}
+    U_{n i \omega}= & \frac{b_{n i \omega} w_i}{\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}} \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right] \label{eq:indirect_utility}
+\end{align}
+
+which is the utility of a worker who lives in location $n$,
+works in location $i$, has idiosyncratic amenities $b_{n i \omega}$,
+and has made the consumption, housing, and labor supply choices that
+maximize their utility.
+
+The derivation is given in \autoref{sec:indirect_utility}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Indirect Utility and the Fréchet distribution}
+
+Notice that indirect utility expression follows a Fréchet distribution,
+since $b_{n i \omega}$ is drawn from an independent Fréchet distribution
+and the other terms are constant in $\omega$:
+
+\begin{align}
+    U_{n i \omega}=\underbrace{\frac{w_i}{\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}} \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right]}_{\text {constant w.r.t. } \omega} \times b_{n i \omega}
+\end{align}
+
+Note that $\frac{w_i}{\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}} \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right] > 0$.
+
+Then, the indirect utility expression is a monotonic 
+transformation of $b_{n i \omega}$ and 
+follows a Fréchet distribution.
+
+The CDF of $U$ is given by:
+
+\begin{align}
+    G_{n i}(U)=e^{-\Psi_{n i} U^{-\epsilon}} \label{eq:frechet_indirect_utility}
+\end{align}
+
+where 
+
+\begin{align}
+    \Psi_{n i}=B_{n i}\left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right]^\epsilon
+\end{align}
+
+The derivation is given in \autoref{sec:frechet_indirect_utility}.
+
+``Each worker selects the
+bilateral commute that offers her the maximum utility, where the maximum of
+Fréchet distributed random variables is itself Fréchet distributed.''
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -693,6 +746,113 @@ which let's us pick back up to write:
 
 which is the second desired expression.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Derivation of Indirect Utility}
+\label{sec:indirect_utility}
+
+This is a derivation of \eqref{eq:indirect_utility}.
+
+Beginning with our utility function:
+
+\begin{align}
+    U_{n i \omega}=\frac{b_{n i \omega}}{\kappa_{n i}}\left(\frac{C_{n \omega}}{\alpha}\right)^\alpha\left(\frac{H_{n \omega}}{1-\alpha}\right)^{1-\alpha} s_\omega^\gamma
+\end{align}
+
+Optimization gives us that workers (living in region $n$ and working in 
+region $i$) spend $\alpha$
+of their income, $w_i \left(\frac{1}{1+\gamma}\right)$, on consumption and $(1-\alpha)$ on housing.
+The price of $C_n$ is $P_n$ and the price of $H_n$ is $Q_n$.
+Thus we have the expressions:
+
+\begin{align}
+    P_n C_n = &\alpha\left(\frac{1}{1+\gamma}\right) w_i \label{eq:p_n_c_n_opt} \\
+    Q_n H_n = &(1-\alpha) \left(\frac{1}{1+\gamma}\right)w_i \label{eq:q_n_h_n_opt}
+\end{align}
+
+Then we can re-write:
+
+\begin{align}
+    U_{n i \omega}=&\frac{b_{n i \omega}}{\kappa_{n i}}\left(\frac{C_{n \omega}}{\alpha}\right)^\alpha\left(\frac{H_{n \omega}}{1-\alpha}\right)^{1-\alpha}s_\omega^\gamma && \parbox[t]{4cm}{\raggedright by \eqref{eq:utility_1}} \\
+    = &\frac{b_{n i \omega}}{\kappa_{n i}}\left(\left(\frac{1}{1+\gamma}\right)\frac{\alpha w_i}{\alpha P_n}\right)^\alpha\left(\left(\frac{1}{1+\gamma}\right)\frac{(1-\alpha) w_i}{(1-\alpha) Q_n}\right)^{1-\alpha}s_\omega^\gamma && \parbox[t]{4cm}{\raggedright by \eqref{eq:p_n_c_n_opt} and \eqref{eq:q_n_h_n_opt}} \\
+    = &\frac{b_{n i \omega}}{\kappa_{n i}}\left(\frac{1}{1+\gamma}\right)\left(\frac{w_i}{P_n}\right)^\alpha\left(\frac{w_i}{Q_n}\right)^{1-\alpha}s_\omega^\gamma \\
+    = &\frac{b_{n i \omega} w_i}{\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}} \left(\frac{1}{1+\gamma}\right) s_\omega^\gamma \\
+    = &\frac{b_{n i \omega} w_i}{\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}} \left(\frac{1}{1+\gamma}\right) \left(\frac{\gamma}{\gamma+1}\right)^{\gamma} && \parbox[t]{4cm}{\raggedright by \eqref{eq:time_allocation}} \\
+    = & \frac{b_{n i \omega} w_i}{\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}} \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right]
+\end{align}
+
+where the last line follows from
+
+\begin{align}
+    \left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}=\left(\frac{\gamma}{\gamma+1}\right)^\gamma\left[1-\frac{\gamma}{\gamma+1}\right]=\left(\frac{\gamma}{\gamma+1}\right)^\gamma \cdot \frac{(\gamma+1)-\gamma}{\gamma+1}=\frac{1}{\gamma+1}\left(\frac{\gamma}{\gamma+1}\right)^\gamma
+\end{align}
+
+This is the expression that we wanted.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Derivation of Fréchet Distribution for Indirect Utility}
+\label{sec:frechet_indirect_utility}
+
+This is a derivation of \eqref{eq:frechet_indirect_utility}.
+
+Consider the following property of 
+the Fréchet distribution:
+
+\begin{notes}[Fréchet Distribution Monotonic Transformation Property]
+    If $X \sim \text{Fréchet}(B, \epsilon)$, then $F_X(x)=\exp \left[-B x^{-\epsilon}\right]$ for $x>0$.
+
+    Then for a constant $c>0$, $cX \sim \text{Fréchet}\left(c^{-\epsilon} B, \epsilon\right)$.
+    
+    In other words, 
+
+    \begin{align}
+        F_{c X}(u)=\operatorname{Pr}\{c X \leq u\}=\operatorname{Pr}\{X \leq u / c\}=\exp \left[-B(u / c)^{-\epsilon}\right]=\exp \left[-\left(c^{\epsilon} B\right) u^{-\epsilon}\right]
+    \end{align}
+
+\end{notes}
+
+
+Recall that
+
+\begin{align}
+    b \sim \text{Fréchet}(B, \epsilon)
+\end{align}
+
+and hence
+
+\begin{align}
+    G^b_{n i \omega}(b)=\exp \left[-B_{n i} b^{-\epsilon}\right]
+\end{align}
+
+Moreover, recall that
+
+\begin{align}
+    U_{n i \omega}=\underbrace{\frac{w_i}{\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}} \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right]}_{\text {constant w.r.t. } \omega} \times b_{n i \omega}
+\end{align}
+
+Thus, employing out property of the Fréchet distribution, we have that
+
+\begin{align}
+    G_{n i}(U)=&\exp \left[-\left(\frac{w_i}{\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}}\right)^{\epsilon} \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right]^\epsilon B_{n i} U^{-\epsilon}\right] && \parbox[t]{4cm}{\raggedright by the property above} \\
+    =&\exp \left[-B_{ni} (\kappa_{n i} P_n^\alpha Q_n^{1-\alpha})^{-\epsilon} \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right]^\epsilon w_i^\epsilon U^{-\epsilon}\right] \\
+    =&\exp \left[- \Psi_{n i} U^{-\epsilon}\right]
+\end{align}
+
+if we define
+
+\begin{align}
+    \Psi_{n i}=B_{n i}\left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right]^\epsilon
+\end{align}
+
+which is the desired expression.
+
+Also, notice that this is saying that
+
+\begin{align}
+    U_{n i \omega} \sim \text{Fréchet}\left(\Psi_{n i}, \epsilon\right) \label{eq:frechet_indirect_utility_sim}
+\end{align}
 
 
 \end{document}
