@@ -62,6 +62,7 @@ is given by'':
 
 See \autoref{sec:good_nij_consumption} for derivation.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Land and Local Consumption}
 
 ``We assume that this land is owned by immobile landlords,
@@ -85,15 +86,15 @@ residents in location $n$, $\bar{v}_n R_n$.
 \end{questions}
 
 The middle term can be read as 
-residents total spending on goods in $n$,
+residents' total spending on goods in $n$,
 $\alpha \bar{v}_n R_n$, plus 
-residents total spending on land in $n$,
+residents' total spending on land in $n$,
 $(1-\alpha) \bar{v}_n R_n$.
 
 We can also get the following expression:
 
 \begin{align}
-    Q_n=(1-\alpha) \frac{\bar{v}_n R_n}{H_n}
+    Q_n=(1-\alpha) \frac{\bar{v}_n R_n}{H_n} \label{eq:land_market_clearing2}
 \end{align}
 
 which says that 
@@ -339,7 +340,7 @@ costs ($\kappa_{n i}$) are lower.
 Summing over $i$, we get the probability of living in $n$:
 
 \begin{align}
-    \lambda_n^R=\frac{R_n}{\bar{L}}=\sum_{i \in N} \lambda_{n i}=\sum_{i \in N} \frac{\Phi_{n i}}{\Phi}
+    \lambda_n^R=\frac{R_n}{\bar{L}}=\sum_{i \in N} \lambda_{n i}=\sum_{i \in N} \frac{\Phi_{n i}}{\Phi} \label{eq:lambda_n_R}
 \end{align}
 
 where national labor market clearing 
@@ -352,7 +353,7 @@ corresponds to $\sum_n \lambda_n^R=\sum_i \lambda_i^L=1$.
 Summing over $n$, we get the probability of working in $i$:
 
 \begin{align}
-    \lambda_i^L=\frac{L_n}{\bar{L}}=\sum_{n \in N} \lambda_{n i}=\sum_{n \in N} \frac{\Phi_{n i}}{\Phi}
+    \lambda_i^L=\frac{L_n}{\bar{L}}=\sum_{n \in N} \lambda_{n i}=\sum_{n \in N} \frac{\Phi_{n i}}{\Phi} \label{eq:lambda_i_L}
 \end{align}
 
 where national labor market clearing 
@@ -420,7 +421,7 @@ where the weight is given by the conditional probability
 of working in the region:
 
 \begin{align}
-    \bar{v}_n=\sum_{i \in N} \lambda_{n i \mid n}^R w_i
+    \bar{v}_n=\sum_{i \in N} \lambda_{n i \mid n}^R w_i \label{eq:expected_worker_income}
 \end{align}
 
 Notice that since $\lambda_{n i \mid n}^R$ increases 
@@ -443,6 +444,82 @@ utility for the economy as a whole:
 \end{align}
 
 The derivation is given in \autoref{sec:expected_utility_1}.
+
+Note that even though expected utility 
+is constant across locations, other 
+details of the locations vary. 
+Wages, for example, must vary to accommodate 
+preference heterogeneity over location. 
+
+``Workplaces and residences face upward-sloping supply 
+functions for workers and residents, respectively.''
+In order to attract more workers, workplaces must pay 
+higher wages to raise commuters' real income and
+induce additional workers
+with lower idiosyncratic amenities for that 
+workplace to commute there.
+Similarly, residences must offer lower land prices 
+to raise residents' real income and induce additional
+workers to live there who have lower idiosyncratic amenities
+for that residence.
+
+Bilateral commutes with attractive characteristics, 
+e.g., high workplace wage and low residence cost of living, 
+``attract additional commuters with lower 
+idiosyncratic amenities, until expected utility 
+(taking into account idiosyncratic amenities) 
+is the same across all bilateral commutes.''
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{General Equilibrium}
+
+``The general equilibrium 
+of the model 
+can be referenced 
+by the following 
+vector of six variables: 
+
+\begin{align}
+    \{w_n, \bar{v}_n, Q_n, L_n, R_n, P_n\}_n \\
+\end{align}
+
+and the scalar 
+
+\begin{align}
+    \bar{U}.
+\end{align}
+
+Given this equilibrium vector 
+and scalar, all other endogenous 
+variables 
+of the model can be determined. ''
+
+``This equilibrium vector 
+solves the following 6 sets of equations:''
+
+\begin{align}
+    &w_i L_i=\sum_{n \in N} \pi_{n i} \bar{v}_n R_n && \parbox[t]{6cm}{\raggedright income equals expenditure, \eqref{eq:workplace_income} above} \\
+    &\bar{v}_n=\sum_{i \in N} \lambda_{n i \mid n}^R w_i && \parbox[t]{6cm}{\raggedright average residential income, \eqref{eq:expected_worker_income} above} \\
+    &Q_n=(1-\alpha) \frac{\bar{v}_n R_n}{H_n} && \parbox[t]{6cm}{\raggedright land market clearing, \eqref{eq:land_market_clearing2} above} \\
+    &\lambda_i^L=\frac{L_n}{\bar{L}}=\sum_{n \in N} \lambda_{n i}=\sum_{n \in N} \frac{\Phi_{n i}}{\Phi} && \parbox[t]{4cm}{\raggedright workplace choice probabilities, \eqref{eq:lambda_i_L} above} \\
+    &\lambda_n^R=\frac{R_n}{\bar{L}}=\sum_{i \in N} \lambda_{n i}=\sum_{i \in N} \frac{\Phi_{n i}}{\Phi} && \parbox[t]{4cm}{\raggedright residence choice probabilities, \eqref{eq:lambda_n_R} above} \\
+    &P_n =\frac{\sigma}{\sigma-1}\left(\frac{L_n}{\sigma F \pi_{n n}}\right)^{\frac{1}{1-\sigma}} \frac{d_{n n} w_n}{A_n} && \parbox[t]{4cm}{\raggedright price index, \eqref{eq:price_index_p_n_2} above} \\
+\end{align}
+
+The final condition 
+``needed to determine the scalar $\bar{U}$ is the labor
+market clearing condition'':
+
+\begin{align}
+    \bar{L}=\sum_{n \in N} R_n=\sum_{n \in N} L_n
+\end{align}
+
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -756,7 +833,7 @@ First, note that total labor income is expressed as:
     w_i L_i
 \end{align}
 
-Total revenue from goods produced in location $i$ and is given by:
+Total revenue from goods produced in location $i$ is given by:
 
 \begin{align}
     \sum_{n \in N} \pi_{n i} \bar{v}_n R_n
