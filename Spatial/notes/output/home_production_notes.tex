@@ -306,7 +306,7 @@ The CDF of $U$ is given by:
 where 
 
 \begin{align}
-    \Psi_{n i}=B_{n i}\left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right]^\epsilon
+    \Psi_{n i}=B_{n i}\left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right]^\epsilon \label{eq:psi_exp}
 \end{align}
 
 The derivation is given in \autoref{sec:frechet_indirect_utility}.
@@ -456,7 +456,8 @@ which is, naturally, the same as the expected
 utility for the economy as a whole:
 
 \begin{align}
-    \bar{U}=\mathbb{E}\left[U_{n i \omega}\right]=\Gamma\left(\frac{\epsilon-1}{\epsilon}\right)\left[\sum_{r \in N} \sum_{s \in N} B_{r s}\left(\kappa_{r s} P_r^\alpha Q_r^{1-\alpha}\right)^{-\epsilon} w_s^\epsilon\right]^{\frac{1}{\epsilon}} \quad \text { all } n, i \in N \label{eq:expected_utility_1}
+    \bar{U}=&\mathbb{E}\left[U_{n i \omega}\right]
+    =&\Gamma\left(\frac{\epsilon-1}{\epsilon}\right) \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right] \left[\sum_{r \in N} \sum_{s \in N} B_{n i}\left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon\right]^{\frac{1}{\epsilon}} \quad \text { all } n, i \in N \label{eq:expected_utility_1}
 \end{align}
 
 The derivation is given in \autoref{sec:expected_utility_1}.
@@ -1173,7 +1174,8 @@ Thus,
     \bar{U} = &\mathbb{E}[U_{n i \omega}]  \\ 
     = & \mathbb{E}[ \max_{n, i} U_{n i \omega}] \\
     = &\left(\sum_{r, s} \Psi_{r s}\right)^{\frac{1}{\epsilon}} \Gamma\left(1-\frac{1}{\epsilon}\right) \\
-    = &\Gamma\left(\frac{\epsilon-1}{\epsilon}\right)\left[\sum_{r \in N} \sum_{s \in N} B_{r s}\left(\kappa_{r s} P_r^\alpha Q_r^{1-\alpha}\right)^{-\epsilon} w_s^\epsilon\right]^{\frac{1}{\epsilon}} && \parbox[t]{4cm}{\raggedright by definition of $\Psi_{rs}$} \\
+    = &\Gamma\left(\frac{\epsilon-1}{\epsilon}\right)\left[\sum_{r \in N} \sum_{s \in N} B_{n i}\left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right]^\epsilon\right]^{\frac{1}{\epsilon}} && \parbox[t]{4cm}{\raggedright by \eqref{eq:psi_exp}} \\
+    = &\Gamma\left(\frac{\epsilon-1}{\epsilon}\right) \left[\left(\frac{\gamma}{\gamma+1}\right)^\gamma-\left(\frac{\gamma}{\gamma+1}\right)^{\gamma+1}\right] \left[\sum_{r \in N} \sum_{s \in N} B_{n i}\left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon\right]^{\frac{1}{\epsilon}} 
 \end{align}
 
 which is the desired expression.
