@@ -281,7 +281,7 @@ maximize their utility.
 The derivation is given in \autoref{sec:indirect_utility}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsubsection{Indirect Utility and the Fréchet distribution}
+\paragraph{Indirect Utility and the Fréchet distribution}
 
 Notice that indirect utility expression follows a Fréchet distribution,
 since $b_{n i \omega}$ is drawn from an independent Fréchet distribution
@@ -315,6 +315,176 @@ The derivation is given in \autoref{sec:frechet_indirect_utility}.
 bilateral commute that offers her the maximum utility, where the maximum of
 Fréchet distributed random variables is itself Fréchet distributed.''
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{The Probability of Living in $n$ and Working in $i$}
+
+Based on the above-established distribution of utility, 
+the probability of a worker choosing to live in $n$ 
+and work in $i$ is then given by:
+
+\begin{align}
+    \lambda_{n i}=\frac{B_{n i}\left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon}{\sum_{r \in N} \sum_{s \in N} B_{r s}\left(\kappa_{r s} P_r^\alpha Q_r^{1-\alpha}\right)^{-\epsilon} w_s^\epsilon} \equiv \frac{\Phi_{n i}}{\Phi} \label{eq:lambda_ni_1}
+\end{align}
+
+The derivation is given in \autoref{sec:lambda_ni_1}.
+
+Thus, the idiosyncratic shocks imply that 
+workers will select different bilateral commutes even 
+when faced with the same set of prices, $(P_n, Q_n, w_i)$,
+commuting costs, $\kappa_{n i}$, and location characteristics, $B_{n i}$.
+However, it also implies that, all else equal, 
+workers are more likely to live in location $n$
+and work in location $i$ when 
+the consumption goods price index ($P_n$) is lower,
+the land prices ($Q_n$) are lower, wages ($w_i$) are higher,
+the amenities ($B_n$) are nicer, and the commuting 
+costs ($\kappa_{n i}$) are lower.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{The Probability of Living in $n$}
+
+Summing over $i$, we get the probability of living in $n$:
+
+\begin{align}
+    \lambda_n^R=\frac{R_n}{\bar{L}}=\sum_{i \in N} \lambda_{n i}=\sum_{i \in N} \frac{\Phi_{n i}}{\Phi} \label{eq:lambda_n_R}
+\end{align}
+
+where national labor market clearing 
+corresponds to $\sum_n \lambda_n^R=\sum_i \lambda_i^L=1$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{The Probability of Working in $i$}
+
+Summing over $n$, we get the probability of working in $i$:
+
+\begin{align}
+    \lambda_i^L=\frac{L_n}{\bar{L}}=\sum_{n \in N} \lambda_{n i}=\sum_{n \in N} \frac{\Phi_{n i}}{\Phi} \label{eq:lambda_i_L}
+\end{align}
+
+where national labor market clearing 
+corresponds to $\sum_n \lambda_n^R=\sum_i \lambda_i^L=1$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Worker Income}
+
+\subsubsection{Probability that a Worker Living in $n$ Commutes to $i$}
+
+The probability that a worker living in $n$ commutes to $i$ is given by:
+
+\begin{align}
+    \lambda_{n i \mid n}^R \equiv \frac{\lambda_{n i}}{\lambda_n^R}=\frac{B_{n i}\left(w_i / \kappa_{n i}\right)^\epsilon}{\sum_{s \in N} B_{n s}\left(w_s / \kappa_{n s}\right)^\epsilon} \label{eq:lambda_ni_n_R}
+\end{align}
+
+\eqref{eq:lambda_ni_n_R} implies a 
+``commuting gravity equation,''
+where the elasticity of commuting flows
+with respect to commuting costs 
+is $-\epsilon$, since
+
+\begin{align}
+    \frac{d \ln \lambda_{n i \mid n}^R}{d \ln \kappa_{n i}}=-\epsilon
+\end{align}
+
+since 
+
+\begin{align}
+    \ln \left(\lambda_{n i \mid n}^R\right) = &\ln \left(\frac{B_{n i}\left(w_i / \kappa_{n i}\right)^\epsilon}{\sum_{s \in N} B_{n s}\left(w_s / \kappa_{n s}\right)^\epsilon}\right) \\
+    = &\ln(B_{ni}) + \epsilon \ln(w_i) - \epsilon \ln(\kappa_{ni}) - \ln\left(\sum_{s \in N} B_{n s}\left(w_s / \kappa_{n s}\right)^\epsilon\right) \\
+\end{align}
+
+\begin{questions}
+    Not totally sure why we're allowed to neglect the term in the denominator.
+    One of you all maybe knows this and could tell me?
+\end{questions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Labor Market Clearing}
+
+We then re-write the labor market clearing condition
+using the $\lambda_{n i \mid n}^R$ term:
+
+\begin{align}
+    L_i=\sum_{n \in N} \lambda_{n i \mid n}^R R_n
+\end{align}
+
+which says that the 
+measure of workers in $i$
+must equal the sum across locations $n$ of 
+the share of people living in $n$ 
+and working in $i$ multiplied by
+the measure of residents in $n$. Note that we are using 
+the measure of workers and not scaling it by the number of 
+hours that they work, hence this does not change 
+compared to the original paper.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{Expected Worker Income}
+
+Expected worker wage
+conditional on living in location $n$ 
+can then be written as a weighted 
+average of all possible workplace regions,
+where the weight is given by the conditional probability 
+of working in the region given living in $n$:
+
+\begin{align}
+    \bar{v}_n=\sum_{i \in N} \lambda_{n i \mid n}^R w_i \label{eq:expected_worker_income}
+\end{align}
+
+Notice that since $\lambda_{n i \mid n}^R$ increases 
+as commuting costs to $i$ decrease, expected 
+wage is higher in regions with 
+low commuting costs to areas with high wages.
+
+Note again that since I've specified ``wage'' that this 
+does not change from the origina paper; we would need 
+to scale by share of time spent working to get 
+expected worker income.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Expected Utility}
+
+Population mobility implies 
+that expected utility 
+is the same across 
+all work-home location pairs,
+which is, naturally, the same as the expected 
+utility for the economy as a whole:
+
+\begin{align}
+    \bar{U}=\mathbb{E}\left[U_{n i \omega}\right]=\Gamma\left(\frac{\epsilon-1}{\epsilon}\right)\left[\sum_{r \in N} \sum_{s \in N} B_{r s}\left(\kappa_{r s} P_r^\alpha Q_r^{1-\alpha}\right)^{-\epsilon} w_s^\epsilon\right]^{\frac{1}{\epsilon}} \quad \text { all } n, i \in N \label{eq:expected_utility_1}
+\end{align}
+
+The derivation is given in \autoref{sec:expected_utility_1}.
+
+Note that even though expected utility 
+is constant across locations, other 
+details of the locations vary. 
+Wages, for example, must vary to accommodate 
+preference heterogeneity over location. 
+
+``Workplaces and residences face upward-sloping supply 
+functions for workers and residents, respectively.''
+In order to attract more workers, workplaces must pay 
+higher wages to raise commuters' real income and
+induce additional workers
+with lower idiosyncratic amenities for that 
+workplace to commute there.
+Similarly, residences must offer lower land prices 
+to raise residents' real income and induce additional
+workers to live there who have lower idiosyncratic amenities
+for that residence.
+
+Bilateral commutes with attractive characteristics, 
+e.g., high workplace wage and low residence cost of living, 
+``attract additional commuters with lower 
+idiosyncratic amenities, until expected utility 
+(taking into account idiosyncratic amenities) 
+is the same across all bilateral commutes.''
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -853,6 +1023,164 @@ Also, notice that this is saying that
 \begin{align}
     U_{n i \omega} \sim \text{Fréchet}\left(\Psi_{n i}, \epsilon\right) \label{eq:frechet_indirect_utility_sim}
 \end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Derivation of $\lambda_{n i}$ Expression}
+\label{sec:lambda_ni_1}
+
+This is a derivation of \eqref{eq:lambda_ni_1}.
+
+First, note that the pdf of $U_{n i \omega}$ is given by:
+
+\begin{align}
+    f_{n i}(u)=\frac{d}{d u} G_{n i}(u)= \frac{d}{d u}\left[\exp \left(-\Psi_{n i} u^{-\epsilon}\right)\right]
+    =\epsilon \Psi_{n i} u^{-\epsilon-1} \exp \left[-\Psi_{n i} u^{-\epsilon}\right] \label{eq:pdf_frechet}
+\end{align}
+
+\begin{align}
+    \lambda_{ni} = &\Pr\left( \underset{(mh)}{\text{argmax }} U_{m h \omega} = (ni) \right) \\
+    = &\Pr\left( U_{n i \omega} > U_{m h \omega} \text{ for all } (m h) \neq (n i) \right) \\
+    = & \int_0^{\infty} \underbrace{f_{n i}(u)}_{\text {pdf of } U_{n i \omega}} \operatorname{Pr}\left(U_{m h \omega}<u, \forall(m, h) \neq(n, i) \mid U_{n i \omega}=u\right) d u \\
+    = & \int_0^{\infty} f_{n i}(u) \operatorname{Pr}\left(U_{m h \omega}<u, \forall(m, h) \neq(n, i) \right) d u && \parbox[t]{4cm}{\raggedright by independence} \\
+    = & \int_0^{\infty} f_{n i}(u) \prod_{(m, h) \neq(n, i)} \operatorname{Pr}\left(U_{m h, \omega}<u\right) d u && \parbox[t]{4cm}{\raggedright by independence} \\
+    = & \int_0^{\infty} f_{n i}(u) \prod_{(m, h) \neq(n, i)} G_{m h}(u) d u && \parbox[t]{4cm}{\raggedright by definition of CDF} \\
+    = & \int_0^{\infty} \epsilon \Psi_{n i} u^{-\epsilon-1} \exp \left[-\Psi_{n i} u^{-\epsilon}\right] \prod_{(m, h) \neq(n, i)} G_{m h}(u) d u && \parbox[t]{4cm}{\raggedright by \eqref{eq:pdf_frechet}} \\
+    = & \int_0^{\infty} \epsilon \Psi_{n i} u^{-\epsilon-1} \exp \left[-\Psi_{n i} u^{-\epsilon}\right] \prod_{(m, h) \neq(n, i)} \exp \left[-\Psi_{m h} u^{-\epsilon}\right] d u && \parbox[t]{4cm}{\raggedright by \eqref{eq:frechet_indirect_utility}} \\
+    = &\int_0^{\infty} \epsilon \Psi_{n i} u^{-\epsilon-1} \exp [-\underbrace{\left(\Psi_{n i}+\sum_{(m, h) \neq(n, i)} \Psi_{m h}\right)}_{\sum_{r, s} \Psi_{r s}} u^{-\epsilon}] d u \\
+    = &\int_0^{\infty} \epsilon \Psi_{n i} u^{-\epsilon-1} \exp \left[-\left(\sum_{r, s} \Psi_{r s}\right) u^{-\epsilon}\right] d u \\
+    = &\Psi_{n i} \int_0^{\infty} \epsilon u^{-\epsilon-1} \exp \left[-\left(\sum_{r, s} \Psi_{r s}\right) u^{-\epsilon}\right] d u
+\end{align}
+
+Consider the following change of variables:
+
+\begin{align}
+    &t = u^{-\epsilon} \\
+    &dt = -\epsilon u^{-\epsilon-1} du \\
+    \Rightarrow &\epsilon u^{-\epsilon-1} d u=-d t
+\end{align}
+
+Notice that as $u$ goes from 0 to $\infty$, $t$ goes from $\infty$ to 0.
+
+Thus, we can re-write:
+
+\begin{align}
+    \lambda_{ni} = &\Psi_{n i} \int_0^{\infty} \epsilon u^{-\epsilon-1} \exp \left[-\left(\sum_{r, s} \Psi_{r s}\right) u^{-\epsilon}\right] d u \\
+    = &\Psi_{n i} \int_{t=\infty}^{t=0} \exp \left[- \left(\sum_{r, s} \Psi_{r s}\right) t\right](-d t)  \\
+    = & \Psi_{n i} \int_{0}^{\infty} \exp \left[- \left(\sum_{r, s} \Psi_{r s}\right) t\right] d t && \parbox[t]{4cm}{\raggedright integral property} \\
+    = & \frac{\Psi_{n i}}{(-\sum_{r, s} \Psi_{r s})} \int_{0}^\infty \left(-\sum_{r, s} \Psi_{r s}\right) \left[-\left(\sum_{r, s} \Psi_{r s}\right) t\right] d t && \parbox[t]{4cm}{\raggedright to make the inside of the integral equal $\frac{d}{dx}[e^{cx}]$} \\
+    = & \frac{\Psi_{n i}}{\sum_{r, s} \Psi_{r s}} \left[ \lim_{t \to \infty} \exp\left(-\left(\sum_{r, s} \Psi_{r s}\right) t\right) - \exp(0)\right] && \parbox[t]{4cm}{\raggedright by the fundamental theorem of calculus} \\
+    = & \frac{\Psi_{n i}}{-(\sum_{r, s} \Psi_{r s})} \left[0 - 1\right] \\
+    = & \frac{\Psi_{n i}}{\sum_{r, s} \Psi_{r s}}
+\end{align}
+
+which is what we wanted.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Derivation of $\bar{U}$ Expression}
+\label{sec:expected_utility_1}
+
+This is a derivation of \eqref{eq:expected_utility_1}.
+
+We are going to rely on the following properties of 
+the Fréchet distribution:
+
+\begin{notes}[Fréchet Distribution Max Stability Property]
+    \label{notes:frechet_max_stability}
+    If\footnote{
+        Note that this is under the parameterization where 
+        $X \sim \text{Fréchet}(B, \epsilon)$ corresponds to $F_X(x)=\exp \left[-B x^{-\epsilon}\right]$.
+        Sometimes, you will see people parameterize the Fréchet distribution
+        as $X \sim \text{Fréchet}(B, \epsilon)$ corresponds to $F_X(x)=\exp \left[-\left(\frac{x}{B}\right)^{-\epsilon}\right]$.
+    } \footnote{\color{red} Find a citation for this.} 
+
+    \begin{align}
+        X_i \sim \text{Fréchet}(B_i, \epsilon)
+    \end{align}
+
+    and 
+
+    \begin{align}
+        Y = \max\{X_1, X_2, \ldots, X_n\}
+    \end{align}
+
+    Then 
+
+    \begin{align}
+        Y \sim \text{Fréchet}\left(\sum_{i=1}^n B_i, \epsilon\right)
+    \end{align}
+
+\end{notes}
+
+\begin{notes}[Fréchet Distribution Property]
+    \label{notes:frechet_expected_value}
+    If\footnote{
+        Note that this is under the parameterization where 
+        $X \sim \text{Fréchet}(B, \epsilon)$ corresponds to $F_X(x)=\exp \left[-B x^{-\epsilon}\right]$.
+        Sometimes, you will see people parameterize the Fréchet distribution
+        as $X \sim \text{Fréchet}(B, \epsilon)$ corresponds to $F_X(x)=\exp \left[-\left(\frac{x}{B}\right)^{-\epsilon}\right]$.
+    } 
+    $X \sim \text{Fréchet}(B, \epsilon)$ and 
+    $\epsilon > 1$, then
+
+    \begin{align}
+        \mathbb{E}[X] = B^{\frac{1}{\epsilon}} \Gamma\left(1-\frac{1}{\epsilon}\right)
+    \end{align}
+
+    
+\end{notes}
+
+Recall from \eqref{eq:frechet_indirect_utility_sim} that:
+
+\begin{align}
+    U_{n i \omega} \sim \text{Fréchet}\left(\Psi_{n i}, \epsilon\right)
+\end{align}
+
+If workers are choosing the location that maximizes utility, 
+then their selected utility follows:
+
+\begin{align}
+    \max_{n, i} U_{n i \omega} \sim \text{Fréchet}\left(\sum_{n, i} \Psi_{n i}, \epsilon\right)
+\end{align}
+
+by the \autoref{notes:frechet_max_stability} property.
+
+From which, as long as $\epsilon > 1$, we get
+
+\begin{align}
+    \mathbb{E}[ \max_{n, i} U_{n i \omega}] &= \left(\sum_{n, i} \Psi_{n i}\right)^{\frac{1}{\epsilon}} \Gamma\left(1-\frac{1}{\epsilon}\right) \\
+\end{align}
+
+by the \autoref{notes:frechet_expected_value} property.
+
+Additionally, if any home-work pair gave strictly higher 
+expected utility, workers would move to that pair until 
+it's expected utility was no longer strictly higher; thus, 
+it must be that the expected utility across 
+all home-work pairs is the same. 
+That is
+
+\begin{align}
+    \mathbb{E}[ \max_{n, i} U_{n i \omega}] = \mathbb{E}[U_{ni \omega}] & \text{ for all } n, i
+\end{align}
+
+Thus, 
+
+\begin{align}
+    \bar{U} = &\mathbb{E}[U_{n i \omega}]  \\ 
+    = & \mathbb{E}[ \max_{n, i} U_{n i \omega}] \\
+    = &\left(\sum_{r, s} \Psi_{r s}\right)^{\frac{1}{\epsilon}} \Gamma\left(1-\frac{1}{\epsilon}\right) \\
+    = &\Gamma\left(\frac{\epsilon-1}{\epsilon}\right)\left[\sum_{r \in N} \sum_{s \in N} B_{r s}\left(\kappa_{r s} P_r^\alpha Q_r^{1-\alpha}\right)^{-\epsilon} w_s^\epsilon\right]^{\frac{1}{\epsilon}} && \parbox[t]{4cm}{\raggedright by definition of $\Psi_{rs}$} \\
+\end{align}
+
+which is the desired expression.
+
+\begin{questions}[Uncertainty]
+    I'm not 100\% sure if my argument here is written out correctly.
+\end{questions}
 
 
 \end{document}
