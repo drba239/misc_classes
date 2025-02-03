@@ -51,4 +51,28 @@
     \item $d_{ni}$: The trade cost of shipping from location $i$ to location $n$
     \item $M_i$: The measure of varieties produced in location $i$
     \item $L_i$: The measure of workers in location $i$
+    \item $G_{ni}(U)$: The CDF of the indirect utility of living in location $n$ and working in location $i$
+        \begin{align}
+            G_{n i}(U)=e^{-\Psi_{n i} U^{-\epsilon}}
+        \end{align}
+        where 
+        \begin{align}
+            \Psi_{n i}=B_{n i}\left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon
+        \end{align}
+    \item $\lambda_{ni}$: The probability that a worker lives in location $n$ and works in location $i$
+        \begin{align}
+            \lambda_{n i}=\frac{B_{n i}\left(\kappa_{n i} P_n^\alpha Q_n^{1-\alpha}\right)^{-\epsilon} w_i^\epsilon}{\sum_{r \in N} \sum_{s \in N} B_{r s}\left(\kappa_{r s} P_r^\alpha Q_r^{1-\alpha}\right)^{-\epsilon} w_s^\epsilon} \equiv \frac{\Phi_{n i}}{\Phi}
+        \end{align}
+    \item $\lambda_n^R$: The probability that a worker lives in location $n$ and works in location $i$
+        \begin{align}
+            \lambda_n^R=\frac{R_n}{\bar{L}}=\sum_{i \in N} \lambda_{n i}=\sum_{i \in N} \frac{\Phi_{n i}}{\Phi}
+        \end{align}
+    \item $\lambda_i^L$: The probability that a worker works in location $i$
+        \begin{align}
+            \lambda_i^L=\frac{L_n}{\bar{L}}=\sum_{n \in N} \lambda_{n i}=\sum_{n \in N} \frac{\Phi_{n i}}{\Phi}
+        \end{align}
+    \item $\lambda_{ni\mid n}^R$: The probability that a worker living in $n$ commutes to $i$.
+        \begin{align}
+            \lambda_{n i \mid n}^R \equiv \frac{\lambda_{n i}}{\lambda_n^R}=\frac{B_{n i}\left(w_i / \kappa_{n i}\right)^\epsilon}{\sum_{s \in N} B_{n s}\left(w_s / \kappa_{n s}\right)^\epsilon}
+        \end{align}
 \end{itemize}
