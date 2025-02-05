@@ -1,0 +1,178 @@
+\documentclass[10pt]{article}
+\include{../../../preamble.tex}
+
+\title{Ch. 9: Experiments with Longitudinal Elements}
+
+\author{Dylan Baker}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+
+\section{Main Takeaways}
+
+\subsection{Gains from Pre-Treatment Outcome Measures}
+
+Consider the two parameters:
+
+\begin{align}
+        \tau^{D I D}=\tau^{\text {post }} & -\tau^{\text {pre }} \\
+        = & \sum_{t>0}\left(\mathbb{E}\left[Y_{i t} \mid D_{i t}=1\right]-\mathbb{E}\left[Y_{i t} \mid D_{i t}=0\right]\right) \\
+        & -\sum_{t \leq 0}\left(\mathbb{E}\left[Y_{i t} \mid D_{i t}=1\right]-\mathbb{E}\left[Y_{i t} \mid D_{i t}=0\right]\right)
+\end{align}
+
+and
+
+\begin{align}
+    \tau^{\text {Post }}=\sum_{t>0}\left(\mathbb{E}\left[Y_{i t} \mid D_{i t}=1\right]-\mathbb{E}\left[Y_{i t} \mid D_{i t}=0\right]\right)
+\end{align}
+
+When you have pre-treatment observations, there are instances 
+where it may be beneficial to include them in your specification 
+and instances where it may not be. This depends on how many 
+pre-treatment observations you have and the strength of the 
+autocorrelation parameter.
+
+Under the assumptions of 
+\begin{enumerate}
+    \item constant variance across time periods, 
+    \item equal variances between all pairs of time points
+    \item autocorrelation in outcomes does not depend on treatment effects
+    \item treatment and control groups are identical in cross-sectional size
+\end{enumerate}
+
+we have 
+
+\begin{align}
+    \operatorname{Var}\left[\tau^{\text {Post }}\right]=\frac{2 \sigma^2}{n_d}\left(\frac{1+\left(N_{\text {Post }}-1\right) \rho}{N_{\text {Post }}}\right)
+\end{align}
+
+and 
+
+\begin{align}
+    \operatorname{Var}\left[\tau^{D I D}\right]=\frac{2 \sigma^2}{n_d}\left(\frac{1+\left(N_{\text {Post }}-1\right) \rho}{N_{\text {Post }}}-\frac{\left(N_{\text {Pre }}+1\right) \rho-1}{N_{\text {Pre }}}\right)
+\end{align}
+
+Below is a guide:
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[width=0.6\textwidth]{../input/simple_mean_v_diff_diff.png}
+    \caption{Choosing Diff-in-Diff versus Diff-in-Means}
+    %\label{fig:}
+\end{figure}
+
+\subsection{Choosing the Optimal Number of Pre- and Post- Periods}
+
+The smallest sample size correspond to a 
+given MDE is given by:
+
+\begin{align}
+    n_0^*=n_1^*=n^*=\frac{2\left(t_{\alpha / 2}+t_\beta\right)^2 \sigma^2}{(M D E)^2}\left(\frac{N_{\text {Pre }}+N_{\text {Post }}}{N_{\text {Pre }} * N_{\text {Post }}}\right)
+\end{align}
+
+As the number of periods increases from 4 to 16, the 
+minimum sample size required to detect a given MDE
+decreases four-fold.
+
+\begin{questions}
+    Look into this more.
+\end{questions}
+
+
+\subsection{Solomon 4-Group Design}
+
+One may worry that taking measures repeatedly 
+may influence participants' responses (e.g., if they 
+get tired of responding). One way to get around this 
+is to use the Solomon 4-group design. Under this design,
+participants are randomly divided into to 2, where 
+half are given a pre-test and half are not. Then,
+post-test outcomes are measured for all participants
+and compared based on whether they received a pre-test. 
+If results are similar across groups, they can be pooled.
+
+
+\subsection{Causal Density}
+
+
+``The actual measurement of a long run treatment effect and the discovered underlying 
+mechanisms at work depends on the outcome's causal density.
+
+The causal density of an outcome variable refers to how well the 
+determinants of the outcome are understood. An outcome with low 
+causal density is one where the factors determining the outcome 
+are well understood. For example, farmers have a near-perfect 
+understanding of the determinants of crop yields, yielding a low 
+causal density. In contrast, the determinants of labor market 
+outcomes are much less well understood and thus have high causal density. 
+For example, future employment and wage outcomes are a function 
+of the numerous and interconnected inputs by multiple people 
+and institutions.''
+
+``As the time between experiment and observation of the outcome increases, 
+so do the number of potential mechanisms driving the effect and
+the causal density. For example, consider the question of 
+whether financial incentives increase test scores. Suppose 
+the researcher announces the incentives right before 
+she administers the test. In that case, one can be 
+reasonably sure that the only mechanism through which the
+treatment works is the student's effort on the test. 
+Conversely, suppose that the researcher announces the 
+financial incentives months before administering the test.
+Then, the student's effort remains a potential mechanism.
+However, possible changes to the student's test score
+could arise through her own study effort or even investment
+rom her parents, teachers, or peers. This general
+problem is one of forecasting long-term treatment outcomes, 
+and its applicability is quite widespread.''
+
+\subsection{Surrogates}
+
+When we are interested in the long-run effect of something 
+but may be interested in expanding the policy before we 
+can observe the long-run effect, we may use a surrogate
+to estimate the long-run effect. In this case, under strong assumptions,
+we consider the effect of the treatment on the surrogate
+and the effect of the surrogate on the long-run outcome.
+
+The key assumptions are:
+
+\begin{notes}
+    \begin{enumerate}
+        \item (A9.3, Comparability): $P_i \perp Y_i \mid Y_i^S$
+            \begin{itemize}
+                \item That is, 
+                    the ``conditional distribution of the primary 
+                    outcome given the surrogates is the
+                    same in the observational and experimental samples.''
+            \end{itemize}
+        \item A linear relationship between the outcome and the surrogate
+        \item $\text{Var}\left[Y_i^S \mid D_i\right]=\text{Var}\left[Y_i \mid D_i\right]$
+        \item (A9.4, Surrogacy Condition): $D_i \perp Y_i \mid Y_i^S$
+            \begin{itemize}
+                \item ``The surrogacy condition requires that the surrogate 
+                fully captures the causal link between the treatment and 
+                the primary outcome. Under the surrogacy condition, 
+                there remains no treatment effect on the outcome after 
+                conditioning on the surrogate.''
+            \end{itemize}
+    \end{enumerate}
+\end{notes}
+
+Under these conditions, we get:
+
+\begin{align}
+    \tau=\rho_{Y_i, Y_i^S} \cdot \tau^s
+\end{align}
+
+If the surrogacy condition doesn't hold, we instead get:
+
+\begin{align}
+    \tau=\rho_{Y_i, Y_i^S} \cdot \tau^S+\left(\mathbb{E}\left[Y_i \mid Y_i^S, D_i=1\right]-\mathbb{E}\left[Y_i \mid Y_i^S, D_i=0\right]\right)
+\end{align}
+
+
+\end{document}
