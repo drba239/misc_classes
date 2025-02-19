@@ -1,0 +1,25 @@
+---
+title: "exploring_data"
+output: pdf_document
+date: "2025-02-09"
+---
+
+```{r echo = FALSE, message = FALSE, warning=FALSE, results='hide'}
+library(tidyverse)
+#setwd(dirname(rstudioapi::getSourceEditorContext()$path))
+```
+
+```{r}
+# Load necessary library
+# Workplace data
+workplaceEmp <- read_csv("../input/workplaceEmp.csv", col_names = FALSE)[[1]] # Number of jobs
+workplaceWage <- read_csv("../input/workplaceWage.csv", col_names = FALSE)[[1]] # Average yearly wage of a job
+
+
+# Total payment to workers in a workplace, in millions
+laborIncome <- (workplaceEmp * workplaceWage) / 10^6
+
+# Display result
+print(laborIncome)
+
+```
