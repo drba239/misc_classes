@@ -22,4 +22,6 @@ laborIncome <- (workplaceEmp * workplaceWage) / 10^6
 # Display result
 print(laborIncome)
 
+
+
 ```

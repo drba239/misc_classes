@@ -1,0 +1,116 @@
+\documentclass[10pt]{article}
+\include{../../../../preamble.tex}
+
+\title{Caliendo Paper Notes}
+
+\author{Dylan Baker}
+\date{March 2025}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Terms}
+
+\input{../input/caliendo_et_al_terms.tex}
+
+\section{The Model}
+
+\subsection{Initial Setup}
+
+
+``In each region-sector combination,
+there is a competitive labor market. 
+In each market, there is a continuum of perfectly
+competitive firms producing intermediate goods.''
+
+Firms have a Cobb-Douglas Constant-Returns-to-Scale (CRS)
+production function, which utilizes labor, 
+``composite local factor that we refer to as structures, 
+and materials from all sectors.''
+
+We assume that productivities 
+are 
+``distributed Fréchet with a sector-specific
+productivity dispersion parameter $\theta^j$.''
+
+Time is discrete, $t=0,1,2, \ldots$.
+
+``Households are forward looking,
+have perfect foresight, and optimally decide where to 
+move given some initial distribution of labor 
+across locations and sectors.
+Households face costs to move across markets
+and experience an idiosyncratic shock that affects their moving decision.''
+
+\subsection{Household Problem}
+
+At $t=0$, there is a mass of households 
+in location $n$ and sector $j$, denoted by $L_0^{n j}$.
+Households are either \emph{employed} or 
+\emph{non-employed}.
+
+If employed in location $n$ and sector $j$ at time $t$, 
+workers inelastically supply a unit of labor 
+and receive wage $w_t^{n j}$.
+
+Given income, the household decides how to allocate 
+their consumption over final goods across sectors 
+with a Cobb-Douglas aggregator. Preferences,
+$U\left(C_t^{n j}\right)$, are over 
+baskets of final local goods:
+
+\begin{align}
+    C_t^{n j}=\prod_{k=1}^J\left(c_t^{n j, k}\right)^{\alpha^k}
+\end{align}
+
+``Households are forward-looking 
+and discount the future at rate $\beta \geq 0$.
+Migration decisions are subject to sectoral and spatial 
+mobility costs.''
+
+\begin{notes}[Assumption 1]
+    Labor relocation costs $\tau^{n j, i k} \geq 0$ depend on the origin ($n j$) and destination ($ik$) and are time invariant, additive, and measured in terms of utility.
+\end{notes}
+
+Households have idiosyncratic shocks $\boldsymbol{\epsilon}_t^{i k}$ for each choice of market.
+
+
+The timing for the household's problem is as follows:
+
+\begin{enumerate}
+    \item Households observe the economic conditions in each market, as well 
+        as their own idiosyncratic shocks.
+    \item Returns
+        \begin{itemize}
+            \item If they begin the period in the labor market, they work 
+            and receive the market wage.
+            \item  If they are non-employed in a region, they receive 
+                home production.
+        \end{itemize}
+    \item Households choose whether to relocate.
+\end{enumerate}
+
+Formally:
+
+\begin{align}
+    \mathrm{v}_t^{n j}=&U\left(C_t^{n j}\right)+\max _{\{i, k\}_{i=1, k=0}^{N, J}}\left\{\beta E\left[\mathrm{v}_{t+1}^{i k}\right]-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right\} \\
+    & \text { s.t. } C_t^{n j} \equiv \begin{cases}b^n & \text { if } j=0 \\
+    w_t^{n j} / P_t^n & \text { otherwise }\end{cases}
+\end{align}
+
+$\mathrm{v}_t^{n j}$ is the lifetime utility of a 
+household currently in location $n$ and sector $j$ at time $t$, with 
+the expectation taken over future realizations of the idiosyncratic shock. 
+$\nu$ is a parameter that scales the variance of the idiosyncratic shock.
+
+Households choose to move to the labor market 
+with the highest utility net of costs.
+
+\begin{notes}[Assumption 2]
+    The idiosyncratic shock $\boldsymbol{\epsilon}$ is i.i.d. over time 
+    and distributed Type-I Extreme Value with zero mean.
+\end{notes}
+
+\end{document}
