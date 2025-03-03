@@ -74,7 +74,7 @@ mobility costs.''
     Labor relocation costs $\tau^{n j, i k} \geq 0$ depend on the origin ($n j$) and destination ($ik$) and are time invariant, additive, and measured in terms of utility.
 \end{notes}
 
-Households have idiosyncratic shocks $\boldsymbol{\epsilon}_t^{i k}$ for each choice of market.
+Households have idiosyncratic shocks $\epsilon_t^{i k}$ for each choice of market.
 
 
 The timing for the household's problem is as follows:
@@ -109,8 +109,280 @@ Households choose to move to the labor market
 with the highest utility net of costs.
 
 \begin{notes}[Assumption 2]
-    The idiosyncratic shock $\boldsymbol{\epsilon}$ is i.i.d. over time 
+    The idiosyncratic shock $\epsilon$ is i.i.d. over time 
     and distributed Type-I Extreme Value with zero mean.
 \end{notes}
+
+Note that Assumption 2 is common in the literature\footnote{Caliendo et al. (2019)
+refers readers to 
+
+Aguirregabiria, V., \& Mira, P. (2010). Dynamic discrete choice structural models: A survey. \emph{Journal of Econometrics, 156}(1), 38-67.} 
+and is useful to allow ``for 
+simple aggregation of idiosyncratic decisions 
+made by households.''
+
+Let
+
+\begin{align}
+    V_t^{n j} \equiv \mathbb{E}\left[\mathrm{v}_t^{n j}\right] \label{eq:V_t_nj_init}
+\end{align}
+
+Then 
+
+\begin{align}
+    V_t^{n j}=U\left(C_t^{n j}\right)+\nu \log \left(\sum_{i=1}^N \sum_{k=0}^J \exp \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}\right)^{1 / \nu}\right) \label{eq:V_t_nj_exp}
+\end{align}
+
+The derivation is given in \autoref{sec:V_t_nj_exp}.
+
+``$V_t^{n j}$ can be interpreted as the expected lifetime 
+utility of a household before the realization of the 
+household preference shocks or, alternatively, as the 
+average utility of households in that market.''
+
+From there we can derive the fraction of households 
+that relocate from market $nj$ to $ik$:
+
+\begin{align}
+    \mu_t^{n j, i k}=\frac{\exp \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}\right)^{1 / \nu}}{\sum_{m=1}^N \sum_{h=0}^J \exp \left(\beta V_{t+1}^{m h}-\tau^{n j, m h}\right)^{1 / \nu}} \label{eq:mu_t_nj_ik}
+\end{align}
+
+\begin{questions}[To-do]
+    Add derivation if desired.
+\end{questions}
+
+All else equal \eqref{eq:mu_t_nj_ik}
+implies that markets with a higher lifetime 
+utility (net of migration costs) will be the ones to attract more migrants.
+Moreover, it allows $\frac{1}{\nu}$ to be interpreted as a migration 
+elasticity with respect to the expected utility of the destination market,
+i.e., $\beta V_{t+1}^{i k}-\tau^{n j, i k}$.
+
+You can see the elasticity interpretation intuitively if you consider:
+
+\begin{align}
+    &\mu_t^{n j, i k}=\frac{\exp \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}\right)^{1 / \nu}}{\sum_{m=1}^N \sum_{h=0}^J \exp \left(\beta V_{t+1}^{m h}-\tau^{n j, m h}\right)^{1 / \nu}} \\
+    \Rightarrow &\ln \mu_t^{n j, i k} = \frac{1}{\nu} \left( \beta V_{t+1}^{i k}-\tau^{n j, i k} - \ln \sum_{m=1}^N \sum_{h=0}^J \exp \left(\beta V_{t+1}^{m h}-\tau^{n j, m h}\right) \right) \\
+    \Rightarrow &\frac{\partial \ln \mu_t^{n j, i k}}{\partial (\beta V_{t+1}^{i k} - \tau^{n j, i k})} \approx \frac{1}{\nu} \\
+\end{align}
+
+\eqref{eq:mu_t_nj_ik} ``conveys all the 
+information needed to determine how the distribution of 
+labor across markets evolves over time. In particular,''
+
+\begin{align}
+    L_{t+1}^{n j}=\sum_{i=1}^N \sum_{k=0}^J \mu_t^{i k, n j} L_t^{i k} \label{eq:L_t_nj}
+\end{align}
+
+\eqref{eq:L_t_nj} characterizes the distribution of 
+employment and non-employment across markets. 
+
+Note that, under the given timing assumptions, 
+labor in period $t$ is ``fully determined by 
+forward-looking decisions at period $t-1$.''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Production}
+
+``Firms in each sector and region 
+are able to produce many varieties
+of intermediate goods. ''
+
+Production requires 
+labor, structures, and materials from all sectors.
+
+``TFP of an intermediate good is composed of two terms, 
+a time-varying sectoral-regional component $\left(A_t^{n j}\right)$, 
+which is common to all varieties in a region and sector, and a 
+variety-specific component $\left(z^{n j}\right)$.''
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Intermediate Good Production}
+
+\paragraph{Production Function}
+
+We assume that the production function is CRS and Cobb-Douglas.
+
+The output for a producer of an intermediate good is given by:
+
+\begin{align}
+    q_t^{n j}=z^{n j}\left(A_t^{n j}\left(h_t^{n j}\right)^{\xi^n}\left(l_t^{n j}\right)^{1-\xi^n}\right)^{\gamma^{n j}} \prod_{k=1}^J\left(M_t^{n j, n k}\right)^{\gamma^{n j, n k}}
+\end{align}
+
+where
+
+\begin{itemize}
+    \item $l_t^{n j}$: Labor inputs in location $n$ and sector $j$ at time $t$
+    \item $h_t^{n j}$: Structure inputs in location $n$ and sector $j$ at time $t$
+    \item $M_t^{n j, n k}$: Material 
+        inputs from sector $k$ demanded by a firm in sector $j$ and region $n$ at time $t$
+    \item $\gamma^{n j} \geq 0$: Share of value-added in 
+        the production of sector $j$ and region $n$
+        \begin{itemize}
+            \item This comes from $\gamma^{n j} + \sum_{k=1}^J \gamma^{n j, n k}=1$ and the Cobb-Douglas form, 
+                so the value-add share is the share that comes from 
+                the non-material inputs.
+        \end{itemize}
+    \item $\gamma^{n, n k} \geq 0$: The share of materials from sector $k$ in 
+        the production of sector $j$ and region $n$.
+    \item $\xi^n$: The share of structures in value-add.
+\end{itemize}
+
+``Material inputs are goods from sector $k$
+produced in the same region $n$.''
+
+\paragraph{Unit Price of an Input Bundle}
+
+The unit price of an input bundle is given by:
+
+\begin{align}
+    x_t^{n j}=B^{n j}\left(\left(r_t^{n j}\right)^{\xi^n}\left(w_t^{n j}\right)^{1-\xi^n}\right)^{\gamma^{n j}} \prod_{k=1}^J\left(P_t^{n k}\right)^{\gamma^{n j, n k}}
+\end{align}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Derivations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Derivation of $V_t^{n j}$}
+\label{sec:V_t_nj_exp}
+
+This is a derivation of \autoref{eq:V_t_nj_exp}.
+
+As a quick starting point, note that we know the 
+value of $U\left(C_t^{n j}\right)$, so 
+the uncertainty is over subsequent periods:
+
+\begin{align}
+    V_t^{n j} \equiv &\mathbb{E}\left[\mathrm{v}_t^{n j}\right] \\
+    = &\mathbb{E}\left[U\left(C_t^{n j}\right)+\max _{\{i, k\}_{i=1, k=0}^{N, J}}\left\{\beta E\left[\mathrm{v}_{t+1}^{i k}\right]-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right\}\right] \\
+    = &U\left(C_t^{n j}\right)+ \mathbb{E}\left[\max _{\{i, k\}_{i=1, k=0}^{N, J}}\left\{\beta E\left[\mathrm{v}_{t+1}^{i k}\right]-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right\}\right]
+\end{align}
+
+Denote the uncertain term as:
+
+\begin{align}
+    \Phi_t^{n j} \equiv \mathbb{E}\left[\max _{\{i, k\}_{i=1, k=0}^{N, J}}\left\{\beta E\left[\mathrm{v}_{t+1}^{i k}\right]-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right\}\right]
+\end{align}
+
+Recall that we assumed that the idiosyncratic shock $\epsilon$ is i.i.d. over time
+and distributed Type-I Extreme Value with zero mean. Then, the 
+CDF of $\epsilon$ is:
+
+\begin{align}
+    F(\epsilon)=\exp (-\exp (-\epsilon-\bar{\gamma}))
+\end{align}
+
+where 
+
+\begin{align}
+    \bar{\gamma} \equiv \int_{-\infty}^{\infty} x \exp (-x-\exp (-x)) d x
+\end{align}
+
+is Euler's constant and 
+
+\begin{align}
+    f(\epsilon)=\partial F / \partial \epsilon
+\end{align}
+
+Denote
+
+\begin{align}
+    \bar{\epsilon}_t^{i k, m h} \equiv \frac{\beta\left(V_{t+1}^{i k}-V_{t+1}^{m h}\right)-\left(\tau^{n j, i k}-\tau^{n j, m h}\right)}{\nu} \label{eq:bar_epsilon_exp}
+\end{align}
+
+Then notice that:
+
+\begin{align}
+    &\Phi_t^{n j} \\
+    \equiv &\mathbb{E}\left[\max _{\{i, k\}_{i=1, k=0}^{N, J}}\left\{\beta E\left[\mathrm{v}_{t+1}^{i k}\right]-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right\}\right] \\
+    = &\mathbb{E}\left[\max _{\{i, k\}_{i=1, k=0}^{N, J}} \left\{ \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \right\}\right] && \text{by \eqref{eq:V_t_nj_init}} \\
+    = &\mathbb{E}\left[ \sum_{i = 1}^N \sum_{k = 0}^J \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \mathbf{1}\left\{ \underset{{\{m, h\}_{m=1, h=0}^{N, J}}}{\text{argmax}} \left\{ \beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} \right\} = i k \right\} \right] \\
+    = &\mathbb{E}\left[ \sum_{i = 1}^N \sum_{k = 0}^J \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} \mathbf{1}\left\{ \beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} < \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \right\} \right] \\
+    = &\sum_{i=1}^N \sum_{k=0}^J \mathbb{E}\left[ \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} \mathbf{1}\left\{ \beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} < \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \right\} \right] \\
+    = &\sum_{i=1}^N \sum_{k=0}^J \mathbb{E}\left[ \mathbb{E} \left[ \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} \mathbf{1}\left\{ \beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} < \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \right\} \mid \epsilon_t^{i k} \right] \right] && \text{by LIE} \\
+    = &\sum_{i=1}^N \sum_{k=0}^J \mathbb{E}\left[ \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} \mathbb{E} \left[ \mathbf{1}\left\{ \beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} < \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \right\} \mid \epsilon_t^{i k} \right] \right]  && \text{by iid}\\
+    = &\sum_{i=1}^N \sum_{k=0}^J \mathbb{E}\left[ \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} \Pr \left(\beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} < \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \mid \epsilon_t^{i k} \right) \right] && \parbox[t]{1.5cm}{\raggedright binary variable property}
+\end{align}
+
+Now, notice that 
+
+\begin{align}
+    &\Pr\left(\beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h}<\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \mid \epsilon_t^{i k}\right) \\
+    = &\Pr\left(\epsilon_t^{m h} < \epsilon_t^{i k}+\frac{\beta V_{t+1}^{i k}-\tau^{n j, i k}-\beta V_{t+1}^{m h}+\tau^{n j, m h}}{\nu} \mid \epsilon_t^{i k}\right) \\
+    = &\Pr\left(\epsilon_t^{m h} < \epsilon_t^{i k}+\bar{\epsilon}_t^{i k, m h} \mid \epsilon_t^{i k}\right) && \text{by \eqref{eq:bar_epsilon_exp}} \\
+    = &F\left(\epsilon_t^{i k}+\bar{\epsilon}_t^{i k, m h}\right) \\
+\end{align}
+
+Thus,
+
+\begin{align}
+    \Phi_t^{n j} = &\sum_{i=1}^N \sum_{k=0}^J \mathbb{E}\left[ \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} F\left(\epsilon_t^{i k}+\bar{\epsilon}_t^{i k, m h}\right) \right] \\
+     = &\sum_{i=1}^N \sum_{k=0}^J \int_{-\infty}^{\infty}\left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) f\left(\epsilon_t^{i k}\right) \prod_{m h \neq i k} F\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}\right) d \epsilon_t^{i k}
+\end{align}
+
+From there, we can note that
+
+\begin{align}
+    f\left(\epsilon_t^{i k}\right) = &\exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left( -\exp \left( - \epsilon_t^{i k} - \bar{\gamma} \right) \right) \\
+    F\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}\right)= &\exp \left[-\exp \left(-\left[\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}+\bar{\gamma}\right]\right)\right]
+\end{align}
+
+Thus,
+
+\begin{align}
+    &f\left(\epsilon_t^{i k}\right) \prod_{m h \neq i k} F\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}\right) \\
+    = &\exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left( -\exp \left( - \epsilon_t^{i k} - \bar{\gamma} \right) \right)
+        \exp \left[-\sum_{(m, h) \neq(i, k)} \exp \left(-\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}+\bar{\gamma}\right)\right)\right] \\
+    = & \exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left[ -\exp \left( - \epsilon_t^{i k} - \bar{\gamma} \right) - \sum_{(m, h) \neq(i, k)} \exp \left(-\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}+\bar{\gamma}\right)\right) \right] \\
+    = & \exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left[  - \sum_{m=1}^N \sum_{h=0}^J \exp \left( -\bar{\epsilon}_t^{i k, m h}-\epsilon_t^{i k}-\bar{\gamma} \right) \right] && \parbox[t]{4cm}{\raggedright since $\bar{\epsilon}_t^{i k, i k} = 0$} \\
+    = & \exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left[ - \exp(-\epsilon_t^{i k} - \bar{\gamma}) \sum_{m=1}^N \sum_{h=0}^J \exp \left( -\bar{\epsilon}_t^{i k, m h} \right) \right] 
+\end{align}
+
+Thus,
+
+\begin{align}
+    &\Phi_t^{n j} \\
+    =&\sum_{i=1}^N \sum_{k=0}^J \int_{-\infty}^{\infty}\left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) f\left(\epsilon_t^{i k}\right) \prod_{m h \neq i k} F\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}\right) d \epsilon_t^{i k} \\
+    = &\sum_{i=1}^N \sum_{k=0}^J \int_{-\infty}^{\infty}\left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left[ - \exp(-\epsilon_t^{i k} - \bar{\gamma}) \sum_{m=1}^N \sum_{h=0}^J \exp \left( -\bar{\epsilon}_t^{i k, m h} \right) \right] d \epsilon_t^{i k}
+\end{align}
+
+Denote:
+
+\begin{align}
+    \lambda_t^{i k} &\equiv \log \sum_{m=1}^N \sum_{h=0}^J \exp \left(-\bar{\epsilon}_t^{i k, m h}\right) \\
+    \zeta_t^{i k} &\equiv \epsilon_t^{i k}+\bar{\gamma}
+\end{align}
+
+\begin{questions}[Break]
+    Putting this derivation on pause here. (The below lines 
+    are directly from the paper.)
+\end{questions}
+
+Then through a change of variables, we have:
+
+\begin{align}
+    \Phi_t^{n j}=\sum_{i=1}^N \sum_{k=0}^J \int_{-\infty}^{\infty}\left(\beta V_{t+1}^{i k}-\tau^{n j i k}+\nu\left(\zeta_t^{i k}-\bar{\gamma}\right)\right) \exp \left(-\zeta_t^{i k}-\exp \left(-\left(\zeta_t^{i k}-\lambda_t^{i k}\right)\right)\right) d \zeta_t^{i k}
+\end{align}
+
+Consider an additional change of variables using:
+
+\begin{align}
+    \tilde{y}_t^{i k}=\zeta_t^{i k}-\lambda_t^{i k}
+\end{align}
+
+Then we obtain:
+
+\begin{align}
+    \Phi_t^{n j}=\sum_{i=1}^N \sum_{k=0}^J \exp \left(-\lambda_t^{i k}\right) \left(\left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu\left(\lambda_t^{i k}-\bar{\gamma}\right)\right)+\nu \int_{-\infty}^{\infty} \tilde{y}_t^{i k} \exp \left(-\tilde{y}_t^{i k}-\exp \left(-\tilde{y}_t^{i k}\right)\right) d \tilde{y}_t^{i k}\right)
+\end{align}
+
 
 \end{document}
