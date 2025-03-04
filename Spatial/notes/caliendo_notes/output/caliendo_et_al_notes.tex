@@ -241,6 +241,154 @@ The unit price of an input bundle is given by:
     x_t^{n j}=B^{n j}\left(\left(r_t^{n j}\right)^{\xi^n}\left(w_t^{n j}\right)^{1-\xi^n}\right)^{\gamma^{n j}} \prod_{k=1}^J\left(P_t^{n k}\right)^{\gamma^{n j, n k}}
 \end{align}
 
+where $B^{n j}$ is a constant.
+
+Then the unit cost of a given intermediate good is given by:
+
+\begin{align}
+    \frac{x_t^{n j}}{z^{n j}\left(A_t^{n j}\right)^{\gamma^{n j}}}
+\end{align}
+
+since the cost for one unit of the inputs is $x_t^{n j}$ and
+the productivity of the variety, $z^{n j}\left(A_t^{n j}\right)^{\gamma^{n j}}$,
+scales the amount you can produce with the relevant input.
+
+\paragraph{Price of Good $j$ in Region $n$}
+
+We take
+
+\begin{itemize}
+    \item $\boldsymbol{\kappa}_t^{n j, i j}$: Iceberg trade costs between market location $n$ and $i$ in 
+    sector $j$.
+    \begin{itemize}
+        \item Delivering one unit of good from market $n$ to $i$ 
+            requires producing $\boldsymbol{\kappa}_t^{n j, i j} \geq  1$ units of the good.
+        \item If a good is nontradable, then $\kappa=\infty$.
+    \end{itemize}
+\end{itemize}
+
+``Competition implies that the 
+price paid for a particular variety of good $j$ in region $n$
+is given by the minimum cost across regions, 
+taking into account trade costs, 
+and where the vector of productivity 
+draws received by the different regions is ''
+
+\begin{align}
+    z^j=\left(z^{1 j}, z^{2 j}, \ldots, z^{N j}\right)
+\end{align}
+
+``That is, using $z^j$ to index varieties:''
+
+\begin{align}
+    p_t^{n j}\left(z^j\right)=\min _i\left\{\frac{\kappa_t^{n j, i j} x_t^{i j}}{z^{i j}\left(A_t^{i j}\right)^{\gamma^{i j}}}\right\}
+\end{align}
+
+\subsubsection{Local Sectoral Aggregate Goods}
+
+\paragraph{Quantity of Aggregate Sectoral Goods}
+
+``Intermediate goods demanded 
+from sector $j$ 
+and from all regions are aggregated 
+into a local sectoral good denoted by $Q$
+and that can be thought of as a bundle of 
+goods purchased from different regions.''
+
+Take 
+
+\begin{itemize}
+    \item $Q_t^{n j}$: The quantity produced of aggregate sectoral 
+        goods $j$ in region $n$ 
+        \begin{align}
+            Q_t^{n j}=\left(\int\left(\tilde{q}_t^{n j}\left(z^j\right)\right)^{1-1 / \eta^{n j}} d \phi^j\left(z^j\right)\right)^{\eta^{n j} /\left(\eta^{n j}-1\right)}
+        \end{align}
+    \item $\phi^j\left(z^j\right)$: The joint distribution over the vector $z^j$.
+        \begin{align}
+            \phi^j\left(z^j\right)=\exp \left\{-\sum_{n=1}^N\left(z^{n j}\right)^{-\theta^j}\right\}
+        \end{align}
+        \begin{itemize}
+            \item $\phi^{n j}\left(z^{n j}\right)$: The marginal distribution of $z^{n j}$.
+                \begin{align}
+                    \phi^{n j}\left(z^{n j}\right)=\exp \left\{-\left(z^{n j}\right)^{-\theta^j}\right\}
+                \end{align}
+        \end{itemize}
+    \item $\tilde{q}_t^{n j}\left(z^j\right)$: The 
+        quantity demanded of an intermediate good
+        of a given variety from the lowest-cost supplier.
+\end{itemize}
+
+Note that 
+``there are no fixed costs 
+or barriers to entry and exit 
+in the production of intermediate and sectoral goods. ''
+Moreover, ``[c]ompetitive behavior 
+implies zero profit at all times.''
+
+\paragraph{Price of Aggregate Sectoral Goods}
+
+Given properties of the Fréchet distribution,
+the price of the aggregate sectoral good is given by:
+
+\begin{align}
+    P_t^{n j}=\Gamma^{n j}\left(\sum_{i=1}^N\left(x_t^{i j} \kappa_t^{n j, i j}\right)^{-\theta^j}\left(A_t^{i j}\right)^{\theta^j \gamma^{i j}}\right)^{-1 / \theta^j}
+\end{align}
+
+where $\Gamma^{n j}$ is a constant
+and we assume that $1+\theta^j>\eta^{n j}$.
+
+\paragraph{Share of Total Expenditure in Market $nj$ on Goods $j$ from Market $i$}
+
+For the share of total expenditure in market $nj$ on goods $j$ from market $i$, we 
+get the expression:
+
+\begin{align}
+    \pi_t^{n j, i j}=\frac{\left(x_t^{i j} \kappa_t^{n j, i j}\right)^{-\theta^j}\left(A_t^{i j}\right)^{\theta^j \gamma^{i j}}}{\sum_{m=1}^N\left(x_t^{m j} \kappa_t^{n j, m j}\right)^{-\theta^j}\left(A_t^{m j}\right)^{\theta^j \gamma^{m j}}}
+\end{align}
+
+``This equilibrium condition resembles a gravity equation.''
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Market Clearing and Unbalanced Trade}
+
+\paragraph{Global Portfolio and Rent}
+
+We assume a mass 1 of rentiers in each region who 
+own the local structures, rent them to firms, send their 
+rents to a global portfolio, receive a constant
+share $\iota^n$ from the global portfolio, 
+with $\sum_{n=1}^N \iota^n=1$,
+and cannot re-locate.
+
+The differences between the 
+remittances and the income 
+rentiers receive from the global portfolio
+generate imbalances, ``which changes in magnitude 
+as the rental prices change.''
+
+The imbalance is given by:
+
+\begin{align}
+    \sum_{k=1}^J r_t^{i k} H^{i k}-\iota^n \chi_t
+\end{align}
+
+where 
+
+\begin{align}
+    \chi_t=\sum_{i=1}^N \sum_{k=1}^J r_t^{i k} H^{i k}
+\end{align}
+
+is the total revenue in the global portfolio.
+
+\paragraph{Total Expenditure on Goods $j$ in Region $n$}
+
+Let $X_t^{n j}$ be the total expenditure on sector $j$ good in region $n$. Then, goods market clearing implies
+
+\begin{align}
+    X_t^{n j}=\underbrace{\sum_{k=1}^J \gamma^{n k, n j} \sum_{i=1}^N \pi_t^{i k, n k} X_t^{i k}}_{\parbox[t]{2cm}{\raggedright \footnotesize \centering }}+
+        \alpha^j\left(\sum_{k=1}^J w_t^{n k} L_t^{n k}+\iota^n \chi_t\right)
+\end{align}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
