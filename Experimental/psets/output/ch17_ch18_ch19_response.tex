@@ -1,0 +1,83 @@
+\documentclass[10pt]{article}
+\include{../../../preamble.tex}
+
+\title{Ch. 17, Ch. 18, \& Ch. 19 Responses}
+
+\author{Dylan Baker}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Ch. 17 Question Responses}
+
+\subsection{Question 1}
+
+Imagine you are conducting a field experiment to study 
+the effectiveness of a new educational program 
+aimed at improving student performance. 
+Before starting the study, you estimate based on 
+existing literature that there is a $40 \%$ 
+chance $(\pi=0.4)$ that your hypothesized 
+intervention genuinely improves student 
+outcomes. You design your experiment with 
+power $( 1 -\beta) =0.8$ and significance 
+level ($\alpha$ of 0.05). However, 
+after running the experiment, there is 
+a potential concern regarding researcher bias. 
+Suppose there is a researcher bias factor ($u$) 
+of $30\%$. Please calculate 
+the PSP with researcher bias and interpret 
+what this means in terms of your confidence in the research finding.
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+\begin{align}
+    P S P^{\text {bias }}=&\frac{(1-\beta) \pi+\beta \pi \mathrm{u}}{(1-\beta) \pi+\beta \pi \mathrm{u}+[\alpha+(1-\alpha) \mathrm{u}](1-\pi)} \\
+    = & \frac{0.8 \times 0.4+0.2 \times 0.4 \times 0.3}{0.8 \times 0.4+0.2 \times 0.4 \times 0.3+[0.05+0.95 \times 0.3](1-0.4)} \\
+    = & \frac{0.32+0.024}{0.32+0.024+0.335 \times 0.6} \\
+    = & \frac{0.344}{0.545}
+\end{align}
+
+This implies that the total share of associations that 
+are declared to be true that are actually true is $\frac{0.344}{0.545}$. 
+Notice that this is lower than if there was no researcher bias,
+hence amid researcher bias, we are less confident in the 
+research finding.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Question 2}
+
+\href{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4778120}{This paper} 
+by Qiu et al. (2024) has recently sparked intense debate on X. Many 
+economists deem it unethical to conduct an NFE on PhD students entering the 
+job market as it can deeply impact their future. Compare it to the job 
+training program in \href{https://www.jstor.org/stable/1806062}{LaLonde 1986}. 
+Are these two experiments ethically different? Why? 
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+The two ethical differences that stand out to me are: 1) In 
+LaLonde (1986), it is more clear to participants 
+what the objective of the program is, i.e., the job training that 
+they are agreeing to is the point of the study, whereas in 
+Qiu et al. (2024), the point is the high-profile re-tweeting, and it 
+seems unclear up front that this is what 
+participants are entering into. 2) Probably more importantly, 
+it seems that there is a higher risk of harming bystanders in 
+Qiu et al. (2024) than in LaLonde (1986). In LaLonde (1986),
+the labor markets under consideration are sufficiently large that 
+the job training program is unlikely to have a
+significant impact on the labor market as a whole.
+However, in Qiu et al. (2024), the academic job market 
+is sufficiently small, with some people getting precisely one offer
+and perhaps never getting into academia without it, 
+that inducing advantages
+may have tangible effects on people's long-run careers.
+
+
+
+\end{document}

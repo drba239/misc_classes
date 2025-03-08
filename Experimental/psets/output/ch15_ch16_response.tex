@@ -1,0 +1,96 @@
+\documentclass[10pt]{article}
+\include{../../../preamble.tex}
+
+\title{Ch. 15 and Ch. 16 Responses}
+
+\author{Dylan Baker}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Ch. 15 Question Responses}
+
+\subsection{Question 1}
+
+You do a lab experiment with power $(1- \beta)=0.8$ and estimated 
+prior 0.4 found an $\alpha$ of 0.0. 
+What is the post study probability? 
+What would the post study probability be 
+following a single successful replication 
+($\alpha$ of 0.05) in an artefactual field 
+experiment setting ($d=0.2$) with power (1- $\beta$) =0.9?
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+I'm kind of confused by what it means to have an $\alpha$ of 0.0,
+but that being said, if you did suppose an $\alpha$ of 0.0, then
+the post study probability would be 1 based on
+
+\begin{align}
+    \text{PSP}=\frac{(1-\beta) \pi}{(1-\beta) \pi+\alpha(1-\pi)} .
+\end{align}
+
+If we consider the artefactual field experiment,
+based on Exhibit 15.8, it seems that the 
+PSP should be around 0.68. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Question 2}
+
+How would you address the replication crisis in economic experiments, list two feasible solutions with explanation?
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+One method is to increase the prevalence and 
+detail of pre-analysis plans to make p-hacking 
+more difficult. Another is to 
+increase the prevalence and rewards for replication,
+especially given that surprising results are currently rewarded.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Main Takeaways}
+
+\subsection{Ch. 15 Takeaways}
+
+\begin{enumerate}
+    \item Our assessment of the probability of a result 
+        being ``true'' depending on the power of the study,
+        the prior probability of the hypothesis being true,
+        and the significance level of the study:
+        \begin{align}
+            P S P=\frac{(1-\beta) \pi}{(1-\beta) \pi+\alpha(1-\pi)} .
+        \end{align}
+    \item Replications are valuable for knowledge generation. 
+        We can update our PSP expression to incorporate replications:
+        \begin{align}
+            P S P=\frac{\pi \sum_{i=r}^n\binom{n}{i}(1-\beta)^i \beta^{(n-i)}}{\pi \sum_{i=r}^n\binom{n}{i}(1-\beta)^i \beta^{(n-i)}+(1-\pi) \sum_{i=r}^n\binom{n}{i} \alpha^i(1-\alpha)^{(n-i)}}
+        \end{align}
+    \item We can reckon with domain distance by adjusting our PSP expression:
+        \begin{align}
+            P S P^{\mathrm{d}}=\frac{(1-\beta) \pi+\beta \pi \mathrm{d}}{(1-\beta) \pi+\beta \pi \mathrm{d}+[\alpha+(1-\alpha) \mathrm{d}](1-\pi)}
+        \end{align}
+\end{enumerate}
+
+\subsection{Ch. 16 Takeaways}
+
+\begin{enumerate}
+    \item If we lose internal validity for an experiment, 
+        then we have lost our whole foundation, as 
+        internal validity is necessary for any hope of external 
+        validity. However, it is not sufficient on its own
+        for external validity.
+    \item Generalizability faces many challenges, such 
+        as selection into experiments. These challenges 
+        may be influenced by our design, e.g., 
+        different upfront payment levels.
+    \item The Voltage Effect refers to when the benefit-cost profile 
+        associated with a treatment worsens 
+        when moving from the lab to scale.
+\end{enumerate}
+
+\end{document}
