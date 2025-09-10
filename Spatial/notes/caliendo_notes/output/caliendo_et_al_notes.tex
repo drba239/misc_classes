@@ -1,0 +1,809 @@
+\documentclass[10pt]{article}
+\include{../../../../preamble.tex}
+
+\title{Caliendo Paper Notes}
+
+\author{Dylan Baker}
+\date{March 2025}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Terms}
+
+\input{../input/caliendo_et_al_terms.tex}
+
+\section{The Model}
+
+\subsection{Initial Setup}
+
+
+``In each region-sector combination,
+there is a competitive labor market. 
+In each market, there is a continuum of perfectly
+competitive firms producing intermediate goods.''
+
+Firms have a Cobb-Douglas Constant-Returns-to-Scale (CRS)
+production function, which utilizes labor, 
+``composite local factor that we refer to as structures, 
+and materials from all sectors.''
+
+We assume that productivities 
+are 
+``distributed Fréchet with a sector-specific
+productivity dispersion parameter $\theta^j$.''
+
+Time is discrete, $t=0,1,2, \ldots$.
+
+``Households are forward looking,
+have perfect foresight, and optimally decide where to 
+move given some initial distribution of labor 
+across locations and sectors.
+Households face costs to move across markets
+and experience an idiosyncratic shock that affects their moving decision.''
+
+\subsection{Household Problem}
+
+At $t=0$, there is a mass of households 
+in location $n$ and sector $j$, denoted by $L_0^{n j}$.
+Households are either \emph{employed} or 
+\emph{non-employed}.
+
+If employed in location $n$ and sector $j$ at time $t$, 
+workers inelastically supply a unit of labor 
+and receive wage $w_t^{n j}$.
+
+Given income, the household decides how to allocate 
+their consumption over final goods across sectors 
+with a Cobb-Douglas aggregator. Preferences,
+$U\left(C_t^{n j}\right)$, are over 
+baskets of final local goods:
+
+\begin{align}
+    C_t^{n j}=\prod_{k=1}^J\left(c_t^{n j, k}\right)^{\alpha^k}
+\end{align}
+
+``Households are forward-looking 
+and discount the future at rate $\beta \geq 0$.
+Migration decisions are subject to sectoral and spatial 
+mobility costs.''
+
+\begin{notes}[Assumption 1]
+    Labor relocation costs $\tau^{n j, i k} \geq 0$ depend on the origin ($n j$) and destination ($ik$) and are time invariant, additive, and measured in terms of utility.
+\end{notes}
+
+Households have idiosyncratic shocks $\epsilon_t^{i k}$ for each choice of market.
+
+
+The timing for the household's problem is as follows:
+
+\begin{enumerate}
+    \item Households observe the economic conditions in each market, as well 
+        as their own idiosyncratic shocks.
+    \item Returns
+        \begin{itemize}
+            \item If they begin the period in the labor market, they work 
+            and receive the market wage.
+            \item  If they are non-employed in a region, they receive 
+                home production.
+        \end{itemize}
+    \item Households choose whether to relocate.
+\end{enumerate}
+
+Formally:
+
+\begin{align}
+    \mathrm{v}_t^{n j}=&U\left(C_t^{n j}\right)+\max _{\{i, k\}_{i=1, k=0}^{N, J}}\left\{\beta E\left[\mathrm{v}_{t+1}^{i k}\right]-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right\} \\
+    & \text { s.t. } C_t^{n j} \equiv \begin{cases}b^n & \text { if } j=0 \\
+    w_t^{n j} / P_t^n & \text { otherwise }\end{cases}
+\end{align}
+
+$\mathrm{v}_t^{n j}$ is the lifetime utility of a 
+household currently in location $n$ and sector $j$ at time $t$, with 
+the expectation taken over future realizations of the idiosyncratic shock. 
+$\nu$ is a parameter that scales the variance of the idiosyncratic shock.
+
+Households choose to move to the labor market 
+with the highest utility net of costs.
+
+\begin{notes}[Assumption 2]
+    The idiosyncratic shock $\epsilon$ is i.i.d. over time 
+    and distributed Type-I Extreme Value with zero mean.
+\end{notes}
+
+Note that Assumption 2 is common in the literature\footnote{Caliendo et al. (2019)
+refers readers to 
+
+Aguirregabiria, V., \& Mira, P. (2010). Dynamic discrete choice structural models: A survey. \emph{Journal of Econometrics, 156}(1), 38-67.} 
+and is useful to allow ``for 
+simple aggregation of idiosyncratic decisions 
+made by households.''
+
+Let
+
+\begin{align}
+    V_t^{n j} \equiv \mathbb{E}\left[\mathrm{v}_t^{n j}\right] \label{eq:V_t_nj_init}
+\end{align}
+
+Then 
+
+\begin{align}
+    V_t^{n j}=U\left(C_t^{n j}\right)+\nu \log \left(\sum_{i=1}^N \sum_{k=0}^J \exp \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}\right)^{1 / \nu}\right) \label{eq:V_t_nj_exp}
+\end{align}
+
+The derivation is given in \autoref{sec:V_t_nj_exp}.
+
+``$V_t^{n j}$ can be interpreted as the expected lifetime 
+utility of a household before the realization of the 
+household preference shocks or, alternatively, as the 
+average utility of households in that market.''
+
+From there we can derive the fraction of households 
+that relocate from market $nj$ to $ik$:
+
+\begin{align}
+    \mu_t^{n j, i k}=\frac{\exp \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}\right)^{1 / \nu}}{\sum_{m=1}^N \sum_{h=0}^J \exp \left(\beta V_{t+1}^{m h}-\tau^{n j, m h}\right)^{1 / \nu}} \label{eq:mu_t_nj_ik}
+\end{align}
+
+\begin{questions}[To-do]
+    Add derivation if desired.
+\end{questions}
+
+All else equal \eqref{eq:mu_t_nj_ik}
+implies that markets with a higher lifetime 
+utility (net of migration costs) will be the ones to attract more migrants.
+Moreover, it allows $\frac{1}{\nu}$ to be interpreted as a migration 
+elasticity with respect to the expected utility of the destination market,
+i.e., $\beta V_{t+1}^{i k}-\tau^{n j, i k}$.
+
+You can see the elasticity interpretation intuitively if you consider:
+
+\begin{align}
+    &\mu_t^{n j, i k}=\frac{\exp \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}\right)^{1 / \nu}}{\sum_{m=1}^N \sum_{h=0}^J \exp \left(\beta V_{t+1}^{m h}-\tau^{n j, m h}\right)^{1 / \nu}} \\
+    \Rightarrow &\ln \mu_t^{n j, i k} = \frac{1}{\nu} \left( \beta V_{t+1}^{i k}-\tau^{n j, i k} - \ln \sum_{m=1}^N \sum_{h=0}^J \exp \left(\beta V_{t+1}^{m h}-\tau^{n j, m h}\right) \right) \\
+    \Rightarrow &\frac{\partial \ln \mu_t^{n j, i k}}{\partial (\beta V_{t+1}^{i k} - \tau^{n j, i k})} \approx \frac{1}{\nu} \\
+\end{align}
+
+\eqref{eq:mu_t_nj_ik} ``conveys all the 
+information needed to determine how the distribution of 
+labor across markets evolves over time. In particular,''
+
+\begin{align}
+    L_{t+1}^{n j}=\sum_{i=1}^N \sum_{k=0}^J \mu_t^{i k, n j} L_t^{i k} \label{eq:L_t_nj}
+\end{align}
+
+\eqref{eq:L_t_nj} characterizes the distribution of 
+employment and non-employment across markets. 
+
+Note that, under the given timing assumptions, 
+labor in period $t$ is ``fully determined by 
+forward-looking decisions at period $t-1$.''
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Production}
+
+``Firms in each sector and region 
+are able to produce many varieties
+of intermediate goods. ''
+
+Production requires 
+labor, structures, and materials from all sectors.
+
+``TFP of an intermediate good is composed of two terms, 
+a time-varying sectoral-regional component $\left(A_t^{n j}\right)$, 
+which is common to all varieties in a region and sector, and a 
+variety-specific component $\left(z^{n j}\right)$.''
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Intermediate Good Production}
+
+\paragraph{Production Function}
+
+We assume that the production function is CRS and Cobb-Douglas.
+
+The output for a producer of an intermediate good is given by:
+
+\begin{align}
+    q_t^{n j}=z^{n j}\left(A_t^{n j}\left(h_t^{n j}\right)^{\xi^n}\left(l_t^{n j}\right)^{1-\xi^n}\right)^{\gamma^{n j}} \prod_{k=1}^J\left(M_t^{n j, n k}\right)^{\gamma^{n j, n k}}
+\end{align}
+
+where
+
+\begin{itemize}
+    \item $l_t^{n j}$: Labor inputs in location $n$ and sector $j$ at time $t$
+    \item $h_t^{n j}$: Structure inputs in location $n$ and sector $j$ at time $t$
+    \item $M_t^{n j, n k}$: Material 
+        inputs from sector $k$ demanded by a firm in sector $j$ and region $n$ at time $t$
+    \item $\gamma^{n j} \geq 0$: Share of value-added in 
+        the production of sector $j$ and region $n$
+        \begin{itemize}
+            \item This comes from $\gamma^{n j} + \sum_{k=1}^J \gamma^{n j, n k}=1$ and the Cobb-Douglas form, 
+                so the value-add share is the share that comes from 
+                the non-material inputs.
+        \end{itemize}
+    \item $\gamma^{n, n k} \geq 0$: The share of materials from sector $k$ in 
+        the production of sector $j$ and region $n$.
+    \item $\xi^n$: The share of structures in value-add.
+\end{itemize}
+
+``Material inputs are goods from sector $k$
+produced in the same region $n$.''
+
+\paragraph{Unit Price of an Input Bundle}
+
+The unit price of an input bundle is given by:
+
+\begin{align}
+    x_t^{n j}=B^{n j}\left(\left(r_t^{n j}\right)^{\xi^n}\left(w_t^{n j}\right)^{1-\xi^n}\right)^{\gamma^{n j}} \prod_{k=1}^J\left(P_t^{n k}\right)^{\gamma^{n j, n k}}
+\end{align}
+
+where $B^{n j}$ is a constant.
+
+Then the unit cost of a given intermediate good is given by:
+
+\begin{align}
+    \frac{x_t^{n j}}{z^{n j}\left(A_t^{n j}\right)^{\gamma^{n j}}}
+\end{align}
+
+since the cost for one unit of the inputs is $x_t^{n j}$ and
+the productivity of the variety, $z^{n j}\left(A_t^{n j}\right)^{\gamma^{n j}}$,
+scales the amount you can produce with the relevant input.
+
+\paragraph{Price of Good $j$ in Region $n$}
+
+We take
+
+\begin{itemize}
+    \item $\boldsymbol{\kappa}_t^{n j, i j}$: Iceberg trade costs between market location $n$ and $i$ in 
+    sector $j$.
+    \begin{itemize}
+        \item Delivering one unit of good from market $n$ to $i$ 
+            requires producing $\boldsymbol{\kappa}_t^{n j, i j} \geq  1$ units of the good.
+        \item If a good is nontradable, then $\kappa=\infty$.
+    \end{itemize}
+\end{itemize}
+
+``Competition implies that the 
+price paid for a particular variety of good $j$ in region $n$
+is given by the minimum cost across regions, 
+taking into account trade costs, 
+and where the vector of productivity 
+draws received by the different regions is ''
+
+\begin{align}
+    z^j=\left(z^{1 j}, z^{2 j}, \ldots, z^{N j}\right)
+\end{align}
+
+``That is, using $z^j$ to index varieties:''
+
+\begin{align}
+    p_t^{n j}\left(z^j\right)=\min _i\left\{\frac{\kappa_t^{n j, i j} x_t^{i j}}{z^{i j}\left(A_t^{i j}\right)^{\gamma^{i j}}}\right\}
+\end{align}
+
+\subsubsection{Local Sectoral Aggregate Goods}
+
+\paragraph{Quantity of Aggregate Sectoral Goods}
+
+``Intermediate goods demanded 
+from sector $j$ 
+and from all regions are aggregated 
+into a local sectoral good denoted by $Q$
+and that can be thought of as a bundle of 
+goods purchased from different regions.''
+
+Take 
+
+\begin{itemize}
+    \item $Q_t^{n j}$: The quantity produced of aggregate sectoral 
+        goods $j$ in region $n$ 
+        \begin{align}
+            Q_t^{n j}=\left(\int\left(\tilde{q}_t^{n j}\left(z^j\right)\right)^{1-1 / \eta^{n j}} d \phi^j\left(z^j\right)\right)^{\eta^{n j} /\left(\eta^{n j}-1\right)}
+        \end{align}
+    \item $\phi^j\left(z^j\right)$: The joint distribution over the vector $z^j$.
+        \begin{align}
+            \phi^j\left(z^j\right)=\exp \left\{-\sum_{n=1}^N\left(z^{n j}\right)^{-\theta^j}\right\}
+        \end{align}
+        \begin{itemize}
+            \item $\phi^{n j}\left(z^{n j}\right)$: The marginal distribution of $z^{n j}$.
+                \begin{align}
+                    \phi^{n j}\left(z^{n j}\right)=\exp \left\{-\left(z^{n j}\right)^{-\theta^j}\right\}
+                \end{align}
+        \end{itemize}
+    \item $\tilde{q}_t^{n j}\left(z^j\right)$: The 
+        quantity demanded of an intermediate good
+        of a given variety from the lowest-cost supplier.
+\end{itemize}
+
+Note that 
+``there are no fixed costs 
+or barriers to entry and exit 
+in the production of intermediate and sectoral goods. ''
+Moreover, ``[c]ompetitive behavior 
+implies zero profit at all times.''
+
+\paragraph{Price of Aggregate Sectoral Goods}
+
+Given properties of the Fréchet distribution,
+the price of the aggregate sectoral good is given by:
+
+\begin{align}
+    P_t^{n j}=\Gamma^{n j}\left(\sum_{i=1}^N\left(x_t^{i j} \kappa_t^{n j, i j}\right)^{-\theta^j}\left(A_t^{i j}\right)^{\theta^j \gamma^{i j}}\right)^{-1 / \theta^j}
+\end{align}
+
+where $\Gamma^{n j}$ is a constant
+and we assume that $1+\theta^j>\eta^{n j}$.
+
+\paragraph{Share of Total Expenditure in Market $nj$ on Goods $j$ from Market $i$}
+
+For the share of total expenditure in market $nj$ on goods $j$ from market $i$, we 
+get the expression:
+
+\begin{align}
+    \pi_t^{n j, i j}=\frac{\left(x_t^{i j} \kappa_t^{n j, i j}\right)^{-\theta^j}\left(A_t^{i j}\right)^{\theta^j \gamma^{i j}}}{\sum_{m=1}^N\left(x_t^{m j} \kappa_t^{n j, m j}\right)^{-\theta^j}\left(A_t^{m j}\right)^{\theta^j \gamma^{m j}}}
+\end{align}
+
+``This equilibrium condition resembles a gravity equation.''
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Market Clearing and Unbalanced Trade}
+
+\paragraph{Global Portfolio and Rent}
+
+We assume a mass 1 of rentiers in each region who 
+own the local structures, rent them to firms, send their 
+rents to a global portfolio, receive a constant
+share $\iota^n$ from the global portfolio, 
+with $\sum_{n=1}^N \iota^n=1$,
+and cannot re-locate.
+
+The differences between the 
+remittances and the income 
+rentiers receive from the global portfolio
+generate imbalances, ``which changes in magnitude 
+as the rental prices change.''
+
+The imbalance is given by:
+
+\begin{align}
+    \sum_{k=1}^J r_t^{i k} H^{i k}-\iota^n \chi_t
+\end{align}
+
+where 
+
+\begin{align}
+    \chi_t=\sum_{i=1}^N \sum_{k=1}^J r_t^{i k} H^{i k}
+\end{align}
+
+is the total revenue in the global portfolio.
+
+\paragraph{Total Expenditure on Goods $j$ in Region $n$}
+
+Let $X_t^{n j}$ be the total expenditure on sector $j$ good in region $n$. Then, goods market clearing implies
+
+\begin{align}
+    X_t^{n j}=\underbrace{\sum_{k=1}^J \gamma^{n k, n j} \sum_{i=1}^N \pi_t^{i k, n k} X_t^{i k}}_{\parbox[t]{4cm}{\raggedright \footnotesize \centering Value of total demand for $nj$ market goods used as materials}}+
+        \underbrace{\alpha^j\left(\sum_{k=1}^J w_t^{n k} L_t^{n k}+\iota^n \chi_t\right)}_{\parbox[t]{2cm}{\raggedright \footnotesize \centering Value of final demand in region $n$}}
+\end{align}
+
+\paragraph{Labor Expression}
+
+``Labor market clearing in region $n$ and sector $j$ 
+is''
+
+\begin{align}
+    L_t^{n j}=\underbrace{\frac{1}{w_t^{n j}} \underbrace{\underbrace{\gamma^{n j}}_{\parbox[t]{1cm}{\raggedright \footnotesize \centering Value-added share}}\underbrace{\left(1-\xi^n\right)}_{\parbox[t]{1.8cm}{\raggedright \footnotesize \centering Share of value-add paid to labor}} \underbrace{\sum_{i=1}^N \pi_t^{i j, n j} X_t^{i j}}_{\parbox[t]{2cm}{\raggedright \footnotesize \centering Total expenditure from $ij$ market on $nj$ goods}}}_{\parbox[t]{2cm}{\raggedright \footnotesize \centering Total wage bill in $nj$}}}_{\parbox[t]{2cm}{\raggedright \footnotesize \centering Labor quantity demanded in $nj$}}
+\end{align}
+
+``while the labor market clearing for structures in region $n$ and sector $j$ must satisfy''
+
+
+\begin{align}
+    H^{n j}=\frac{\gamma^{n j} \xi^n}{r_t^{n j}} \sum_{i=1}^N \pi_t^{i j, n j} X_t^{i j}
+\end{align}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Equilibrium}
+
+\subsubsection{Fundamentals and Parameters}
+
+``The endogenous state of the economy 
+at any moment in time is given by the distribution of labor 
+across all markets $L_t$.''
+
+The fundamentals of the economy are deterministic and include 
+
+\begin{itemize}
+    \item $A_t=\left\{A_t^{n j}\right\}_{n=1, j=1}^{N, J}$: Aggregate sectoral regional productivities
+    \item $\boldsymbol{\kappa}_t=\left\{\boldsymbol{\kappa}_t^{n j, i j}\right\}_{n=1, i=1, j=1}^{N, N, J}$: Bilateral trade costs 
+    \item $Y=\left\{\tau^{n j, i k}\right\}_{n=1, j=0, i=1, k=0}^{N, J, J, N}$: Labor re-location costs
+    \item $H=\left\{H^{n j}\right\}_{n=1, j=1}^{N, J}$: Stock of land and structures across markets
+    \item $b=\left\{b^n\right\}_{n=1}^N$: Home production across regions
+\end{itemize}
+
+Time-varying fundamentals are denoted by
+
+\begin{align}
+    \Theta_t \equiv\left(A_t, \kappa_t\right)
+\end{align}
+
+Constant fundamentals are denoted by
+
+\begin{align}
+    \bar{\Theta} \equiv(\Upsilon, H, b)
+\end{align}
+
+The parameters in the economy, assumed constant throughout the paper, 
+are given by:
+
+\begin{itemize}
+    \item $\gamma^{n j}$: Value-added shares
+    \item $\left(1-\xi^n\right)$: Labor-share in value-added
+    \item $\left(\gamma^{n k, n j}\right)$: Input-output coefficients
+    \item $\iota^n$: Portfolio shares
+    \item $\alpha^j$: Final consumption expenditure shares
+    \item $\beta$: The discount factor
+    \item $\theta$: Trade elasticities
+    \item $\nu$: Migration elasticity
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Equilibrium Definition}
+
+\paragraph{Temporary Equilibrium}
+
+
+\begin{definition}[Temporary Equilibrium] 
+    
+    Given $\left(L_t, \boldsymbol{\Theta}_t, \overline{\boldsymbol{\Theta}}\right)$, a temporary equilibrium is a vector of wages $w\left(L_t, \boldsymbol{\Theta}_t\right.$, $\bar{\Theta})$ that 
+    satisfies the equilibrium conditions of the static subproblem
+    characterized by:
+
+    \begin{align}
+        x_t^{n j}=&B^{n j}\left(\left(r_t^{n j}\right)^{\xi^n}\left(w_t^{n j}\right)^{1-\xi^n}\right)^{\gamma^{n j}} \prod_{k=1}^J\left(P_t^{n k}\right)^{\gamma^{n j, n k}} \\
+        P_t^{n j}=&\Gamma^{n j}\left(\sum_{i=1}^N\left(x_t^{i j} \kappa_t^{n j, i j}\right)^{-\theta^j}\left(A_t^{i j}\right)^{\theta^j \gamma^{i j}}\right)^{-1 / \theta^j} \\
+        \pi_t^{n j, i j}=&\frac{\left(x_t^{i j} \kappa_t^{n j, i j}\right)^{-\theta^j}\left(A_t^{i j}\right)^{\theta^j \gamma^{i j}}}{\sum_{m=1}^N\left(x_t^{m j} \kappa_t^{n j, m j}\right)^{-\theta^j}\left(A_t^{m j}\right)^{\theta^j \gamma^{m j}}} \\
+        X_t^{n j}=&\sum_{k=1}^J \gamma^{n k, n j} \sum_{i=1}^N \pi_t^{i k, n k} X_t^{i k}+\alpha^j\left(\sum_{k=1}^J w_t^{n k} L_t^{n k}+\iota^n \chi_t\right) \\
+        L_t^{n j}=&\frac{\gamma^{n j}\left(1-\xi^n\right)}{w_t^{n j}} \sum_{i=1}^N \pi_t^{i j, n j} X_t^{i j} \\
+        H^{n j}=&\frac{\gamma^{n j} \xi^n}{r_t^{n j}} \sum_{i=1}^N \pi_t^{i j, n j} X_t^{i j}
+    \end{align}
+
+\end{definition}
+
+``The temporary equilibrium of our model is the solution 
+to a static multicountry interregional trade model.''
+
+We can then express real wages as:
+
+\begin{align}
+    \omega^{n j}\left(L_t, \Theta_t, \bar{\Theta}\right)=w_t^{n j} / P_t^n
+\end{align}
+
+\paragraph{Sequential Competitive Equilibrium}
+
+Consider
+
+\begin{itemize}
+    \item $\mu_t=\left\{\mu_t^{n j, i k}\right\}_{n=1, j=0, i=1, k=0}^{N, J, N, J}$: The migration shares
+    \item $V_t=\left\{V_t^{n j}\right\}_{n=1, j=0}^{N, J}$: Lifetime utilities
+\end{itemize}
+
+\begin{definition}[Sequential Competitive Equilibrium]
+    
+    Given $\left(L_0,\left\{\Theta_t\right\}_{t=0}^{\infty}, \bar{\Theta}\right)$, 
+    a sequential competitive equilibrium of the model is a sequence of 
+    $\left\{L_t, \mu_t, V_t, w\left(L_t, \Theta_t, \bar{\Theta}\right)\right\}_{t=0}^{\infty}$ 
+    that solves equilibrium conditions 
+    
+    \begin{align}
+        V_t^{n j}=&U\left(C_t^{n j}\right)+\nu \log \left(\sum_{i=1}^N \sum_{k=0}^J \exp \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}\right)^{1 / \nu}\right) \\
+        \mu_t^{n j, i k}=&\frac{\exp \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}\right)^{1 / \nu}}{\sum_{m=1}^N \sum_{h=0}^J \exp \left(\beta V_{t+1}^{m h}-\tau^{n j, m h}\right)^{1 / \nu}} \\
+        L_{t+1}^{n j}=&\sum_{i=1}^N \sum_{k=0}^J \mu_t^{i k, n j} L_t^{i k}
+    \end{align}
+
+    and the 
+    temporary equilibrium at each $t$.
+    
+\end{definition}
+
+\paragraph{Stationary Equilibrium}
+
+\begin{definition}[Stationary Equilibrium] 
+    
+    A stationary equilibrium of the model is a sequential competitive 
+    equilibrium such that 
+    
+    \begin{align}
+        \left\{L_t, \mu_t, V_t, w\left(L_t, \Theta_t, \bar{\Theta}\right)\right\}_{t-0}^{\infty}
+    \end{align}
+    
+    are constant for all $t$.
+
+\end{definition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dynamic Hat Algebra}
+
+\subsection{Solving the Model}
+
+We aim to study the general equilibrium implications 
+of a change in fundamentals relative to a baseline economy.
+
+\begin{definition}[Baseline Economy] 
+    The baseline economy is the allocation 
+    
+    \begin{align}
+        \left\{L_t, \mu_{t-1}, \pi_t, X_t\right\}_{t=0}^{\infty}
+    \end{align}
+
+    corresponding to the sequence of fundamentals $\left\{\Theta_t\right\}_{t=0}^{\infty}$ and to $\bar{\Theta}$.
+\end{definition}
+
+We now consider how to solve for the baseline economy in 
+time differences.
+
+We use the notation:
+
+\begin{itemize}
+    \item $\dot{y}_{t+1}$: The proportional change in any scalar or 
+        vector between periods $t$ and $t+1$.
+        \begin{align}
+            \dot{y}_{t+1} \equiv\left(y_{t+1}^1 / y_t^1, y_{t+1}^2 / y_t^2, \ldots\right)
+        \end{align}
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Temporary Equilibrium of the Baseline Economy After Changing Employment and Fundamentals}
+
+First, we'll consider how to solve for a temporary equilibrium
+of the baseline economy at $t+1$ after changing employment, $\dot{L}_{t+1}$, 
+and fundamentals, $\dot{\Theta}_{t+1}$ -- which we can do without 
+estimates of $\Theta_t$ or $\bar{\Theta}$.
+
+
+\begin{proposition} 
+    Given the allocation of the temporary equilibrium at 
+    $t,\left\{L_t, \pi_t, X_t\right\}$, the solution to the temporary 
+    equilibrium at $t+1$ for a given change in $\dot{L}_{t+1}$ and 
+    $\dot{\Theta}_{t+1}$ does not require information on the level 
+    of fundamentals at $t, \Theta_t$, or $\bar{\Theta}$. In particular, 
+    it is obtained as the solution to the following system 
+    of nonlinear equations: 
+
+    \begin{align}
+        \dot{x}_{t+1}^{n j}=&\left(\dot{L}_{t+1}^{n j}\right)^{\gamma^{n j} \xi^n}\left(\dot{w}_{t+1}^{n j}\right)^{\gamma^{n j}} \prod_{k=1}^J\left(\dot{P}_{t+1}^{n k}\right)^{\gamma^{n j, n k}} \\
+        \dot{P}_{t+1}^{n j}=&\left(\sum_{i=1}^N \pi_t^{n j, i j}\left(\dot{x}_{t+1}^{i j} \dot{\kappa}_{t+1}^{n j, i j}\right)^{-\theta^j}\left(\dot{A}_{t+1}^{i j}\right)^{\theta^j \gamma^{i j}}\right)^{-1 / \theta^j} \\
+        \pi_{t+1}^{n j, i j}=&\pi_t^{n j, i j}\left(\frac{\dot{x}_{t+1}^{i j} \dot{\kappa}_{t+1}^{n j, i j}}{\dot{P}_{t+1}^{n j}}\right)^{-\theta^j}\left(\dot{A}_{t+1}^{i j}\right)^{\theta^j \gamma^{i j}} \\
+        X_{t+1}^{n j}=&\sum_{k=1}^J \gamma^{n k, n j} \sum_{i=1}^N \pi_{t+1}^{i k, n k} X_{t+1}^{i k}+\alpha^j\left(\sum_{k=1}^J \dot{w}_{t+1}^{n k} \dot{L}_{t+1}^{n k} w_t^{n k} L_t^{n k}+\iota^n \chi_{t+1}\right) \\
+        \dot{w}_{t+1}^{n j} \dot{L}_{t+1}^{n j} w_t^{n j} L_t^{n j}=&\gamma^{n j}\left(1-\xi^n\right) \sum_{i=1}^N \pi_{t+1}^{i j, n j} X_{t+1}^{i j} \\
+        \text { where } \quad \chi_{t+1}=&\sum_{i=1}^N \sum_{k=1}^J \frac{\xi^i}{1-\xi^i} \dot{w}_{t+1}^{i k} \dot{L}_{t+1}^{i k} w_t^{i k} L_t^{i k}
+    \end{align}
+
+\end{proposition}
+
+This proposition highlights that 
+we don't need to know the level of fundamentals
+to solve for the temporary equilibrium at $t+1$; we can solve 
+with only the changes in employment and fundamentals.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Solving for the Sequential Equilibrium}
+
+Now, we'll show that ``given 
+an allocation at $t=0$, $\left\{L_0, \pi_0, X_0\right\}$, 
+the matrix of gross migration flows at $t = -1$, $\mu_{-1}$,
+and a sequence of changes in fundamentals, one can solve for the 
+sequential equilibrium in time differences 
+without needing to estimate the levels of fundamentals.''
+
+\begin{definition}[Converging Sequence of Changes in Fundamentals] 
+    A converging sequence of changes in fundamentals is such that $\lim _{t \rightarrow \infty} \dot{\Theta}_t=1$
+\end{definition}
+
+\begin{notes}[Assumption]
+    Agents have logarithmic preferences, $U\left(C_t^{n j}\right) \equiv \log \left(C_t^{n j}\right)$.
+\end{notes}
+
+We denote
+
+\begin{align}
+    u_t^{n j} \equiv \exp \left(V_t^{n j}\right)
+\end{align}
+
+and 
+
+\begin{itemize}
+    \item $\dot{\omega}^{n j}\left(\dot{L}_{t+1}, \dot{\Theta}_{t+1}\right)$: (For all 
+    $n$ and $j$) the equilibrium real wages in time differences 
+    as functions of the change
+    in labor $\dot{L}_{t+1}$ and time-varying fundamentals $\dot{\Theta}_{t+1}$.
+\end{itemize}
+
+
+``Namely, $\dot{\omega}^{n j}\left(\dot{L}_{t+1}, \dot{\Theta}_{t+1}\right)$ is the solution
+to the system in Proposition 1.''
+
+\begin{proposition} 
+    Conditional on an initial allocation of the economy, 
+    $\left(L_0, \pi_0, X_0, \mu_{-1}\right)$, given an anticipated 
+    convergent sequence of changes in fundamentals, 
+    $\left\{\dot{\Theta}_t\right\}_{t=1}^{\infty}$, the solution to the 
+    sequential equilibrium in time differences does not require 
+    information on the level of the fundamentals 
+    $\left\{\Theta_t\right\}_{t=0}^{\infty}$ or $\bar{\Theta}$ and solves 
+    the following system of nonlinear equations: 
+
+    \begin{align}
+        \mu_{t+1}^{n j, i k}=&\frac{\mu_t^{n j, i k}\left(\dot{u}_{t+2}^{i k}\right)^{\beta / \nu}}{\sum_{m=1}^N \sum_{h=0}^J \mu_t^{n j, m h}\left(\dot{u}_{t+2}^{m h}\right)^{\beta / \nu}}, \\
+        \dot{u}_{t+1}^{n j}=&\dot{\omega}^{n j}\left(\dot{L}_{t+1}, \dot{\Theta}_{t+1}\right)\left(\sum_{i=1}^N \sum_{k=0}^J \mu_t^{n j, i k}\left(\dot{u}_{t+2}^{i k}\right)^{\beta / \nu}\right)^\nu \\
+        L_{t+1}^{n j}=&\sum_{i=1}^N \sum_{k=0}^J \mu_t^{i k, n j} L_t^{i k}
+    \end{align}
+
+    for all $j, n, i$, and $k$ at each $t$, where $\left\{\dot{\omega}^{n j}\left(\dot{L}_t, \dot{\Theta}_t\right)\right\}_{n=1, j=0, t=1}^{N, J, \infty}$ is the solution to the temporary equilibrium given $\left\{\dot{L}_t, \dot{\Theta}_t\right\}_{t=1}^{\infty}$.
+
+\end{proposition}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Solving for Counterfactuals}
+
+In addition to solving for the sequential equilibrium, we are 
+interested in computing counterfactuals, 
+by which we mean the 
+``study of how allocations change across 
+space and time, relative to a baseline 
+economy, given a new sequence of fundamentals, 
+which we denote by $\left\{\Theta_t^{\prime}\right\}_{t=1}^{\infty}$.''
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Derivations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Derivation of $V_t^{n j}$}
+\label{sec:V_t_nj_exp}
+
+This is a derivation of \autoref{eq:V_t_nj_exp}.
+
+As a quick starting point, note that we know the 
+value of $U\left(C_t^{n j}\right)$, so 
+the uncertainty is over subsequent periods:
+
+\begin{align}
+    V_t^{n j} \equiv &\mathbb{E}\left[\mathrm{v}_t^{n j}\right] \\
+    = &\mathbb{E}\left[U\left(C_t^{n j}\right)+\max _{\{i, k\}_{i=1, k=0}^{N, J}}\left\{\beta E\left[\mathrm{v}_{t+1}^{i k}\right]-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right\}\right] \\
+    = &U\left(C_t^{n j}\right)+ \mathbb{E}\left[\max _{\{i, k\}_{i=1, k=0}^{N, J}}\left\{\beta E\left[\mathrm{v}_{t+1}^{i k}\right]-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right\}\right]
+\end{align}
+
+Denote the uncertain term as:
+
+\begin{align}
+    \Phi_t^{n j} \equiv \mathbb{E}\left[\max _{\{i, k\}_{i=1, k=0}^{N, J}}\left\{\beta E\left[\mathrm{v}_{t+1}^{i k}\right]-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right\}\right]
+\end{align}
+
+Recall that we assumed that the idiosyncratic shock $\epsilon$ is i.i.d. over time
+and distributed Type-I Extreme Value with zero mean. Then, the 
+CDF of $\epsilon$ is:
+
+\begin{align}
+    F(\epsilon)=\exp (-\exp (-\epsilon-\bar{\gamma}))
+\end{align}
+
+where 
+
+\begin{align}
+    \bar{\gamma} \equiv \int_{-\infty}^{\infty} x \exp (-x-\exp (-x)) d x
+\end{align}
+
+is Euler's constant and 
+
+\begin{align}
+    f(\epsilon)=\partial F / \partial \epsilon
+\end{align}
+
+Denote
+
+\begin{align}
+    \bar{\epsilon}_t^{i k, m h} \equiv \frac{\beta\left(V_{t+1}^{i k}-V_{t+1}^{m h}\right)-\left(\tau^{n j, i k}-\tau^{n j, m h}\right)}{\nu} \label{eq:bar_epsilon_exp}
+\end{align}
+
+Then notice that:
+
+\begin{align}
+    &\Phi_t^{n j} \\
+    \equiv &\mathbb{E}\left[\max _{\{i, k\}_{i=1, k=0}^{N, J}}\left\{\beta E\left[\mathrm{v}_{t+1}^{i k}\right]-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right\}\right] \\
+    = &\mathbb{E}\left[\max _{\{i, k\}_{i=1, k=0}^{N, J}} \left\{ \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \right\}\right] && \text{by \eqref{eq:V_t_nj_init}} \\
+    = &\mathbb{E}\left[ \sum_{i = 1}^N \sum_{k = 0}^J \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \mathbf{1}\left\{ \underset{{\{m, h\}_{m=1, h=0}^{N, J}}}{\text{argmax}} \left\{ \beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} \right\} = i k \right\} \right] \\
+    = &\mathbb{E}\left[ \sum_{i = 1}^N \sum_{k = 0}^J \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} \mathbf{1}\left\{ \beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} < \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \right\} \right] \\
+    = &\sum_{i=1}^N \sum_{k=0}^J \mathbb{E}\left[ \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} \mathbf{1}\left\{ \beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} < \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \right\} \right] \\
+    = &\sum_{i=1}^N \sum_{k=0}^J \mathbb{E}\left[ \mathbb{E} \left[ \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} \mathbf{1}\left\{ \beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} < \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \right\} \mid \epsilon_t^{i k} \right] \right] && \text{by LIE} \\
+    = &\sum_{i=1}^N \sum_{k=0}^J \mathbb{E}\left[ \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} \mathbb{E} \left[ \mathbf{1}\left\{ \beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} < \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \right\} \mid \epsilon_t^{i k} \right] \right]  && \text{by iid}\\
+    = &\sum_{i=1}^N \sum_{k=0}^J \mathbb{E}\left[ \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} \Pr \left(\beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h} < \beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \mid \epsilon_t^{i k} \right) \right] && \parbox[t]{1.5cm}{\raggedright binary variable property}
+\end{align}
+
+Now, notice that 
+
+\begin{align}
+    &\Pr\left(\beta V_{t+1}^{m h}-\tau^{n j, m h}+\nu \epsilon_t^{m h}<\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k} \mid \epsilon_t^{i k}\right) \\
+    = &\Pr\left(\epsilon_t^{m h} < \epsilon_t^{i k}+\frac{\beta V_{t+1}^{i k}-\tau^{n j, i k}-\beta V_{t+1}^{m h}+\tau^{n j, m h}}{\nu} \mid \epsilon_t^{i k}\right) \\
+    = &\Pr\left(\epsilon_t^{m h} < \epsilon_t^{i k}+\bar{\epsilon}_t^{i k, m h} \mid \epsilon_t^{i k}\right) && \text{by \eqref{eq:bar_epsilon_exp}} \\
+    = &F\left(\epsilon_t^{i k}+\bar{\epsilon}_t^{i k, m h}\right) \\
+\end{align}
+
+Thus,
+
+\begin{align}
+    \Phi_t^{n j} = &\sum_{i=1}^N \sum_{k=0}^J \mathbb{E}\left[ \left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \prod_{m h \neq i k} F\left(\epsilon_t^{i k}+\bar{\epsilon}_t^{i k, m h}\right) \right] \\
+     = &\sum_{i=1}^N \sum_{k=0}^J \int_{-\infty}^{\infty}\left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) f\left(\epsilon_t^{i k}\right) \prod_{m h \neq i k} F\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}\right) d \epsilon_t^{i k}
+\end{align}
+
+From there, we can note that
+
+\begin{align}
+    f\left(\epsilon_t^{i k}\right) = &\exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left( -\exp \left( - \epsilon_t^{i k} - \bar{\gamma} \right) \right) \\
+    F\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}\right)= &\exp \left[-\exp \left(-\left[\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}+\bar{\gamma}\right]\right)\right]
+\end{align}
+
+Thus,
+
+\begin{align}
+    &f\left(\epsilon_t^{i k}\right) \prod_{m h \neq i k} F\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}\right) \\
+    = &\exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left( -\exp \left( - \epsilon_t^{i k} - \bar{\gamma} \right) \right)
+        \exp \left[-\sum_{(m, h) \neq(i, k)} \exp \left(-\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}+\bar{\gamma}\right)\right)\right] \\
+    = & \exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left[ -\exp \left( - \epsilon_t^{i k} - \bar{\gamma} \right) - \sum_{(m, h) \neq(i, k)} \exp \left(-\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}+\bar{\gamma}\right)\right) \right] \\
+    = & \exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left[  - \sum_{m=1}^N \sum_{h=0}^J \exp \left( -\bar{\epsilon}_t^{i k, m h}-\epsilon_t^{i k}-\bar{\gamma} \right) \right] && \parbox[t]{4cm}{\raggedright since $\bar{\epsilon}_t^{i k, i k} = 0$} \\
+    = & \exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left[ - \exp(-\epsilon_t^{i k} - \bar{\gamma}) \sum_{m=1}^N \sum_{h=0}^J \exp \left( -\bar{\epsilon}_t^{i k, m h} \right) \right] 
+\end{align}
+
+Thus,
+
+\begin{align}
+    &\Phi_t^{n j} \\
+    =&\sum_{i=1}^N \sum_{k=0}^J \int_{-\infty}^{\infty}\left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) f\left(\epsilon_t^{i k}\right) \prod_{m h \neq i k} F\left(\bar{\epsilon}_t^{i k, m h}+\epsilon_t^{i k}\right) d \epsilon_t^{i k} \\
+    = &\sum_{i=1}^N \sum_{k=0}^J \int_{-\infty}^{\infty}\left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu \epsilon_t^{i k}\right) \exp ( - \epsilon_t^{i k} - \bar{\gamma}) \exp \left[ - \exp(-\epsilon_t^{i k} - \bar{\gamma}) \sum_{m=1}^N \sum_{h=0}^J \exp \left( -\bar{\epsilon}_t^{i k, m h} \right) \right] d \epsilon_t^{i k}
+\end{align}
+
+Denote:
+
+\begin{align}
+    \lambda_t^{i k} &\equiv \log \sum_{m=1}^N \sum_{h=0}^J \exp \left(-\bar{\epsilon}_t^{i k, m h}\right) \\
+    \zeta_t^{i k} &\equiv \epsilon_t^{i k}+\bar{\gamma}
+\end{align}
+
+\begin{questions}[Break]
+    Putting this derivation on pause here. (The below lines 
+    are directly from the paper.)
+\end{questions}
+
+Then through a change of variables, we have:
+
+\begin{align}
+    \Phi_t^{n j}=\sum_{i=1}^N \sum_{k=0}^J \int_{-\infty}^{\infty}\left(\beta V_{t+1}^{i k}-\tau^{n j i k}+\nu\left(\zeta_t^{i k}-\bar{\gamma}\right)\right) \exp \left(-\zeta_t^{i k}-\exp \left(-\left(\zeta_t^{i k}-\lambda_t^{i k}\right)\right)\right) d \zeta_t^{i k}
+\end{align}
+
+Consider an additional change of variables using:
+
+\begin{align}
+    \tilde{y}_t^{i k}=\zeta_t^{i k}-\lambda_t^{i k}
+\end{align}
+
+Then we obtain:
+
+\begin{align}
+    \Phi_t^{n j}=\sum_{i=1}^N \sum_{k=0}^J \exp \left(-\lambda_t^{i k}\right) \left(\left(\beta V_{t+1}^{i k}-\tau^{n j, i k}+\nu\left(\lambda_t^{i k}-\bar{\gamma}\right)\right)+\nu \int_{-\infty}^{\infty} \tilde{y}_t^{i k} \exp \left(-\tilde{y}_t^{i k}-\exp \left(-\tilde{y}_t^{i k}\right)\right) d \tilde{y}_t^{i k}\right)
+\end{align}
+
+
+\end{document}

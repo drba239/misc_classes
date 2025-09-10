@@ -1,0 +1,32 @@
+\contentsline {section}{\numberline {1}Terms}{1}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Model Section Terms}{1}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Dynamic Hat Algebra Section Terms}{4}{subsection.1.2}%
+\contentsline {section}{\numberline {2}The Model}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Initial Setup}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Household Problem}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Production}{7}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Intermediate Good Production}{7}{subsubsection.2.3.1}%
+\contentsline {paragraph}{\numberline {2.3.1.1}Production Function}{7}{paragraph.2.3.1.1}%
+\contentsline {paragraph}{\numberline {2.3.1.2}Unit Price of an Input Bundle}{8}{paragraph.2.3.1.2}%
+\contentsline {paragraph}{\numberline {2.3.1.3}Price of Good $j$ in Region $n$}{9}{paragraph.2.3.1.3}%
+\contentsline {subsubsection}{\numberline {2.3.2}Local Sectoral Aggregate Goods}{9}{subsubsection.2.3.2}%
+\contentsline {paragraph}{\numberline {2.3.2.1}Quantity of Aggregate Sectoral Goods}{9}{paragraph.2.3.2.1}%
+\contentsline {paragraph}{\numberline {2.3.2.2}Price of Aggregate Sectoral Goods}{10}{paragraph.2.3.2.2}%
+\contentsline {paragraph}{\numberline {2.3.2.3}Share of Total Expenditure in Market $nj$ on Goods $j$ from Market $i$}{10}{paragraph.2.3.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.3}Market Clearing and Unbalanced Trade}{10}{subsubsection.2.3.3}%
+\contentsline {paragraph}{\numberline {2.3.3.1}Global Portfolio and Rent}{10}{paragraph.2.3.3.1}%
+\contentsline {paragraph}{\numberline {2.3.3.2}Total Expenditure on Goods $j$ in Region $n$}{11}{paragraph.2.3.3.2}%
+\contentsline {paragraph}{\numberline {2.3.3.3}Labor Expression}{11}{paragraph.2.3.3.3}%
+\contentsline {subsection}{\numberline {2.4}Equilibrium}{11}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Fundamentals and Parameters}{11}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Equilibrium Definition}{12}{subsubsection.2.4.2}%
+\contentsline {paragraph}{\numberline {2.4.2.1}Temporary Equilibrium}{12}{paragraph.2.4.2.1}%
+\contentsline {paragraph}{\numberline {2.4.2.2}Sequential Competitive Equilibrium}{13}{paragraph.2.4.2.2}%
+\contentsline {paragraph}{\numberline {2.4.2.3}Stationary Equilibrium}{14}{paragraph.2.4.2.3}%
+\contentsline {section}{\numberline {3}Dynamic Hat Algebra}{14}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Solving the Model}{14}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Temporary Equilibrium of the Baseline Economy After Changing Employment and Fundamentals}{15}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Solving for the Sequential Equilibrium}{15}{subsubsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.2}Solving for Counterfactuals}{17}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Derivations}{17}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Derivation of $V_t^{n j}$}{17}{subsection.4.1}%

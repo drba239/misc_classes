@@ -1,0 +1,115 @@
+---
+title: "MH_sampler"
+output: pdf_document
+date: "2024-10-10"
+---
+
+```{r setup, include=FALSE}
+# Load knitr and set global chunk options
+knitr::opts_chunk$set(
+  fig.width = 5,   # Default figure width
+  fig.height = 4,  # Default figure height
+  fig.align = "center",  # Optional: center align all plots
+  out.width = "80%"  # Optional: control plot width as a percentage of text width
+)
+```
+
+```{r}
+library(tidyverse)
+library(fixest)
+library(modelsummary)
+#setwd("/Users/dylanbaker/Documents/GitHub/misc_classes/IO1/psets/pset1/code")
+```
+
+```{r}
+set.seed(123)  # For reproducibility
+
+# Parameters
+n_firms <- 100
+n_periods <- 50
+rho <- 0.8  # AR(1) process parameter
+gamma_sd <- 0.5  # Standard deviation for firm fixed effect gamma
+epsilon_sd <- 0.1  # Standard deviation for AR(1) shocks epsilon
+k_sd <- 0.1  # Standard deviation for capital k
+w_sd <- 0.5  # Standard deviation for log real wage w
+
+# Create empty data frame for the panel data
+panel_data <- data.frame(
+  firm_id = rep(1:n_firms, each = n_periods),
+  time = rep(1:n_periods, n_firms),
+  gamma = rep(rnorm(n_firms, mean = 0, sd = gamma_sd), each = n_periods)
+)
+
+# Initialize omega and epsilon
+panel_data$omega <- 0
+panel_data$epsilon <- rnorm(n_firms * n_periods, mean = 0, sd = epsilon_sd)
+
+# Create AR(1) process for omega
+for (i in 2:n_periods) {
+  panel_data$omega[panel_data$time == i] <- rho * panel_data$omega[panel_data$time == i - 1] + 
+                                             panel_data$epsilon[panel_data$time == i]
+}
+
+# Total Factor Productivity (TFP)
+panel_data$a <- panel_data$gamma + panel_data$omega
+
+# Capital (k), i.i.d across firms and time
+panel_data$k <- rnorm(n_firms * n_periods, mean = 0, sd = k_sd)
+
+# Log real wage rate (w), i.i.d across firms and time
+panel_data$w <- rnorm(n_firms * n_periods, mean = 0, sd = w_sd)
+
+# Get the log of 0.7
+ln_07 <- log(0.7)
+
+# Loop through the periods to calculate labor based on your equation
+panel_data$l <- NA  # Initialize labor column
+for (i in 2:n_periods) {
+  idx <- panel_data$time == i
+  idx_lag <- panel_data$time == i - 1
+  # Labor equation derived in Part A
+  panel_data$l[idx] <- panel_data$k[idx] + 
+    (10 / 3) * (ln_07 + panel_data$gamma[idx] + rho * panel_data$omega[idx_lag] - panel_data$w[idx])
+}
+
+# For the first period, we don't have a lag for omega, so set labor using a simplified version
+panel_data$l[panel_data$time == 1] <- panel_data$k[panel_data$time == 1] + 
+  (10 / 3) * (ln_07 + panel_data$gamma[panel_data$time == 1] - panel_data$w[panel_data$time == 1])
+
+# Production function: y_it = a_it + 0.7 l_it + 0.3 k_it (in logs)
+panel_data$y <- panel_data$a + 0.7 * panel_data$l + 0.3 * panel_data$k
+```
+
+```{r}
+# Fit the two models
+model_1 <- feols(y ~ l + k, data = panel_data)
+model_2 <- feols(y ~ l + k | firm_id, data = panel_data)
+
+# Generate the table using etable
+etable_output <- etable(list("Pooled OLS" = model_1, "Fixed Effects" = model_2), 
+                        tex = TRUE)
+
+# Save the output to a .tex file
+writeLines(etable_output, "../output/baseline_vs_fe_ols.tex")
+```
+
+```{r}
+# Fit the two models with w as an instrument for l
+# Model 1: Pooled OLS with IV
+model_1_iv <- feols(y ~ 1 + k | 0 | l ~ w, data = panel_data)
+model_1_iv
+
+# Model 2: Fixed Effects with IV
+# model_2_iv <- feols(y ~ k | firm_id | l ~ w, data = panel_data)
+# model_2_iv
+
+# Generate the table using etable
+etable_output2 <- etable(list("Pooled OLS (IV)" = model_1_iv), tex = TRUE)
+
+# Save the output to a .tex file
+writeLines(etable_output2, "../output/iv_reg.tex")
+```
+
+```{r}
+
+```

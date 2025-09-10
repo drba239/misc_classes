@@ -1,0 +1,553 @@
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{color}  % Allows for color customization
+\usepackage{enumitem}
+\usepackage{etoolbox}
+\usepackage{fancyhdr}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{pdflscape}
+\usepackage{placeins}
+\usepackage{multirow}
+\usepackage{tikz}
+\usepackage{xcolor}
+\setlength\parindent{0pt}
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
+
+\usepackage[listings,skins,breakable]{tcolorbox} % package for colored boxes
+
+
+
+
+\usepackage{subcaption}
+
+
+% Make it so that the bottom page of a 
+% book section doesn't have weird spacing
+\raggedbottom
+
+
+% Define custom colors
+% You can-redo these later, they're not being used 
+% for anything as of 5/12/24
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% You can-redo the lstlisting style later, it's not being used 
+% for anything as of 5/12/24
+
+% Define the lstlisting style
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+
+% Set the length of \parskip to add a line between paragraphs
+\setlength{\parskip}{1em}
+
+\usepackage{mathtools}
+\mathtoolsset{showonlyrefs=true}
+
+
+% Set the second level of itemize to use \circ as the bullet point
+\setlist[itemize,2]{label={$\circ$}}
+
+% Define symbols
+\DeclareMathSymbol{\Perp}{\mathrel}{symbols}{"3F}
+\newcommand\barbelow[1]{\stackunder[1.2pt]{$#1$}{\rule{.8ex}{.075ex}}}
+\newcommand{\succprec}{\mathrel{\mathpalette\succ@prec{\succ\prec}}}
+\newcommand{\precsucc}{\mathrel{\mathpalette\succ@prec{\prec\succ}}}
+
+
+\newcounter{example}[section] % Reset example counter at each new section
+\renewcommand{\theexample}{\thesection.\arabic{example}} % Format the example number as section.number
+
+\newenvironment{example}
+  {% Begin environment
+   \refstepcounter{example}% Step counter and allow for labeling
+   \noindent\textbf{Example \theexample.} % Display the example number
+  }
+  {% End environment
+   \par\noindent\hfill\textit{End of Example.}\par
+  }
+
+
+
+% deeper section command
+% This will let you go one level deeper than whatever section level you're on.
+\makeatletter
+\newcommand{\deepersection}[1]{%
+  \ifnum\value{subparagraph}>0
+    % Already at the deepest standard level (\subparagraph), cannot go deeper
+    \subparagraph{#1}
+  \else
+    \ifnum\value{paragraph}>0
+      \subparagraph{#1}
+    \else
+      \ifnum\value{subsubsection}>0
+        \paragraph{#1}
+      \else
+        \ifnum\value{subsection}>0
+          \subsubsection{#1}
+        \else
+          \ifnum\value{section}>0
+            \subsection{#1}
+          \else
+            \section{#1}
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
+\makeatother
+
+
+% same section command
+% This will let create a section at the same level as whatever section level you're on.
+\makeatletter
+\newcommand{\samesection}[1]{%
+  \ifnum\value{subparagraph}>0
+    \subparagraph{#1}
+  \else
+    \ifnum\value{paragraph}>0
+      \paragraph{#1}
+    \else
+      \ifnum\value{subsubsection}>0
+        \subsubsection{#1}
+      \else
+        \ifnum\value{subsection}>0
+          \subsection{#1}
+        \else
+          \ifnum\value{section}>0
+            \section{#1}
+          \else
+            % Default to section if outside any sectioning
+            \section{#1}
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
+\makeatother
+
+\makeatletter
+\newcommand{\shallowersection}[1]{%
+  \ifnum\value{subparagraph}>0
+    \paragraph{#1} % From subparagraph to paragraph
+  \else
+    \ifnum\value{paragraph}>0
+      \subsubsection{#1} % From paragraph to subsubsection
+    \else
+      \ifnum\value{subsubsection}>0
+        \subsection{#1} % From subsubsection to subsection
+      \else
+        \ifnum\value{subsection}>0
+          \section{#1} % From subsection to section
+        \else
+          \ifnum\value{section}>0
+            \chapter{#1} % Assuming a document class with chapters
+          \else
+            \section{#1} % Default to section if somehow higher than section
+          \fi
+        \fi
+      \fi
+    \fi
+  \fi
+}
+\makeatother
+
+
+
+\newcounter{problemcounter}
+\renewcommand{\theproblemcounter}{Q.\arabic{problemcounter}}
+
+% Define the problem environment
+\newenvironment{problem}[1][]{%
+  \refstepcounter{problemcounter}%
+  \if\relax\detokenize{#1}\relax
+    \tcolorbox[breakable, colback=red!10, colframe=red!50, fonttitle=\bfseries, title={Problem \theproblemcounter}, arc=5mm, boxrule=0.5mm]
+  \else
+    \tcolorbox[breakable, colback=red!10, colframe=red!50, fonttitle=\bfseries, title={Problem \theproblemcounter: #1}, arc=5mm, boxrule=0.5mm]
+    \addcontentsline{toc}{subsubsection}{\theproblemcounter: #1}%
+  \fi
+}{
+  \endtcolorbox
+}
+
+% Define a new counter for definitions
+\newcounter{definitioncounter}
+\renewcommand{\thedefinitioncounter}{D.\arabic{definitioncounter}}
+
+\newenvironment{definition}[1][]{%
+  \refstepcounter{definitioncounter}%
+  \if\relax\detokenize{#1}\relax
+    \tcolorbox[
+      breakable,
+      parbox=false, % Treat content normally regarding paragraphs
+      before upper={\parindent0pt \parskip7pt}, % No indentation and add space between paragraphs
+      colback=blue!10,
+      colframe=blue!50,
+      fonttitle=\bfseries,
+      title={Definition \thedefinitioncounter},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt, % Adjust vertical space before the box
+      after skip=10pt % Adjust vertical space after the box
+    ]
+  \else
+    \tcolorbox[
+      breakable,
+      parbox=false,
+      before upper={\parindent0pt \parskip7pt},
+      colback=blue!10,
+      colframe=blue!50,
+      fonttitle=\bfseries,
+      title={Definition \thedefinitioncounter: #1},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt,
+      after skip=10pt
+    ]
+  \fi
+}{
+  \endtcolorbox
+}
+
+
+% Define a new counter for theorems
+\newcounter{theoremcounter}
+\renewcommand{\thetheoremcounter}{T.\arabic{theoremcounter}}
+
+\newenvironment{theorem}[1][]{%
+  \refstepcounter{theoremcounter}%
+  \if\relax\detokenize{#1}\relax
+    \tcolorbox[
+      breakable,
+      parbox=false, % Treat content normally regarding paragraphs
+      before upper={\parindent0pt \parskip7pt}, % No indentation and add space between paragraphs
+      colback=green!10,
+      colframe=green!75!black,
+      fonttitle=\bfseries,
+      title={Theorem \thetheoremcounter},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt, % Adjust vertical space before the box
+      after skip=10pt % Adjust vertical space after the box
+    ]
+  \else
+    \tcolorbox[
+      breakable,
+      parbox=false,
+      before upper={\parindent0pt \parskip7pt},
+      colback=green!10,
+      colframe=green!75!black,
+      fonttitle=\bfseries,
+      title={Theorem \thetheoremcounter: #1},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt,
+      after skip=10pt
+    ]
+  \fi
+}{
+  \endtcolorbox
+}
+
+
+% Define a new counter for remarks
+\newcounter{remarkcounter}
+\renewcommand{\theremarkcounter}{R.\arabic{remarkcounter}}
+
+\newenvironment{remark}[1][]{%
+  \refstepcounter{remarkcounter}%
+  \if\relax\detokenize{#1}\relax
+    \tcolorbox[
+      breakable,
+      parbox=false, % Treat content normally regarding paragraphs
+      before upper={\parindent0pt \parskip7pt}, % No indentation and add space between paragraphs
+      colback=green!10,
+      colframe=green!75!black,
+      fonttitle=\bfseries,
+      title={Remark \theremarkcounter},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt, % Adjust vertical space before the box
+      after skip=10pt % Adjust vertical space after the box
+    ]
+  \else
+    \tcolorbox[
+      breakable,
+      parbox=false,
+      before upper={\parindent0pt \parskip7pt},
+      colback=green!10,
+      colframe=green!75!black,
+      fonttitle=\bfseries,
+      title={Remark \theremarkcounter: #1},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt,
+      after skip=10pt
+    ]
+  \fi
+}{
+  \endtcolorbox
+}
+
+% Define a new counter for lemmas
+\newcounter{lemmacounter}
+\renewcommand{\thelemmacounter}{L.\arabic{lemmacounter}}
+
+\newenvironment{lemma}[1][]{%
+  \refstepcounter{lemmacounter}%
+  \if\relax\detokenize{#1}\relax
+    \tcolorbox[
+      breakable,
+      parbox=false, % Treat content normally regarding paragraphs
+      before upper={\parindent0pt \parskip7pt}, % No indentation and add space between paragraphs
+      colback=green!10,
+      colframe=green!75!black,
+      fonttitle=\bfseries,
+      title={Lemma \thelemmacounter},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt, % Adjust vertical space before the box
+      after skip=10pt % Adjust vertical space after the box
+    ]
+  \else
+    \tcolorbox[
+      breakable,
+      parbox=false,
+      before upper={\parindent0pt \parskip7pt},
+      colback=green!10,
+      colframe=green!75!black,
+      fonttitle=\bfseries,
+      title={Lemma \thelemmacounter: #1},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt,
+      after skip=10pt
+    ]
+  \fi
+}{
+  \endtcolorbox
+}
+
+% Define a new counter for propositions
+\newcounter{propositioncounter}
+\renewcommand{\thepropositioncounter}{P.\arabic{propositioncounter}}
+
+\newenvironment{proposition}[1][]{%
+  \refstepcounter{propositioncounter}%
+  \if\relax\detokenize{#1}\relax
+    \tcolorbox[
+      breakable,
+      parbox=false, % Treat content normally regarding paragraphs
+      before upper={\parindent0pt \parskip7pt}, % No indentation and add space between paragraphs
+      colback=green!10,
+      colframe=green!75!black,
+      fonttitle=\bfseries,
+      title={Proposition \thepropositioncounter},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt, % Adjust vertical space before the box
+      after skip=10pt % Adjust vertical space after the box
+    ]
+  \else
+    \tcolorbox[
+      breakable,
+      parbox=false,
+      before upper={\parindent0pt \parskip7pt},
+      colback=green!10,
+      colframe=green!75!black,
+      fonttitle=\bfseries,
+      title={Proposition \thepropositioncounter: #1},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt,
+      after skip=10pt
+    ]
+  \fi
+}{
+  \endtcolorbox
+}
+
+%\newtheorem{proposition}[theorem]{Proposition}  % Propositions share numbering with theorems
+
+
+% Define a new counter for notes
+\newcounter{notescounter}
+\renewcommand{\thenotescounter}{D.\arabic{notescounter}}
+
+\newenvironment{notes}[1][]{
+  \refstepcounter{notescounter}%
+  \if\relax\detokenize{#1}\relax
+    % If #1 is empty, set the title to "Notes"
+    \tcolorbox[
+      breakable,
+      parbox=false, % Treat content normally regarding paragraphs
+      before upper={\parindent0pt \parskip7pt}, % No indentation and add space between paragraphs
+      colback=blue!10,
+      colframe=blue!50,
+      fonttitle=\bfseries,
+      title={Notes},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt, % Adjust vertical space before the box
+      after skip=10pt % Adjust vertical space after the box
+    ]
+  \else
+    % If #1 is not empty, use it as the title
+    \tcolorbox[
+      breakable,
+      parbox=false,
+      before upper={\parindent0pt \parskip7pt},
+      colback=blue!10,
+      colframe=blue!50,
+      fonttitle=\bfseries,
+      title={#1}, % Use provided title instead of default
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt,
+      after skip=10pt
+    ]
+  \fi
+}{
+  \endtcolorbox
+}
+
+
+
+
+
+
+
+% Define a new counter for questions
+\newcounter{questionscounter}
+\renewcommand{\thequestionscounter}{D.\arabic{questionscounter}}
+
+\newenvironment{questions}[1][]{
+  \refstepcounter{questionscounter}%
+  \if\relax\detokenize{#1}\relax
+    % If #1 is empty, set the title to "Questions"
+    \tcolorbox[
+      breakable,
+      parbox=false, % Treat content normally regarding paragraphs
+      before upper={\parindent0pt \parskip7pt}, % No indentation and add space between paragraphs
+      colback=red!10,
+      colframe=red!50,
+      fonttitle=\bfseries,
+      title={Questions},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt, % Adjust vertical space before the box
+      after skip=10pt % Adjust vertical space after the box
+    ]
+  \else
+    % If #1 is not empty, use it as the title
+    \tcolorbox[
+      breakable,
+      parbox=false,
+      before upper={\parindent0pt \parskip7pt},
+      colback=red!10,
+      colframe=red!50,
+      fonttitle=\bfseries,
+      title={#1}, % Use provided title instead of default
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt,
+      after skip=10pt
+    ]
+  \fi
+}{
+  \endtcolorbox
+}
+
+
+
+
+
+
+% Define a new counter for overview
+\newcounter{overviewcounter}
+\renewcommand{\theoverviewcounter}{D.\arabic{overviewcounter}}
+
+
+
+
+\newenvironment{overview}[1][]{%
+  \refstepcounter{overviewcounter}%
+  \if\relax\detokenize{#1}\relax
+    \tcolorbox[
+      breakable,
+      parbox=false, % Treat content normally regarding paragraphs
+      before upper={\parindent0pt \parskip7pt}, % No indentation and add space between paragraphs
+      colback=green!10,
+      colframe=green!75!black,
+      fonttitle=\bfseries,
+      title={Overview},
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt, % Adjust vertical space before the box
+      after skip=10pt % Adjust vertical space after the box
+    ]
+  \else
+    \tcolorbox[
+      breakable,
+      parbox=false,
+      before upper={\parindent0pt \parskip7pt},
+      colback=green!10,
+      colframe=green!75!black,
+      fonttitle=\bfseries,
+      title={#1}, % Use provided title instead of default
+      arc=5mm,
+      boxrule=0.5mm,
+      before skip=10pt,
+      after skip=10pt
+    ]
+  \fi
+}{
+  \endtcolorbox
+}
+
+
+
+% Add a line after paragraph header
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+            {-3.25ex \@plus -1ex \@minus -.2ex}%
+            {1.5ex \@plus .2ex}%
+            {\normalfont\normalsize\bfseries}}
+\makeatother
+
+
+% Taking away line before and after align
+\BeforeBeginEnvironment{align}{\vspace{-\parskip}}
+\AfterEndEnvironment{align}{\vskip0pt plus 2pt}
+
+\usepackage{changepage}

@@ -1,0 +1,82 @@
+\documentclass[10pt]{article}
+\include{../../../preamble.tex}
+
+\title{Ch. 11 and Ch. 12 Responses}
+
+\author{Dylan Baker}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Ch. 12 Question Responses}
+
+\subsection{Question 1}
+
+Using the example of the CHECC experiment, briefly compare two of the tests for internal validity mentioned in the chapter and evaluate their performance in this context.
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+In the CHECC experiment, the GHO test for internal validity 
+indicates that, for cognitive scores, there is 
+we cannot detect a difference across the four cells defined 
+by treatment status and responder status, 
+whereas for non-cognitive scores, 
+we can detect a significant difference. 
+Moreover, the test also shows no evidence that baseline 
+outcomes differ between the treatment and control groups 
+when responder status is held constant.
+
+Meanwhile, the selective attrition test—which assesses 
+whether the sample that remains in the study differs 
+systematically on key characteristics—suggests there 
+is no selective attrition based on gender, race, 
+primary language, or birthweight. In other words, 
+participants who dropped out of the study do not 
+appear to differ meaningfully from those who stayed,
+at least with respect to these particular covariates.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Question 2}
+Provide the main disadvantage of the following solutions to dealing with attrition:
+
+\begin{enumerate}
+    \item Horowitz and Manski Bounds i.e. when is it not informative?
+    \item Inverse Probability Weighting i.e. when does the key assumption not hold and what makes it potentially more biased than the unweighted average?
+\end{enumerate}
+
+\hrulefill\hspace{0.5em}\dotfill\hspace{0.5em}\hrulefill
+
+For (1), the Horowitz and Manski bounds are not informative 
+when the support is wide or attrition is meaningful.
+
+For (2), the key assumption fails when
+non-missing observations are systematically than 
+the 
+missing observations one would like them to, in some sense,
+fill the role of. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Main Takeaways}
+
+\subsection{Ch. 11 Takeaways}
+
+\begin{itemize}
+    \item Amid SUTVA violations, the partial non-interference and exchangeability assumptions may permit identifying causal effects of interest. However, they are still strong assumptions that may not hold.
+    \item Design-based approaches can help address potential spillovers—for instance, randomizing at higher levels.
+    \item Saturation designs take this a step further by randomly assigning different levels of treatment intensity within groups and then randomizing treatment among individuals in those groups, enabling researchers to directly estimate and analyze spillover effects.
+\end{itemize}
+
+\subsection{Ch. 12 Takeaways}
+
+\begin{itemize}
+    \item When treatment effects are consistent for both participants who stay and those who drop out, attrition may not introduce bias.
+    \item Similar rates of attrition across control and treatment does not solve the issue of attrition.
+    \item Several methods exist to address potential bias from attrition—such as available case analysis, Horowitz and Manski bounds, Lee bounds, and inverse probability weighting. Lee bounds tend to be more flexible, while Horowitz and Manski bounds become uninformative in many conditions.
+\end{itemize}
+
+
+\end{document}

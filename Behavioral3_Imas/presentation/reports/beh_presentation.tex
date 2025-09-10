@@ -1,0 +1,480 @@
+% -------------------------------------
+% Setup 
+% -------------------------------------
+\documentclass[11pt, aspectratio=169]{beamer}
+\input{beamer_theme}
+%\addbibresource{references.bib}
+
+
+\newenvironment{transitionframe}{
+  \setbeamercolor{background canvas}{bg=maroon,fg=white}
+  \color{white}
+  \centering
+  \LARGE
+  \begin{center}
+  \begin{frame}[plain, noframenumbering]}{
+  \end{frame}
+  \end{center}
+}
+
+% -------------------------------------
+% Begin Document 
+% -------------------------------------
+% -------------------------------------
+% Begin Document 
+% -------------------------------------
+\begin{document}
+\title{Behavioral Attenuation}
+\subtitle{\normalsize Ben Enke, Thomas Graeber, Ryan Oprea, and Jeffrey Yang;  \textit{Working Paper.}}
+\author{Shivani Pandey and Dylan Baker}
+\date{April 22, 2025}
+
+\begin{frame}[plain, noframenumbering] 
+\maketitle
+\end{frame}
+
+\begin{frame}{Variation in Parameters and Pre-Registered Simple Points}
+
+\begin{itemize}
+    \item The authors 
+        varied the central decision-relevant 
+        parameter over a wide range, which 
+        they argue moves problem complexity,
+        to explore the ``demand side'' 
+        of information-processing.
+    \vfill
+    \item In most experiments, they included 
+        ``potential simple points'' at natural
+        boundaries at which optimizing was 
+        expected to be easy.
+\end{itemize}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Cognitive Uncertainty Elicitation}
+
+    \begin{itemize}
+        \item The authors elicited cognitive uncertainty 
+            essentially by asking participants
+            how certain they were that they 
+            optimized.
+        \vfill
+        \item Example:
+            \begin{itemize}
+                \item Continuous decisions in subjective tasks, illustrated by Effort supply: 
+                ``How certain are you that completing somewhere between [Y-1] and [Y+1] tasks is actually your best decision, given your preferences?''
+            \end{itemize}
+    \end{itemize}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % Slide 3: Main Results
+\begin{transitionframe}
+    Results
+\end{transitionframe}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Example Experimental Results - Objective Task}
+
+    \begin{columns}
+    
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item To the right is an example of 
+                    the results from an objective task.
+                \item Note that attenuation is present
+                    across most of the parameter space,
+                    i.e., the elasticity is smaller 
+                    than expected for an optimizing agent.
+                \item This is
+                    especially true once off the boundary
+                    and is stronger for high CU participants.
+            \end{itemize}
+        \end{column}
+    
+        \begin{column}{0.5\textwidth}
+            \includegraphics[width=\linewidth]{../input/fig1a.png}
+        \end{column}
+    
+    \end{columns}
+    
+\end{frame}
+    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Example Experimental Results - Subjective Task}
+    
+    \begin{columns}
+    
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item To the right is an example of 
+                    the results from a subjective task.
+                \item Although there's no objective benchmark, 
+                    we can see a similar pattern emerge.
+            \end{itemize}
+        \end{column}
+    
+        \begin{column}{0.5\textwidth}
+            \includegraphics[width=\linewidth]{../input/fig1b.png}
+        \end{column}
+    
+    \end{columns}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Econometric Strategy}
+    
+    \begin{itemize}
+        \item For each experiment, $e$, the authors 
+            estimate
+            \begin{align}
+                a_{i, j}^e=\alpha^e+\gamma^e \theta_j^e+\beta^e \theta_j^e C U_{i, j}^e+\delta^e C U_{i, j}^e+\sum_x \chi^e d_x^e+\epsilon_{i, j}^e
+            \end{align}
+            where
+            \begin{center}
+            \begin{minipage}{0.85\linewidth}
+                \begin{multicols}{2}
+                    \begin{itemize}
+                        \setlength\itemsep{2pt}
+                        \item $i$: Individual
+                        \item $j$: Parameter order, i.e., $\theta_j>\theta_{j-1}$
+                        \item $a_{i, j}^e$: Decision
+                        \item $d_x^e$: Controls 
+                        \item $C U_{i, j}^e$: Elicited cognitive uncertainty
+                        \item $\theta_j^e$: Parameter value
+                        \item $\gamma^e$: Coefficient on the parameter normalized to be positive
+                        \item $\beta^e$: Coefficient of interest on the interaction between CU and parameter
+                    \end{itemize}
+                \end{multicols}
+            \end{minipage}
+            \end{center}
+    \end{itemize}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{T-Stat Results}
+
+
+    \begin{columns}
+    
+        \begin{column}{0.3\textwidth}
+            \begin{itemize}
+                \item The attenuation hypothesis 
+                    is that $\beta^e$ is negative.
+                \item The authors report the 
+                    t-statistic for
+                    each experiment.
+                \item The black-curve presents 
+                    a $\mathcal{N}(0,1)$ distribution
+                    for reference.
+                \item 28/30 are negative; 24/30 are 
+                    significant at the 5\% level.
+            \end{itemize}
+        \end{column}
+    
+        \begin{column}{0.7\textwidth}
+            \includegraphics[width=\linewidth]{../input/fig2a.png}
+        \end{column}
+    
+    \end{columns}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Attenuation Ratio}
+    
+    \begin{itemize}
+        \item Under the authors' specification, we have:
+            \begin{align}
+                \frac{\partial \mathbb{E}\left[a_{i, j}^e\right]}{\partial \theta_j^e}=\gamma^e+\beta^e \mathrm{CU}
+            \end{align}
+        \item From which, we can define another measure for 
+            cross-experiment comparison:
+            \begin{align}
+                C U \text { attenuation ratio } & \equiv \frac{(\text { Sensitivity at } C U=0)-(\text { Sensitivity at } C U=0.5)}{(\text { Sensitivity at } C U=0)} \\
+                & =-\frac{0.5 \hat{\beta}^e}{\hat{\gamma}^e}
+            \end{align}
+        \item Interpretation: How much the sensitivity
+            decreases as CU increases from 0 to 0.5.
+    \end{itemize}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Attenuation Ratio Figure}
+    
+    \begin{columns}
+    
+        \begin{column}{0.3\textwidth}
+            \begin{itemize}
+                \item The reduction in sensitivity 
+                    is 33\% on average and up to 87\%. 
+            \end{itemize}
+        \end{column}
+    
+        \begin{column}{0.7\textwidth}
+            \includegraphics[width=\linewidth]{../input/fig2b.png}
+        \end{column}
+    
+    \end{columns}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Attenuation to Objective Benchmarks}
+
+    \begin{itemize}
+        \item We then consider the subset of experiments 
+            with objective benchmarks.
+        \item The authors estimate:
+            \begin{align}
+                a_{i, j}^e=v^e+\omega^e \theta_j^e+\sum_x \chi^e d_x^e+u_{i, j}^e
+            \end{align}
+            where the term of interest is 
+            $\omega^e$.
+        \item Specifically, we consider 
+            the ratio between the estimated
+            $\omega^e$ and the rational benchmark: 
+            \begin{align}
+                \frac{\hat{\omega}^e}{\omega_R^e}
+            \end{align}
+    \end{itemize}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Attenuation to Objective Benchmark}
+    
+    \begin{columns}
+    
+        \begin{column}{0.3\textwidth}
+            \begin{itemize}
+                \item The black dots reflect $\frac{\hat{\omega}^e}{\omega_R^e}$ 
+                \item The red and blue symbols plot the fitted values 
+                    at 100\% CU and 0\% CU, respectively.
+                \item The main takeaway is to notice that all 
+                    dots are below one and the high and low CU 
+                    split as expected. 
+            \end{itemize}
+        \end{column}
+    
+        \begin{column}{0.7\textwidth}
+            \includegraphics[width=\linewidth]{../input/fig3.png}
+        \end{column}
+    
+    \end{columns}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Within- and Across-Subject Variation}
+
+    \begin{itemize}
+        \item Subject FE 
+            explain 44\% of the variation in CU,
+            suggesting that subject-level
+            differences in cognitive ability 
+            -- the so-called ``supply side''
+            of information processing -- 
+            may be important for attenuation
+        \item The authors then estimate an adjusted version 
+            of the earlier specification 
+                \begin{align}
+                    a_{i, j}^e=\alpha^e+\gamma^e \theta_j^e+\beta^e \theta_j^e \overline{CU}_{i}^e+\delta^e \overline{CU}_{i}^e+\sum_x \chi^e d_x^e+\epsilon_{i, j}^e
+                \end{align}
+            with $\overline{CU}_{i}^e$ rather than $ C U_{i, j}^e$
+            reflecting the use of the subject-level average,
+            rather than the individual decision's CU.
+        \item This results in a large drop in the 
+            average attenuation effect size (33.0 to 8.8) and
+            t-statistic (-4.8 to -1.39),
+            suggesting a meaningful role for within-subject variation.
+    \end{itemize}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % Slide 3: Main Results
+\begin{transitionframe}
+    Problem Complexity and Diminishing Sensitivity
+\end{transitionframe}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Problem Complexity and Diminishing Sensitivity}
+    
+    \begin{itemize}
+        \item The authors now 
+            leverage the fact that,
+            within a given task type, 
+            some configurations of the 
+            task will demand more 
+            information-processing 
+            than others.
+        \vfill
+        \item Motivated by this, we 
+            first return to the ``simple points''
+            referenced earlier.
+    \end{itemize}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{CU and Distance from Boundary}
+    
+    \begin{columns}
+    
+        \begin{column}{0.4\textwidth}
+            \begin{itemize}
+                \item The figure to the right 
+                    shows median CU by distance from the
+                    boundary.
+                \item Notice that at the boundary, 
+                    median CU tends to be 0.
+                \item The solid line displays 
+                    the overall median across 
+                    experiments.
+            \end{itemize}
+        \end{column}
+    
+        \begin{column}{0.6\textwidth}
+            \includegraphics[width=\linewidth]{../input/fig4.png}
+        \end{column}
+    
+    \end{columns}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Diminishing Sensitivity}
+    
+    \begin{itemize}
+        \item The presented model 
+            predicts that there should be diminished 
+            sensitivity to the parameter value
+            as the distance from the boundary
+            increases due to the heightened 
+            CU.
+        \item To assess for diminished sensitivity, the 
+            authors estimate
+            \begin{align}
+                a_{i, j}^e=\alpha_d^e+\gamma_d^e \theta_j^e+\beta_d^e \theta_j^e \Delta_j^e+\delta^e \Delta_j^e+\sum_x \chi^e d_x^e+v_{i, j}^e
+            \end{align}
+            where $\Delta_j^e$ is the distance from the
+            nearest boundary
+        \item Diminished sensitivity is captured by: $\hat{\beta}_d^e<0$.
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Diminished Sensitivity T Statistics}
+
+
+    \begin{columns}
+    
+        \begin{column}{0.4\textwidth}
+            \begin{itemize}
+                \item The figure to the 
+                    right displays the 
+                    t-statistics for  
+                    $\hat{\beta}_d^e$.
+                \item Almost are all 
+                    negative and statistically 
+                    significant, as expected.
+            \end{itemize}
+        \end{column}
+    
+        \begin{column}{0.7\textwidth}
+            \includegraphics[width=\linewidth]{../input/fig5a.png}
+        \end{column}
+    
+    \end{columns}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Across-Problem Variation in Complexity and Elasticity}
+    
+
+    \begin{columns}
+    
+        \begin{column}{0.4\textwidth}
+            \begin{itemize}
+                \item We now link variation 
+                    in task complexity 
+                    and diminished sensitivity
+                    by comparing
+                    sensitivity and CU not 
+                    across individuals, but 
+                    across task parameters.
+                \item The authors construct comparable 
+                    measures of CU and sensitivity
+                    across experiments by computing 
+                    the local average and normalizing 
+                    by the experiment average. (See 
+                    figure to the right.)
+            \end{itemize}
+        \end{column}
+    
+        \begin{column}{0.7\textwidth}
+            \includegraphics[width=\linewidth]{../input/fig5b.png}
+        \end{column}
+    
+    \end{columns}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+    
+    
+\begin{frame}{Discussion}
+    
+    \begin{itemize}
+        \item Behavioral attenuation can (at least partially)
+            explain many previously studied
+            anomalies, including many explored in the paper.
+        \item Additionally, the authors argue that 
+            behavioral attenuation offers
+            a more parsimonious explanation
+            than the oft-offered alternative of 
+            domain-specific preferences.
+        \item Finally, the authors conclude 
+            with a note of optimism for the 
+            power of the cognitive lens to 
+            speak to a wide variety of 
+            economic phenomena with 
+            only a limited set of principles.
+    \end{itemize}
+    
+\end{frame}
+
+
+
+
+\end{document}

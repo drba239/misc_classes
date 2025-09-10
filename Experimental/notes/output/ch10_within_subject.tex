@@ -1,0 +1,86 @@
+\documentclass[10pt]{article}
+\include{../../../preamble.tex}
+
+\title{Ch. 10: Within-Subject Experimental Designs}
+
+\author{Dylan Baker}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+
+\section{Main Takeaways}
+
+\subsection{Additional Assumptions from Within-Subjects Design}
+
+
+\begin{enumerate}
+    \item (A10.1, Balanced Panel): For all $(i, t) \in \mathcal{J} \times \mathcal{T}$, we have $\mathbb{P}\left[R_{i t}=1\right]=1$, and for all $(i, t) \in \mathcal{J} \times \mathcal{T}$ with $\mathbb{P}\left[R_{i t}=1\right]=1$ the researcher observes $\left(Y_{i t}, D_{i t}, Z_{i t}, \boldsymbol{X}_{i t}\right)$.
+    \item (A10.2, Temporal Stability): For all $t \in \mathcal{T}, Y_{i t}\left(D_{i t}, \boldsymbol{D}_{i,-t}, t\right)=Y_{i t}\left(D_{i t}, \boldsymbol{D}_{i,-\boldsymbol{t}}\right)$.
+        \begin{itemize}
+            \item This rules out time-varying effects in the potential outcomes, 
+                such as respondent fatigue.
+        \end{itemize}
+    \item (A10.3, Causal Transience): For all $\boldsymbol{D}_{\boldsymbol{i}}, Y_{i t}\left(D_{i t}, \boldsymbol{D}_{\boldsymbol{i}}, T\right)=Y_{i t}\left(D_{i t}, T\right)$.
+        \begin{itemize}
+            \item This implies that the treatment effect does not persist over time 
+                when we change the treatment status; the treatment effects 
+                do not depend on the order in which they are implemented.
+        \end{itemize}
+\end{enumerate}
+
+\subsection{Highlighting 3 Threats to Temporal Stability}
+
+``The literature has enumerated various threats to temporal 
+stability and here we focus on three key threats: 
+
+\begin{enumerate}
+    \item time-specific shocks to the outcome, 
+    \item time trends such as learning or regression to the mean, and 
+    \item the measurement outcome might change over time.'' 
+\end{enumerate}
+
+Examples: The Hawthorne effect being just a day-of-the-week effect.
+
+
+\subsection{Randomize Treatment Order}
+
+One way to control for time effects 
+is to ``generate different random orders of the treatment conditions.''
+
+\subsection{Threats to Causal Transience}
+
+``The main threats to causal transience are anticipation and 
+carry-over effects. Anticipation effects occur when subjects 
+change their behavior because of treatments that will
+happen in the future...
+Carry-over effects occur when the impact of treatment persists through the measurement.''
+
+``Researchers may detect carry-over effects if 
+they counterbalance treatment regimes and compare 
+the effects of a given treatment by position. If effects 
+are asymmetric, carry-over effects may be confounding the results.''
+
+\subsection{Key Advantages of Within-Subject Design}
+
+We can retrieve:
+
+\begin{align}
+    \tau_i \equiv Y_{i t}(1)-Y_{i t}(0)
+\end{align}
+
+They offer increased power. 
+
+\begin{figure}[!htb]
+    \centering
+        \includegraphics[width=0.9\textwidth]{../input/between_v_within.png}
+    \caption{Figure Capturing Power for Between versus Within-Subject Designs}
+    %\label{fig:}
+\end{figure}
+
+
+
+
+\end{document}
